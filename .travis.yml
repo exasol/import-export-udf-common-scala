@@ -1,0 +1,47 @@
+language: scala
+
+sudo: required
+dist: trusty
+services: docker
+
+addons:
+  apt:
+    packages:
+      - shellcheck
+
+before_install:
+  - git fetch --tags
+
+matrix:
+  include:
+    - jdk: openjdk11
+      scala: 2.12.12
+
+    - jdk: oraclejdk11
+      scala: 2.12.12
+
+    - jdk: openjdk11
+      scala: 2.13.3
+
+    - jdk: oraclejdk11
+      scala: 2.13.3
+
+script:
+  - travis_wait 30 ./scripts/ci.sh
+
+cache:
+  directories:
+    - "$HOME/.sbt/1.0"
+    - "$HOME/.sbt/boot/scala*"
+    - "$HOME/.sbt/cache"
+    - "$HOME/.sbt/launchers"
+    - "$HOME/.ivy2"
+    - "$HOME/.coursier"
+
+before_cache:
+  - du -h -d 1 $HOME/.ivy2/
+  - du -h -d 2 $HOME/.sbt/
+  - du -h -d 4 $HOME/.coursier/
+  - find $HOME/.sbt -name "*.lock" -type f -delete
+  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -type f -delete
+  - find $HOME/.coursier/cache -name "*.lock" -type f -delete
