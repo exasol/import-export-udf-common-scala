@@ -58,8 +58,8 @@ These plugins help with project development.
 
 [travis-badge]: https://img.shields.io/travis/exasol/import-export-udf-common-scala/master.svg?logo=travis
 [travis-link]: https://travis-ci.com/exasol/import-export-udf-common-scala
-[coveralls-badge]: https://img.shields.io/coveralls/exasol/import-export-udf-common-scala.svg
-[coveralls-link]: https://coveralls.io/github/exasol/import-export-udf-common-scala
+[coveralls-badge]: https://coveralls.io/repos/github/exasol/import-export-udf-common-scala/badge.svg?branch=master
+[coveralls-link]: https://coveralls.io/github/exasol/import-export-udf-common-scala?branch=master
 [maven-badge]: https://maven-badges.herokuapp.com/maven-central/com.exasol/import-export-udf-common-scala_2.12/badge.svg
 [maven-link]: https://mvnrepository.com/artifact/com.exasol/import-export-udf-common-scala
 [apache-avro-link]: https://avro.apache.org/
