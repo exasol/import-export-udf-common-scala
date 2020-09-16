@@ -29,6 +29,9 @@ matrix:
 script:
   - travis_wait 30 ./scripts/ci.sh
 
+after_success:
+  - ./sbtx coveralls
+
 cache:
   directories:
     - "$HOME/.sbt/1.0"
