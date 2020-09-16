@@ -1,7 +1,20 @@
 # Import Export UDF Common Scala
 
-Common libraries for Exasol IMPORT and EXPORT user-defined functions in Scala
+[![Build Status][travis-badge]][travis-link]
+[![Coveralls][coveralls-badge]][coveralls-link]
+[![Maven Central][maven-badge]][maven-link]
+
+Common libraries for Exasol IMPORT and EXPORT user defined functions in Scala
 programming language.
+
+## Features
+
+- Supports user provided key value parameters parsing
+- Supports Avro record deserialization into internal data structure
+
+## Information for Users
+
+- [Changelog](doc/changes/changelog.md)
 
 ## Dependencies
 
@@ -43,6 +56,12 @@ These plugins help with project development.
 | [SBT PGP][sbt-pgp-link]                     | PGP plugin for `sbt`                                            | BSD 3-Clause License |
 | [SBT Git][sbt-git-link]                     | A plugin for Git integration, used to version the release jars  | BSD 2-Clause License |
 
+[travis-badge]: https://img.shields.io/travis/exasol/import-export-udf-common-scala/master.svg?logo=travis
+[travis-link]: https://travis-ci.com/exasol/import-export-udf-common-scala
+[coveralls-badge]: https://img.shields.io/coveralls/exasol/import-export-udf-common-scala.svg
+[coveralls-link]: https://coveralls.io/github/exasol/import-export-udf-common-scala
+[maven-badge]: https://maven-badges.herokuapp.com/maven-central/com.exasol/import-export-udf-common-scala_2.12/badge.svg
+[maven-link]: https://mvnrepository.com/artifact/com.exasol/import-export-udf-common-scala
 [apache-avro-link]: https://avro.apache.org/
 [scala-logging-link]: https://github.com/lightbend/scala-logging
 [exasol-script-api-link]: https://docs.exasol.com/database_concepts/udf_scripts.htm
