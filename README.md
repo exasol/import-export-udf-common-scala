@@ -16,6 +16,10 @@ programming language.
 
 - [Changelog](doc/changes/changelog.md)
 
+## Information for Contributors
+
+* [Developer Guide](doc/development/developer_guide.md)
+
 ## Dependencies
 
 ### Runtime Dependencies
