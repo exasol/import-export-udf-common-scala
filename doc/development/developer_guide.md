@@ -16,7 +16,7 @@ Please keep in mind that contributions are not only pull requests. They can be
 any helpful comment on issues, improving documentation, enhancing the build process
 and many other tasks.
 
-### Getting in touch
+### Getting in Touch
 
 Please feel free to report a bug, suggest an idea for a feature, or ask a
 question about the code.
@@ -30,7 +30,7 @@ issues][open-issues]. You can choose the ones that interest you the most. If you
 are new to the project, check out the issues labeled as
 [good-first-issue][first-issue].
 
-### Submitting a pull request
+### Submitting a Pull Request
 
 Once you have found an interesting feature or issue to contribute, you can
 follow the steps below to submit your patches.
@@ -64,7 +64,7 @@ Additionally, we assume you have some experience doing Scala development. If you
 have any questions in general or about the development process, please feel free
 to get in touch.
 
-## Building the project
+## Building the Project
 
 First clone a local copy of the repository:
 
@@ -91,7 +91,7 @@ You can also run several commands combined together:
 Additionally, you can run `testOnly filename` or `it:testOnly filename` commands
 to only run single file tests.
 
-### Running E2E build script
+### Running E2E Build Script
 
 Inside the `scripts/` folder, you will find the `ci.sh` bash file, that runs
 end-to-end build process. This file is intended to be run in continuous
@@ -112,7 +112,7 @@ the Scala programming language. You can check that with the following command:
 TRAVIS_SCALA_VERSION=2.11.12 ./scripts/ci.sh
 ```
 
-## Checking the test coverage
+## Checking the Test Coverage
 
 The `ci.sh` script also creates the code coverage reports. They are located in
 the target path, `target/scala-<SCALA.VERSION>/scoverage-report/`.
@@ -129,7 +129,7 @@ running:
 ;clean;coverage;test;it:test;coverageReport
 ```
 
-## Checking the dependency updates
+## Checking the Dependency Updates
 
 It is important to keep the dependencies up to date.
 
@@ -148,7 +148,7 @@ Check if any dependencies have new versions:
 dependencyUpdates
 ```
 
-### Dependency tree and artifact eviction
+### Dependency Tree and Artifact Eviction
 
 You can check the dependency tree by running the command below:
 
