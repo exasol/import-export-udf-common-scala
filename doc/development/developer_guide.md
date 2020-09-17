@@ -1,7 +1,7 @@
 # Developer Guide
 
 This guide provides development workflows that are used to develop and maintain
-the import-export-udf-common-scala. It is intended for those who wish to address
+the import-export-udf-common-scala and the projects based on it. It is intended for those who wish to address
 the issues, merge a pull request, perform release or deep dive into the codebase
 of the project.
 
