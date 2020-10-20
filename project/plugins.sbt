@@ -50,7 +50,7 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "1.0.0")
 
 // Adds a `sbt-explicit-dependencies` plugin
 // https://github.com/cb372/sbt-explicit-dependencies
-addSbtPlugin("com.github.cb372" % "sbt-explicit-dependencies" % "0.2.13")
+addSbtPlugin("com.github.cb372" % "sbt-explicit-dependencies" % "0.2.14")
 
 // Setup this and project/project/plugins.sbt for formatting
 // project/*.scala files with scalafmt
