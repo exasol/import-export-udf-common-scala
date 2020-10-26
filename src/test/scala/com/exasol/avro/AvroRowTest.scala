@@ -112,31 +112,6 @@ class AvroRowTest extends AnyFunSuite {
     assert(AvroRow(record) === expectedRow)
   }
 
-  test("apply throws if Avro type (nested record) is not supported") {
-    val innerRecordSchema = createRecord(
-      "innerRecord",
-      createPrimitiveUnionField("inner_field", Schema.Type.STRING)
-    )
-
-    val recordSchema = createRecord(
-      "record",
-      createPrimitiveUnionField("col_str", Schema.Type.STRING),
-      createField("col_record", innerRecordSchema)
-    )
-
-    val innerRecord = new GenericData.Record(innerRecordSchema)
-    innerRecord.put("inner_field", "abc")
-
-    val record = new GenericData.Record(recordSchema)
-    record.put("col_str", "xyz")
-    record.put("col_record", innerRecord)
-
-    val thrown = intercept[IllegalArgumentException] {
-      AvroRow(record)
-    }
-    assert(thrown.getMessage === "Avro record type is not supported!")
-  }
-
   test("apply throws if GenericRecord value cannot be cast as string") {
     val recordSchema = createRecord(
       "record",
