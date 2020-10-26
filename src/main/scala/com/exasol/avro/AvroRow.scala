@@ -69,8 +69,6 @@ object AvroRow {
       case Schema.Type.ARRAY   => getArrayValue(value, field)
       case Schema.Type.MAP     => getMapValue(value, field)
       case Schema.Type.RECORD  => getRecordValue(value)
-      case field =>
-        throw new IllegalArgumentException(s"Avro ${field.getName} type is not supported!")
     }
   }
 

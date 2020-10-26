@@ -4,7 +4,7 @@ addSbtPlugin("org.wartremover" % "sbt-wartremover" % "2.4.11")
 
 // Adds Contrib Warts
 // http://github.com/wartremover/wartremover-contrib/
-addSbtPlugin("org.wartremover" % "sbt-wartremover-contrib" % "1.3.8")
+addSbtPlugin("org.wartremover" % "sbt-wartremover-contrib" % "1.3.9")
 
 // Adds most common doc api mappings
 // https://github.com/ThoughtWorksInc/sbt-api-mappings

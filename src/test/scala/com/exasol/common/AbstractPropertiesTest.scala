@@ -181,6 +181,42 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
     verify(metadata, times(1)).getConnection("connection_info")
   }
 
+  test("parseConnectionInfo returns key value pairs from password") {
+    properties = Map("CONNECTION_NAME" -> "connection_info")
+    val metadata = mockMetadata("", "a=secret1;b=secret2")
+    val result = BaseProperties(properties)
+      .parseConnectionInfo("username", Option(metadata))
+    assert(result === Map("a" -> "secret1", "b" -> "secret2"))
+    verify(metadata, times(1)).getConnection("connection_info")
+  }
+
+  test("parseConnectionInfo returns key value pairs with updated username") {
+    properties = Map("CONNECTION_NAME" -> "connection_info")
+    val metadata = mockMetadata("John", "a=secret1;b=secret2")
+    val result = BaseProperties(properties)
+      .parseConnectionInfo("username", Option(metadata))
+    assert(result === Map("username" -> "John", "a" -> "secret1", "b" -> "secret2"))
+    verify(metadata, times(1)).getConnection("connection_info")
+  }
+
+  test("parseConnectionInfo throws if password does not contain key value pairs") {
+    properties = Map("CONNECTION_NAME" -> "connection_info")
+    val metadata = mockMetadata("John", "secret")
+    val thrown = intercept[IllegalArgumentException] {
+      BaseProperties(properties).parseConnectionInfo("username", Option(metadata))
+    }
+    val expected = "Connection object password does not contain key=value pairs!"
+    assert(thrown.getMessage === expected)
+    verify(metadata, times(1)).getConnection("connection_info")
+  }
+
+  private[this] def mockMetadata(username: String, password: String): ExaMetadata = {
+    val metadata = mock[ExaMetadata]
+    val connectionInfo = newConnectionInformation(username, password)
+    when(metadata.getConnection("connection_info")).thenReturn(connectionInfo)
+    metadata
+  }
+
   final def newConnectionInformation(
     username: String,
     password: String

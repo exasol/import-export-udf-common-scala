@@ -98,6 +98,16 @@ class AvroComplexTypesTest extends AnyFunSuite {
     assert(AvroRow(record) === Row(Seq(expected)))
   }
 
+  test("throws unsupported array type") {
+    val schema = getArraySchema("""{"type":"map", "values":"int"}""")
+    val record = new GenericData.Record(schema)
+    record.put("value", JMap.of("k1", 1, "k2", 2, "k3", 3))
+    val thrown = intercept[IllegalArgumentException] {
+      AvroRow(record)
+    }
+    assert(thrown.getMessage.contains("Unsupported Avro Array type"))
+  }
+
   test("parse avro map type") {
     val schema = getMapSchema("\"int\"")
     val record = new GenericData.Record(schema)
@@ -175,6 +185,17 @@ class AvroComplexTypesTest extends AnyFunSuite {
     val row = AvroRow(record)
     assert(row.getAs[Int](0) === 1)
     assert(row.getAs[String](1) === expected)
+  }
+
+  test("throws unsupported record type") {
+    val schema = getRecordSchema(s"""{"name":"address","type":$addressSchemaString}""")
+    val record = new GenericData.Record(schema)
+    record.put("id", 1)
+    record.put("address", "str")
+    val thrown = intercept[IllegalArgumentException] {
+      AvroRow(record)
+    }
+    assert(thrown.getMessage.contains("Unsupported Avro Record type"))
   }
 
 }
