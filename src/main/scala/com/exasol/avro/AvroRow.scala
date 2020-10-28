@@ -20,25 +20,28 @@ import org.apache.avro.util.Utf8
 object AvroRow {
 
   /**
-   * Converts an Avro record into an internal {@link Row}.
+   * Converts an Avro record into an internal [[com.exasol.common.data.Row]].
    *
    * @param avroRecord a generic Avro record
    * @return a Row representation of the given Avro record
    */
   def apply(avroRecord: GenericRecord): Row = {
-    val size = avroRecord.getSchema.getFields.size
-    val values = Array.ofDim[Any](size)
     val fields = avroRecord.getSchema().getFields()
-    for { index <- 0 until fields.size } {
-      val fieldSchema = fields.get(index).schema()
-      val fieldValue = getAvroValue(avroRecord.get(index), fieldSchema)
-      if (isPrimitiveAvroType(fieldSchema.getType())) {
-        values.update(index, fieldValue)
-      } else {
-        values.update(index, JsonMapper.toJson(fieldValue))
-      }
+    val size = fields.size()
+    val values = Array.ofDim[Any](size)
+    for { i <- 0 until size } {
+      values.update(i, getAvroFieldValue(fields.get(i).schema(), avroRecord.get(i)))
     }
     Row(values.toSeq)
+  }
+
+  private[this] def getAvroFieldValue(schema: Schema, value: Any): Any = {
+    val fieldValue = getAvroValue(value, schema)
+    if (isPrimitiveAvroType(schema.getType())) {
+      fieldValue
+    } else {
+      JsonMapper.toJson(fieldValue)
+    }
   }
 
   private[this] def isPrimitiveAvroType(avroType: Schema.Type): Boolean =
