@@ -20,7 +20,7 @@ import org.apache.avro.util.Utf8
 object AvroRow {
 
   /**
-   * Converts Avro record into an internal Row.
+   * Converts an Avro record into an internal {@link Row}.
    *
    * @param avroRecord a generic Avro record
    * @return a Row representation of the given Avro record
