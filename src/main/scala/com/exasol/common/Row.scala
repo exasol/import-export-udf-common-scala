@@ -13,6 +13,7 @@ final case class Row(protected[data] val values: Seq[Any]) {
    *
    * If the value is null, null is returned.
    */
+  @throws[IndexOutOfBoundsException]("When index is out of bounds")
   def get(index: Int): Any = values(index)
 
   /** Returns the value at position {@code index} casted to the type. */
