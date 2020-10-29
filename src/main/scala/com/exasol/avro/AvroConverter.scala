@@ -23,6 +23,7 @@ import org.apache.avro.util.Utf8
  */
 final class AvroConverter {
 
+  private[this] val EXASOL_DECIMAL_PRECISION = 36
   private[this] lazy val decimalConverter = new DecimalConversion()
   private[this] lazy val timestampMillisConverter = new TimestampMillisConversion()
   private[this] lazy val timestampMicrosConverter = new TimestampMicrosConversion()
@@ -77,13 +78,11 @@ final class AvroConverter {
     }
   }
 
-  private[this] def getIntValue(value: Any, field: Schema): Any = {
-    val logicalType = field.getLogicalType()
-    logicalType match {
+  private[this] def getIntValue(value: Any, field: Schema): Any =
+    field.getLogicalType() match {
       case _: LogicalTypes.Date => dateFromSinceEpoch(value.asInstanceOf[Int].longValue())
       case _                    => value
     }
-  }
 
   private[this] def dateFromSinceEpoch(days: Long): Date = {
     // scalastyle:off magic.number
@@ -93,32 +92,38 @@ final class AvroConverter {
     new Date(millis)
   }
 
-  private[this] def getLongValue(value: Any, field: Schema): Any = {
-    val logicalType = field.getLogicalType()
-    logicalType match {
+  private[this] def getLongValue(value: Any, field: Schema): Any =
+    field.getLogicalType() match {
       case lt: LogicalTypes.TimestampMillis =>
         Timestamp.from(timestampMillisConverter.fromLong(value.asInstanceOf[Long], field, lt))
       case lt: LogicalTypes.TimestampMicros =>
         Timestamp.from(timestampMicrosConverter.fromLong(value.asInstanceOf[Long], field, lt))
       case _ => value
     }
-  }
 
-  private[this] def getFixedValue(value: Any, field: Schema): Any = {
-    val logicalType = field.getLogicalType()
-    logicalType match {
+  private[this] def getFixedValue(value: Any, field: Schema): Any =
+    field.getLogicalType() match {
       case lt: LogicalTypes.Decimal =>
+        checkPrecision(lt)
         decimalConverter.fromFixed(value.asInstanceOf[GenericFixed], field, lt)
       case _ => getStringValue(value, field)
     }
-  }
 
-  private[this] def getBytesValue(value: Any, field: Schema): Any = {
-    val logicalType = field.getLogicalType()
-    logicalType match {
+  private[this] def getBytesValue(value: Any, field: Schema): Any =
+    field.getLogicalType() match {
       case lt: LogicalTypes.Decimal =>
+        checkPrecision(lt)
         decimalConverter.fromBytes(value.asInstanceOf[ByteBuffer], field, lt)
       case _ => getStringValue(value, field)
+    }
+
+  private[this] def checkPrecision(logicalType: LogicalTypes.Decimal): Unit = {
+    val precision = logicalType.getPrecision()
+    if (precision > EXASOL_DECIMAL_PRECISION) {
+      throw new IllegalArgumentException(
+        s"Decimal precision ${precision.toString()} is larger than " +
+          s"maximum allowed precision ${EXASOL_DECIMAL_PRECISION.toString()}."
+      )
     }
   }
 

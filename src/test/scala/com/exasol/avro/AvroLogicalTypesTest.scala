@@ -131,4 +131,24 @@ class AvroLogicalTypesTest extends AnyFunSuite {
     }
   }
 
+  test("throws if avro decimal exceeds allowed precision") {
+    val schema = getLogicalSchema(
+      s"""|{
+          |   "type":"bytes",
+          |   "logicalType":"decimal",
+          |   "precision":40,
+          |   "scale":0
+          |}""".stripMargin
+    )
+    val record = new GenericData.Record(schema)
+    val bigDecimal = new BigDecimal("1234567890123456789012345678901234567890")
+    val bytes = ByteBuffer.wrap(bigDecimal.unscaledValue().toByteArray())
+    record.put("value", bytes)
+    val thrown = intercept[IllegalArgumentException] {
+      AvroRow(record)
+    }
+    val expected = "Decimal precision 40 is larger than maximum allowed precision 36."
+    assert(thrown.getMessage === expected)
+  }
+
 }
