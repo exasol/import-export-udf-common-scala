@@ -1,10 +1,10 @@
 // Adds a `wartremover` a flexible Scala code linting tool
 // http://github.com/puffnfresh/wartremover
-addSbtPlugin("org.wartremover" % "sbt-wartremover" % "2.4.11")
+addSbtPlugin("org.wartremover" % "sbt-wartremover" % "2.4.12")
 
 // Adds Contrib Warts
 // http://github.com/wartremover/wartremover-contrib/
-addSbtPlugin("org.wartremover" % "sbt-wartremover-contrib" % "1.3.9")
+addSbtPlugin("org.wartremover" % "sbt-wartremover-contrib" % "1.3.10")
 
 // Adds most common doc api mappings
 // https://github.com/ThoughtWorksInc/sbt-api-mappings

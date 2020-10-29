@@ -1,5 +1,7 @@
 package com.exasol.common.avro
 
+import java.math.BigDecimal
+import java.nio.ByteBuffer
 import java.sql.Date
 import java.sql.Timestamp
 
@@ -97,13 +99,11 @@ class AvroLogicalTypesTest extends AnyFunSuite {
     decimals.foreach {
       case (given, expected) =>
         val record = new GenericData.Record(schema)
-        val bytes = new Conversions.DecimalConversion().toBytes(
-          new java.math.BigDecimal(given).setScale(scale),
-          schema.getField("value").schema(),
-          LogicalTypes.decimal(precision, scale)
+        val bytes = ByteBuffer.wrap(
+          new BigDecimal(given).setScale(scale).unscaledValue().toByteArray()
         )
         record.put("value", bytes)
-        assert(AvroRow(record) === Row(Seq(new java.math.BigDecimal(expected))))
+        assert(AvroRow(record) === Row(Seq(new BigDecimal(expected))))
     }
   }
 
@@ -122,12 +122,12 @@ class AvroLogicalTypesTest extends AnyFunSuite {
       case (given, expected) =>
         val record = new GenericData.Record(schema)
         val fixed = new Conversions.DecimalConversion().toFixed(
-          new java.math.BigDecimal(given).setScale(scale),
+          new BigDecimal(given).setScale(scale),
           schema.getField("value").schema(),
           LogicalTypes.decimal(precision, scale)
         )
         record.put("value", fixed)
-        assert(AvroRow(record) === Row(Seq(new java.math.BigDecimal(expected))))
+        assert(AvroRow(record) === Row(Seq(new BigDecimal(expected))))
     }
   }
 
