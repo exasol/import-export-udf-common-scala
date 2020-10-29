@@ -1,13 +1,19 @@
 package com.exasol.common.avro
 
 import java.nio.ByteBuffer
+import java.sql.Date
+import java.sql.Timestamp
+import java.time._
 import java.util.{Map => JMap}
 import java.util.Collection
 
 import com.exasol.common.data.Row
 import com.exasol.common.json.JsonMapper
 
+import org.apache.avro.Conversions
+import org.apache.avro.LogicalTypes
 import org.apache.avro.Schema
+import org.apache.avro.data.TimeConversions
 import org.apache.avro.generic.GenericFixed
 import org.apache.avro.generic.GenericRecord
 import org.apache.avro.generic.IndexedRecord
@@ -60,18 +66,71 @@ object AvroRow {
     field.getType() match {
       case Schema.Type.NULL    => value
       case Schema.Type.BOOLEAN => value
-      case Schema.Type.INT     => value
-      case Schema.Type.LONG    => value
+      case Schema.Type.INT     => getIntValue(value, field)
+      case Schema.Type.LONG    => getLongValue(value, field)
       case Schema.Type.FLOAT   => value
       case Schema.Type.DOUBLE  => value
       case Schema.Type.STRING  => getStringValue(value, field)
-      case Schema.Type.FIXED   => getStringValue(value, field)
-      case Schema.Type.BYTES   => getStringValue(value, field)
+      case Schema.Type.FIXED   => getFixedValue(value, field)
+      case Schema.Type.BYTES   => getBytesValue(value, field)
       case Schema.Type.ENUM    => value.toString
       case Schema.Type.UNION   => getUnionValue(value, field)
       case Schema.Type.ARRAY   => getArrayValue(value, field)
       case Schema.Type.MAP     => getMapValue(value, field)
       case Schema.Type.RECORD  => getRecordValue(value)
+    }
+  }
+
+  private[this] def getIntValue(value: Any, field: Schema): Any = {
+    val logicalType = field.getLogicalType()
+    logicalType match {
+      case _: LogicalTypes.Date => dateFromSinceEpoch(value.asInstanceOf[Int].longValue())
+      case _                    => value
+    }
+  }
+
+  private[this] def dateFromSinceEpoch(days: Long): Date = {
+    // scalastyle:off magic.number
+    val date = LocalDateTime.of(1970, 1, 1, 0, 0, 0).plusDays(days)
+    // scalastyle:on
+    val millis = date.atZone(ZoneId.systemDefault).toInstant().toEpochMilli()
+    new Date(millis)
+  }
+
+  private[this] def getLongValue(value: Any, field: Schema): Any = {
+    val logicalType = field.getLogicalType()
+    logicalType match {
+      case lt: LogicalTypes.TimestampMillis =>
+        Timestamp.from(
+          new TimeConversions.TimestampMillisConversion()
+            .fromLong(value.asInstanceOf[Long], field, lt)
+        )
+      case lt: LogicalTypes.TimestampMicros =>
+        Timestamp.from(
+          new TimeConversions.TimestampMicrosConversion()
+            .fromLong(value.asInstanceOf[Long], field, lt)
+        )
+      case _ => value
+    }
+  }
+
+  private[this] def getFixedValue(value: Any, field: Schema): Any = {
+    val logicalType = field.getLogicalType()
+    logicalType match {
+      case lt: LogicalTypes.Decimal =>
+        new Conversions.DecimalConversion()
+          .fromFixed(value.asInstanceOf[GenericFixed], field, lt)
+      case _ => getStringValue(value, field)
+    }
+  }
+
+  private[this] def getBytesValue(value: Any, field: Schema): Any = {
+    val logicalType = field.getLogicalType()
+    logicalType match {
+      case lt: LogicalTypes.Decimal =>
+        new Conversions.DecimalConversion()
+          .fromBytes(value.asInstanceOf[ByteBuffer], field, lt)
+      case _ => getStringValue(value, field)
     }
   }
 
