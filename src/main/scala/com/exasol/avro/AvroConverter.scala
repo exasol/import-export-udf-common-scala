@@ -36,7 +36,7 @@ final class AvroConverter {
    *
    * @param value Avro record field value
    * @param schema Avro record field schema
-   * @return A regular Java data types
+   * @return regular Java data type
    */
   def convert(value: Any, schema: Schema): Any = {
     val fieldValue = getAvroValue(value, schema)
