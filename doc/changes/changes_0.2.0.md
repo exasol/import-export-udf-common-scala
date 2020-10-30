@@ -1,4 +1,4 @@
-# Import Export UDF Common Scala 0.2.0, released 2020-10-DD
+# Import Export UDF Common Scala 0.2.0, released 2020-10-30
 
 ## Features
 

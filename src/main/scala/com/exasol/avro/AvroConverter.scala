@@ -176,10 +176,13 @@ final class AvroConverter {
       )
   }
 
+  // Avro Map key is either Utf8 or Java String type, both can be
+  // converted to string.
+  @SuppressWarnings(Array("org.wartremover.warts.ToString"))
   private[this] def getMapValue(map: Any, field: Schema): JMap[String, Any] = {
     val result = new java.util.HashMap[String, Any]()
-    map.asInstanceOf[JMap[String, _]].forEach { (key, value) =>
-      val _ = result.put(key, getAvroValue(value, field.getValueType()))
+    map.asInstanceOf[JMap[_ <: java.lang.CharSequence, _]].forEach { (key, value) =>
+      val _ = result.put(key.toString(), getAvroValue(value, field.getValueType()))
     }
     result
   }

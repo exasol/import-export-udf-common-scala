@@ -47,7 +47,7 @@ class AvroComplexTypesTest extends AnyFunSuite {
         s"""|{
             |  "type": "record",
             |  "namespace": "com.exasol.avro.Types",
-            |  "name": "MapRecord",
+            |  "name": "RecordRecord",
             |  "fields": [
             |     {"name": "id", "type":"int"},
             |     $avroRecordType

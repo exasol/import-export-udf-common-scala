@@ -87,7 +87,7 @@ class AvroLogicalTypesTest extends AnyFunSuite {
     "-2.31" -> "-2.31"
   )
 
-  test("parse avro bytes with decimal as big decimal type") {
+  test("parse avro bytes with decimal as Java BigDecimal type") {
     val schema = getLogicalSchema(
       s"""|{
           |   "type":"bytes",
@@ -107,7 +107,7 @@ class AvroLogicalTypesTest extends AnyFunSuite {
     }
   }
 
-  test("parse avro fixed with decimal as big decimal type") {
+  test("parse avro fixed with decimal as Java BigDecimal type") {
     val schema = getLogicalSchema(
       s"""|{
           |   "name":"fixed",
