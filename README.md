@@ -60,10 +60,10 @@ These plugins help with project development.
 | [SBT PGP][sbt-pgp-link]                     | PGP plugin for `sbt`                                            | BSD 3-Clause License |
 | [SBT Git][sbt-git-link]                     | A plugin for Git integration, used to version the release jars  | BSD 2-Clause License |
 
-[travis-badge]: https://img.shields.io/travis/com/exasol/import-export-udf-common-scala/master.svg?logo=travis
+[travis-badge]: https://img.shields.io/travis/com/exasol/import-export-udf-common-scala/main.svg?logo=travis
 [travis-link]: https://travis-ci.com/exasol/import-export-udf-common-scala
-[coveralls-badge]: https://coveralls.io/repos/github/exasol/import-export-udf-common-scala/badge.svg?branch=master
-[coveralls-link]: https://coveralls.io/github/exasol/import-export-udf-common-scala?branch=master
+[coveralls-badge]: https://coveralls.io/repos/github/exasol/import-export-udf-common-scala/badge.svg?branch=main
+[coveralls-link]: https://coveralls.io/github/exasol/import-export-udf-common-scala?branch=main
 [maven-badge]: https://maven-badges.herokuapp.com/maven-central/com.exasol/import-export-udf-common-scala_2.12/badge.svg
 [maven-link]: https://mvnrepository.com/artifact/com.exasol/import-export-udf-common-scala
 [apache-avro-link]: https://avro.apache.org/
