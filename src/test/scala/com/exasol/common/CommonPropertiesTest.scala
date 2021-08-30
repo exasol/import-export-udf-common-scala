@@ -9,9 +9,8 @@ class CommonPropertiesTest extends AnyFunSuite {
       ";" -> Map.empty[String, String],
       "a -> 1;b -> 2;c -> 3" -> Map("a" -> "1", "b" -> "2", "c" -> "3")
     )
-    testData.foreach {
-      case (given, expected) =>
-        assert(CommonProperties.mapFromString(given) === expected)
+    testData.foreach { case (given, expected) =>
+      assert(CommonProperties.mapFromString(given) === expected)
     }
   }
 

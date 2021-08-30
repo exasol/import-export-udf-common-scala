@@ -33,7 +33,7 @@ object Dependencies {
       excludeAll (
         ExclusionRule(organization = "com.fasterxml.jackson.core"),
         ExclusionRule(organization = "com.fasterxml.jackson.module")
-    ),
+      ),
     "com.fasterxml.jackson.core" % "jackson-databind" % JacksonVersion,
     "com.fasterxml.jackson.module" %% "jackson-module-scala" % JacksonVersion
   )

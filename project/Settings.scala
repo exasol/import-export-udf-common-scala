@@ -20,7 +20,7 @@ object Settings {
     scalacOptions ++= Compilation.compilerFlagsFn(scalaVersion.value),
     scalacOptions in (Compile, console) := Compilation.consoleFlagsFn(scalaVersion.value),
     javacOptions ++= Compilation.JavacCompilerFlags,
-    compileOrder in Compile := CompileOrder.JavaThenScala,
+    compileOrder in Compile := CompileOrder.JavaThenScala
   )
 
   def miscSettings(): Seq[Setting[_]] = Seq(
@@ -49,8 +49,8 @@ object Settings {
       (scalastyleConfig in Test) := (baseDirectory in ThisBuild).value / "project" / "scalastyle-test-config.xml",
       mainScalastyle := scalastyle.in(Compile).toTask("").value,
       testScalastyle := scalastyle.in(Test).toTask("").value,
-      (test in Test) := ((test in Test) dependsOn mainScalastyle).value,
-      (test in Test) := ((test in Test) dependsOn testScalastyle).value,
+      (test in Test) := (test in Test).dependsOn(mainScalastyle).value,
+      (test in Test) := (test in Test).dependsOn(testScalastyle).value
     )
   }
 

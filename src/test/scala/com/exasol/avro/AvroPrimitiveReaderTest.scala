@@ -49,14 +49,14 @@ class AvroPrimitiveReaderTest extends AnyFunSuite {
 
   test("parse avro float type") {
     val record = new GenericData.Record(getSchema("\"float\""))
-    record.put("value", 3.14F)
+    record.put("value", 3.14f)
     assert(AvroRow(record) === Row(Seq(3.14f)))
   }
 
   test("parse avro double type") {
     val record = new GenericData.Record(getSchema("\"double\""))
     record.put("value", 2.71d)
-    assert(AvroRow(record) === Row(Seq(2.71D)))
+    assert(AvroRow(record) === Row(Seq(2.71d)))
   }
 
   test("parse avro union null first type") {

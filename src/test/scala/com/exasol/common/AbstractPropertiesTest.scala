@@ -229,6 +229,5 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
       override def getPassword(): String = password
     }
 
-  private[this] case class BaseProperties(val params: Map[String, String])
-      extends AbstractProperties(params)
+  private[this] case class BaseProperties(val params: Map[String, String]) extends AbstractProperties(params)
 }

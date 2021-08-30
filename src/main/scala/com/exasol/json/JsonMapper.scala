@@ -1,7 +1,7 @@
 package com.exasol.common.json
 
 import com.fasterxml.jackson.core.`type`.TypeReference
-import com.fasterxml.jackson.databind.json.{ JsonMapper => BaseJsonMapper }
+import com.fasterxml.jackson.databind.json.{JsonMapper => BaseJsonMapper}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 
 object JsonMapper {
