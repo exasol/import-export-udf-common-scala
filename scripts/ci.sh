@@ -6,12 +6,12 @@ set -o errtrace -o nounset -o pipefail -o errexit
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 cd "$BASE_DIR"
 
-MAIN_SCALA_VERSION=2.12.12
+DEFAULT_SCALA_VERSION=2.12.12
 
-if [[ -z "${TRAVIS_SCALA_VERSION:-}" ]]; then
-  echo "Environment variable TRAVIS_SCALA_VERSION is not set"
-  echo "Using MAIN_SCALA_VERSION: $MAIN_SCALA_VERSION"
-  TRAVIS_SCALA_VERSION=$MAIN_SCALA_VERSION
+if [[ -z "${SCALA_VERSION:-}" ]]; then
+  echo "Environment variable SCALA_VERSION is not set"
+  echo "Using DEFAULT_SCALA_VERSION: $DEFAULT_SCALA_VERSION"
+  SCALA_VERSION=$DEFAULT_SCALA_VERSION
 fi
 
 run_self_check () {
@@ -31,7 +31,7 @@ run_cleaning () {
   echo "#        Cleaning                          #"
   echo "#                                          #"
   echo "############################################"
-  ./sbtx ++$TRAVIS_SCALA_VERSION clean
+  ./sbtx ++$SCALA_VERSION clean
 }
 
 run_unit_tests () {
@@ -40,7 +40,7 @@ run_unit_tests () {
   echo "#        Unit testing                      #"
   echo "#                                          #"
   echo "############################################"
-  ./sbtx ++$TRAVIS_SCALA_VERSION coverage test
+  ./sbtx ++$SCALA_VERSION coverage test
 }
 
 run_coverage_report () {
@@ -49,7 +49,7 @@ run_coverage_report () {
   echo "#        Coverage report                   #"
   echo "#                                          #"
   echo "############################################"
-  ./sbtx ++$TRAVIS_SCALA_VERSION coverageReport
+  ./sbtx ++$SCALA_VERSION coverageReport
 }
 
 run_api_doc () {
@@ -58,16 +58,7 @@ run_api_doc () {
   echo "#        Generating API documentaion       #"
   echo "#                                          #"
   echo "############################################"
-  ./sbtx ++$TRAVIS_SCALA_VERSION doc
-}
-
-run_explicit_dependencies () {
-  echo "############################################"
-  echo "#                                          #"
-  echo "#        Unused Dependencies               #"
-  echo "#                                          #"
-  echo "############################################"
-  ./sbtx ++$TRAVIS_SCALA_VERSION undeclaredCompileDependencies unusedCompileDependencies
+  ./sbtx ++$SCALA_VERSION doc
 }
 
 run_dependency_info () {
@@ -76,7 +67,7 @@ run_dependency_info () {
   echo "#        Dependency information            #"
   echo "#                                          #"
   echo "############################################"
-  ./sbtx ++$TRAVIS_SCALA_VERSION dependencyUpdates pluginUpdates dependencyTree
+  ./sbtx ++$SCALA_VERSION dependencyUpdates pluginUpdates dependencyTree
 }
 
 run_shell_check () {
@@ -111,7 +102,6 @@ run_cleaning
 run_unit_tests
 run_coverage_report
 run_api_doc
-run_explicit_dependencies
 run_dependency_info
 run_shell_check
 run_clean_worktree_check
