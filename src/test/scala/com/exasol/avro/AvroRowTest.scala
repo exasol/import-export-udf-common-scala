@@ -1,5 +1,7 @@
 package com.exasol.common.avro
 
+import java.nio.charset.StandardCharsets.UTF_8
+
 import com.exasol.common.data.Row
 
 import org.apache.avro.Schema
@@ -77,7 +79,7 @@ class AvroRowTest extends AnyFunSuite {
     record.put("col_float_union", 1.0f)
     record.put("col_bool", true)
     record.put("col_bool_union", false)
-    record.put("col_bytes", "bytes".getBytes())
+    record.put("col_bytes", "bytes".getBytes(UTF_8))
     record.put("col_bytes_union", null)
     record.put("col_fixed", getFixedData(fixedSchema, Array[Byte](102, 105, 120, 101, 100)))
     record.put("col_fixed_union", getFixedData(fixedSchema, Array[Byte](104, 101, 108, 108, 111)))

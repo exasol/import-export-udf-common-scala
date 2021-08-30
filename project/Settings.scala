@@ -7,7 +7,6 @@ import com.typesafe.sbt.SbtGit.git
 import scoverage.ScoverageSbtPlugin.autoImport._
 import org.scalastyle.sbt.ScalastylePlugin.autoImport._
 import wartremover.WartRemover.autoImport.wartremoverErrors
-import com.lucidchart.sbt.scalafmt.ScalafmtCorePlugin.autoImport._
 
 /** A list of (boilerplate) settings for build process */
 object Settings {
@@ -30,8 +29,6 @@ object Settings {
     wartremoverErrors in (Test, compile) := Compilation.WartremoverTestFlags,
     // General settings
     cancelable in Global := true,
-    // ScalaFmt settings
-    scalafmtOnCompile := true,
     // Scoverage settings
     coverageMinimum := 50,
     coverageOutputHTML := true,

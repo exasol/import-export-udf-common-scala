@@ -131,9 +131,9 @@ final class AvroConverter {
     value match {
       case str: String            => str
       case utf: Utf8              => utf.toString
-      case byteBuffer: ByteBuffer => new String(byteBuffer.array)
-      case arrayByte: Array[Byte] => new String(arrayByte)
-      case fixed: GenericFixed    => new String(fixed.bytes())
+      case byteBuffer: ByteBuffer => new String(byteBuffer.array, "UTF8")
+      case arrayByte: Array[Byte] => new String(arrayByte, "UTF8")
+      case fixed: GenericFixed    => new String(fixed.bytes(), "UTF8")
       case _ =>
         throw new IllegalArgumentException(
           s"Avro ${field.getName} type cannot be converted to string!"
