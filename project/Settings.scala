@@ -18,19 +18,18 @@ object Settings {
   def buildSettings(scalaVersion: SettingKey[String]): Seq[Setting[_]] = Seq(
     // Compiler settings
     scalacOptions ++= Compilation.compilerFlagsFn(scalaVersion.value),
-    scalacOptions in (Compile, console) := Compilation.consoleFlagsFn(scalaVersion.value),
+    Compile / console / scalacOptions := Compilation.consoleFlagsFn(scalaVersion.value),
     javacOptions ++= Compilation.JavacCompilerFlags,
-    compileOrder in Compile := CompileOrder.JavaThenScala
+    Compile / compileOrder := CompileOrder.JavaThenScala
   )
 
   def miscSettings(): Seq[Setting[_]] = Seq(
     // Wartremover settings
-    wartremoverErrors in (Compile, compile) := Compilation.WartremoverFlags,
-    wartremoverErrors in (Test, compile) := Compilation.WartremoverTestFlags,
+    Compile / compile / wartremoverErrors := Compilation.WartremoverFlags,
+    Test / compile / wartremoverErrors := Compilation.WartremoverTestFlags,
     // General settings
-    cancelable in Global := true,
+    Global / cancelable := true,
     // Scoverage settings
-    coverageMinimum := 50,
     coverageOutputHTML := true,
     coverageOutputXML := true,
     coverageOutputCobertura := true,
@@ -45,12 +44,12 @@ object Settings {
     lazy val testScalastyle = taskKey[Unit]("testScalastyle")
     Seq(
       scalastyleFailOnError := true,
-      (scalastyleConfig in Compile) := (baseDirectory in ThisBuild).value / "project" / "scalastyle-config.xml",
-      (scalastyleConfig in Test) := (baseDirectory in ThisBuild).value / "project" / "scalastyle-test-config.xml",
-      mainScalastyle := scalastyle.in(Compile).toTask("").value,
-      testScalastyle := scalastyle.in(Test).toTask("").value,
-      (test in Test) := (test in Test).dependsOn(mainScalastyle).value,
-      (test in Test) := (test in Test).dependsOn(testScalastyle).value
+      Compile / scalastyleConfig := (ThisBuild / baseDirectory).value / "project" / "scalastyle-config.xml",
+      Test / scalastyleConfig := (ThisBuild / baseDirectory).value / "project" / "scalastyle-test-config.xml",
+      mainScalastyle := (Compile / scalastyle).toTask("").value,
+      testScalastyle := (Compile / scalastyle).toTask("").value,
+      Test / test := (Test / test).dependsOn(mainScalastyle).value,
+      Test / test := (Test / test).dependsOn(testScalastyle).value
     )
   }
 
