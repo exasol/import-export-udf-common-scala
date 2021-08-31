@@ -31,7 +31,7 @@ run_cleaning () {
   echo "#        Cleaning                          #"
   echo "#                                          #"
   echo "############################################"
-  ./sbtx ++$SCALA_VERSION clean
+  sbt ++$SCALA_VERSION clean
 }
 
 run_unit_tests () {
@@ -40,7 +40,7 @@ run_unit_tests () {
   echo "#        Unit testing                      #"
   echo "#                                          #"
   echo "############################################"
-  ./sbtx ++$SCALA_VERSION coverage test
+  sbt ++$SCALA_VERSION coverage test
 }
 
 run_coverage_report () {
@@ -49,7 +49,7 @@ run_coverage_report () {
   echo "#        Coverage report                   #"
   echo "#                                          #"
   echo "############################################"
-  ./sbtx ++$SCALA_VERSION coverageReport
+  sbt ++$SCALA_VERSION coverageReport
 }
 
 run_api_doc () {
@@ -58,7 +58,7 @@ run_api_doc () {
   echo "#        Generating API documentaion       #"
   echo "#                                          #"
   echo "############################################"
-  ./sbtx ++$SCALA_VERSION doc
+  sbt ++$SCALA_VERSION doc
 }
 
 run_dependency_info () {
@@ -67,7 +67,7 @@ run_dependency_info () {
   echo "#        Dependency information            #"
   echo "#                                          #"
   echo "############################################"
-  ./sbtx ++$SCALA_VERSION dependencyUpdates pluginUpdates dependencyTree
+  sbt ++$SCALA_VERSION dependencyUpdates pluginUpdates dependencyTree
 }
 
 run_shell_check () {
