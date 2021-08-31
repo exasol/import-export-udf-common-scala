@@ -1,5 +1,7 @@
 package com.exasol.common.avro
 
+import java.nio.charset.StandardCharsets.UTF_8
+
 import com.exasol.common.data.Row
 
 import org.apache.avro.Schema
@@ -7,6 +9,8 @@ import org.apache.avro.generic.GenericData
 import org.scalatest.funsuite.AnyFunSuite
 
 class AvroRowTest extends AnyFunSuite {
+
+  private[this] val avroNamespace = "com.exasol.cloudetl.avro"
 
   test("apply returns Row from GenericRecord with ByteBuffer column") {
     val recordSchema = createRecord(
@@ -77,7 +81,7 @@ class AvroRowTest extends AnyFunSuite {
     record.put("col_float_union", 1.0f)
     record.put("col_bool", true)
     record.put("col_bool_union", false)
-    record.put("col_bytes", "bytes".getBytes())
+    record.put("col_bytes", "bytes".getBytes(UTF_8))
     record.put("col_bytes_union", null)
     record.put("col_fixed", getFixedData(fixedSchema, Array[Byte](102, 105, 120, 101, 100)))
     record.put("col_fixed_union", getFixedData(fixedSchema, Array[Byte](104, 101, 108, 108, 111)))
@@ -150,7 +154,7 @@ class AvroRowTest extends AnyFunSuite {
     for { field <- fields } {
       javaFields.add(field)
     }
-    val schema = Schema.createRecord(name, name, "com.exasol.cloudetl.avro", false)
+    val schema = Schema.createRecord(name, name, avroNamespace, false)
     schema.setFields(javaFields)
     schema
   }
@@ -178,14 +182,14 @@ class AvroRowTest extends AnyFunSuite {
     new Schema.Field(name, unionSchema, null, null, Schema.Field.Order.ASCENDING)
 
   private[this] final def createFixedSchema(name: String, size: Int): Schema =
-    Schema.createFixed(name, "", "com.exasol.cloudetl.avro", size)
+    Schema.createFixed(name, "", avroNamespace, size)
 
   private[this] final def createEnumSchema(name: String, ordinals: Seq[String]): Schema = {
     val javaOrdinals = new java.util.ArrayList[String]()
     for { ord <- ordinals } {
       javaOrdinals.add(ord)
     }
-    Schema.createEnum(name, "", "com.exasol.cloudetl.avro", javaOrdinals)
+    Schema.createEnum(name, "", avroNamespace, javaOrdinals)
   }
 
 }

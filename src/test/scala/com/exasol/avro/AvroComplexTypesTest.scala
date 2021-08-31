@@ -66,7 +66,7 @@ class AvroComplexTypesTest extends AnyFunSuite {
   test("parse avro Java collection type") {
     val schema = getArraySchema("\"double\"")
     val record = new GenericData.Record(schema)
-    record.put("value", JList.of(1.2d, 3.14d, 2.71D))
+    record.put("value", JList.of(1.2d, 3.14d, 2.71d))
     assert(AvroRow(record) === Row(Seq("[1.2,3.14,2.71]")))
   }
 

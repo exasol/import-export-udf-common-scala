@@ -15,7 +15,7 @@ object Publishing {
     homepage := Some(url("https://github.com/exasol/import-export-udf-common-scala")),
     licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT")),
     publishMavenStyle := true,
-    publishArtifact in Test := false,
+    Test / publishArtifact := false,
     pomIncludeRepository := Function.const(false),
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
@@ -56,20 +56,19 @@ object Publishing {
     // Gnupg related settings
     // Global scope somehow needed here; otherwise publishLocalSigned looks for these credentials
     // in default path of ~/.sbt/gpg/
-    useGpg in Global := false,
-    pgpPublicRing in Global := baseDirectory.value / "project" / ".gnupg" / "local.pubring.asc",
-    pgpSecretRing in Global := baseDirectory.value / "project" / ".gnupg" / "local.secring.asc",
-    pgpPassphrase in Global := sys.env.get("PGP_PASSPHRASE").map(_.toArray),
+    Global / useGpg := false,
+    Global / pgpPublicRing := baseDirectory.value / "project" / ".gnupg" / "local.pubring.asc",
+    Global / pgpSecretRing := baseDirectory.value / "project" / ".gnupg" / "local.secring.asc",
+    Global / pgpPassphrase := sys.env.get("PGP_PASSPHRASE").map(_.toArray),
     credentials ++= (for {
       username <- sys.env.get("SONATYPE_USERNAME")
       password <- sys.env.get("SONATYPE_PASSWORD")
-    } yield
-      Credentials(
-        "Sonatype Nexus Repository Manager",
-        "oss.sonatype.org",
-        username,
-        password
-      )).toSeq,
+    } yield Credentials(
+      "Sonatype Nexus Repository Manager",
+      "oss.sonatype.org",
+      username,
+      password
+    )).toSeq,
     // git.baseVersion setting represents previously released version
     git.baseVersion := "0.1.0",
     git.gitTagToVersionNumber := {
@@ -83,7 +82,7 @@ object Publishing {
         git.gitUncommittedChanges.value,
         git.uncommittedSignifier.value
       )
-      git.gitHeadCommit.value map { _.substring(0, 7) } map { sha =>
+      git.gitHeadCommit.value.map(_.substring(0, 7)).map { sha =>
         git.baseVersion.value + "-" + sha + suffix
       }
     }

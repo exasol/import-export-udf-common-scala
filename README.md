@@ -1,8 +1,20 @@
 # Import Export UDF Common Scala
 
-[![Build Status][travis-badge]][travis-link]
-[![Coveralls][coveralls-badge]][coveralls-link]
-[![Maven Central][maven-badge]][maven-link]
+[![Build Status](https://github.com/exasol/import-export-udf-common-scala/actions/workflows/ci-build.yml/badge.svg)](https://github.com/exasol/import-export-udf-common-scala/actions/workflows/ci-build.yml)
+[![Coveralls](https://img.shields.io/coveralls/exasol/import-export-udf-common-scala.svg)](https://coveralls.io/github/exasol/import-export-udf-common-scala)
+[![Maven Central](https://img.shields.io/maven-central/v/com.exasol/import-export-udf-common-scala)](https://search.maven.org/artifact/com.exasol/import-export-udf-common-scala)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Aimport-export-udf-common-scala&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.exasol%3Aimport-export-udf-common-scala)
+
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Aimport-export-udf-common-scala&metric=security_rating)](https://sonarcloud.io/dashboard?id=com.exasol%3Aimport-export-udf-common-scala)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Aimport-export-udf-common-scala&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=com.exasol%3Aimport-export-udf-common-scala)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Aimport-export-udf-common-scala&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=com.exasol%3Aimport-export-udf-common-scala)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Aimport-export-udf-common-scala&metric=sqale_index)](https://sonarcloud.io/dashboard?id=com.exasol%3Aimport-export-udf-common-scala)
+
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Aimport-export-udf-common-scala&metric=code_smells)](https://sonarcloud.io/dashboard?id=com.exasol%3Aimport-export-udf-common-scala)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Aimport-export-udf-common-scala&metric=coverage)](https://sonarcloud.io/dashboard?id=com.exasol%3Aimport-export-udf-common-scala)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Aimport-export-udf-common-scala&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=com.exasol%3Aimport-export-udf-common-scala)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Aimport-export-udf-common-scala&metric=ncloc)](https://sonarcloud.io/dashboard?id=com.exasol%3Aimport-export-udf-common-scala)
 
 Common libraries for Exasol IMPORT and EXPORT user defined functions in Scala
 programming language.
@@ -60,12 +72,6 @@ These plugins help with project development.
 | [SBT PGP][sbt-pgp-link]                     | PGP plugin for `sbt`                                            | BSD 3-Clause License |
 | [SBT Git][sbt-git-link]                     | A plugin for Git integration, used to version the release jars  | BSD 2-Clause License |
 
-[travis-badge]: https://img.shields.io/travis/com/exasol/import-export-udf-common-scala/main.svg?logo=travis
-[travis-link]: https://travis-ci.com/exasol/import-export-udf-common-scala
-[coveralls-badge]: https://coveralls.io/repos/github/exasol/import-export-udf-common-scala/badge.svg?branch=main
-[coveralls-link]: https://coveralls.io/github/exasol/import-export-udf-common-scala?branch=main
-[maven-badge]: https://maven-badges.herokuapp.com/maven-central/com.exasol/import-export-udf-common-scala_2.12/badge.svg
-[maven-link]: https://mvnrepository.com/artifact/com.exasol/import-export-udf-common-scala
 [apache-avro-link]: https://avro.apache.org/
 [scala-logging-link]: https://github.com/lightbend/scala-logging
 [exasol-script-api-link]: https://docs.exasol.com/database_concepts/udf_scripts.htm

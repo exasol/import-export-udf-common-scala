@@ -1,9 +1,9 @@
 # Developer Guide
 
 This guide provides development workflows that are used to develop and maintain
-the import-export-udf-common-scala and the projects based on it. It is intended for those who wish to address
-the issues, merge a pull request, perform release or deep dive into the codebase
-of the project.
+the import-export-udf-common-scala and the projects based on it. It is intended
+for those who wish to address the issues, merge a pull request, perform release
+  or deep dive into the codebase of the project.
 
 ## Contributing
 
@@ -13,8 +13,8 @@ Please feel free to report a bug, suggest an idea for a feature, or ask a
 question about the code.
 
 Please keep in mind that contributions are not only pull requests. They can be
-any helpful comment on issues, improving documentation, enhancing the build process
-and many other tasks.
+any helpful comment on issues, improving documentation, enhancing the build
+process and many other tasks.
 
 ### Getting in Touch
 
@@ -72,7 +72,7 @@ First clone a local copy of the repository:
 git clone https://github.com/exasol/import-export-udf-common-scala.git
 ```
 
-Then run `./sbtx`, and run any of these commands:
+Then run `sbt`, and run any of these commands:
 
 - `clean`       : cleans previously compiled outputs; to start clean again.
 - `compile`     : compiles the source files.
@@ -80,7 +80,7 @@ Then run `./sbtx`, and run any of these commands:
 - `it:compile`  : compiles the integration test files.
 - `test`        : run all the unit tests.
 - `it:test`     : run all the integration tests.
-- `doc`         : generate the api documentation.
+- `doc`         : generate the API documentation.
 
 You can also run several commands combined together:
 
@@ -95,8 +95,8 @@ to only run single file tests.
 
 Inside the `scripts/` folder, you will find the `ci.sh` bash file, that runs
 end-to-end build process. This file is intended to be run in continuous
-integration (CI) environment. For the continuous integration we use the [Travis
-CI](https://travis-ci.com/).
+integration (CI) environment. For the continuous integration we use the Github
+Actions.
 
 Please run this file to make sure that everything is working before committing
 code or submitting a pull request.
@@ -109,7 +109,7 @@ Additionally, ensure that the `ci.sh` scripts work with different versions of
 the Scala programming language. You can check that with the following command:
 
 ```bash
-TRAVIS_SCALA_VERSION=2.11.12 ./scripts/ci.sh
+SCALA_VERSION=2.13.6 ./scripts/ci.sh
 ```
 
 ## Checking the Test Coverage

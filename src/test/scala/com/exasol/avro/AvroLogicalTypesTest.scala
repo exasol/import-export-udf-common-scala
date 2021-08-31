@@ -44,11 +44,10 @@ class AvroLogicalTypesTest extends AnyFunSuite {
       "2019-02-10"
     )
     val schema = getLogicalSchema("""{"type":"int","logicalType":"date"}""")
-    daysSinceEpoch.zipWithIndex.foreach {
-      case (days, i) =>
-        val record = new GenericData.Record(schema)
-        record.put("value", days)
-        assert(AvroRow(record).getAs[Date](0).toString() === expectedDates(i))
+    daysSinceEpoch.zipWithIndex.foreach { case (days, i) =>
+      val record = new GenericData.Record(schema)
+      record.put("value", days)
+      assert(AvroRow(record).getAs[Date](0).toString() === expectedDates(i))
     }
   }
 
@@ -56,23 +55,21 @@ class AvroLogicalTypesTest extends AnyFunSuite {
 
   test("parse avro long with timestamp-millis as Java SQL timestamp type") {
     val schema = getLogicalSchema("""{"type":"long","logicalType":"timestamp-millis"}""")
-    milliseconds.foreach {
-      case millis =>
-        val record = new GenericData.Record(schema)
-        record.put("value", millis)
-        assert(AvroRow(record).getAs[Timestamp](0) === new Timestamp(millis))
+    milliseconds.foreach { case millis =>
+      val record = new GenericData.Record(schema)
+      record.put("value", millis)
+      assert(AvroRow(record).getAs[Timestamp](0) === new Timestamp(millis))
     }
   }
 
   test("parse avro long with timestamp-micros as Java SQL timestamp type") {
     val schema = getLogicalSchema("""{"type":"long","logicalType":"timestamp-micros"}""")
-    milliseconds.foreach {
-      case millis =>
-        val record = new GenericData.Record(schema)
-        record.put("value", millis * 1000L + 13)
-        val expected = new Timestamp(millis)
-        expected.setNanos(13000)
-        assert(AvroRow(record).getAs[Timestamp](0) === expected)
+    milliseconds.foreach { case millis =>
+      val record = new GenericData.Record(schema)
+      record.put("value", millis * 1000L + 13)
+      val expected = new Timestamp(millis)
+      expected.setNanos(13000)
+      assert(AvroRow(record).getAs[Timestamp](0) === expected)
     }
   }
 
@@ -96,14 +93,13 @@ class AvroLogicalTypesTest extends AnyFunSuite {
           |   "scale":2
           |}""".stripMargin
     )
-    decimals.foreach {
-      case (given, expected) =>
-        val record = new GenericData.Record(schema)
-        val bytes = ByteBuffer.wrap(
-          new BigDecimal(given).setScale(scale).unscaledValue().toByteArray()
-        )
-        record.put("value", bytes)
-        assert(AvroRow(record) === Row(Seq(new BigDecimal(expected))))
+    decimals.foreach { case (given, expected) =>
+      val record = new GenericData.Record(schema)
+      val bytes = ByteBuffer.wrap(
+        new BigDecimal(given).setScale(scale).unscaledValue().toByteArray()
+      )
+      record.put("value", bytes)
+      assert(AvroRow(record) === Row(Seq(new BigDecimal(expected))))
     }
   }
 
@@ -118,16 +114,15 @@ class AvroLogicalTypesTest extends AnyFunSuite {
           |   "scale":2
           |}""".stripMargin
     )
-    decimals.foreach {
-      case (given, expected) =>
-        val record = new GenericData.Record(schema)
-        val fixed = new Conversions.DecimalConversion().toFixed(
-          new BigDecimal(given).setScale(scale),
-          schema.getField("value").schema(),
-          LogicalTypes.decimal(precision, scale)
-        )
-        record.put("value", fixed)
-        assert(AvroRow(record) === Row(Seq(new BigDecimal(expected))))
+    decimals.foreach { case (given, expected) =>
+      val record = new GenericData.Record(schema)
+      val fixed = new Conversions.DecimalConversion().toFixed(
+        new BigDecimal(given).setScale(scale),
+        schema.getField("value").schema(),
+        LogicalTypes.decimal(precision, scale)
+      )
+      record.put("value", fixed)
+      assert(AvroRow(record) === Row(Seq(new BigDecimal(expected))))
     }
   }
 

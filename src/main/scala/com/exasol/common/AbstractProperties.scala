@@ -42,7 +42,7 @@ abstract class AbstractProperties(private val properties: Map[String, String]) {
    */
   final def isNull(key: String): Boolean =
     properties.get(key).fold(true) { value =>
-      value eq null
+      value.eq(null)
     }
 
   /**
@@ -138,7 +138,7 @@ abstract class AbstractProperties(private val properties: Map[String, String]) {
 
   @SuppressWarnings(Array("org.wartremover.warts.Return"))
   // scalastyle:off
-  final override def equals(other: Any): Boolean = {
+  override final def equals(other: Any): Boolean = {
     if (!other.isInstanceOf[AbstractProperties]) {
       return false
     }
@@ -154,7 +154,7 @@ abstract class AbstractProperties(private val properties: Map[String, String]) {
   }
   // scalastyle:on
 
-  final override def hashCode(): Int =
+  override final def hashCode(): Int =
     properties.hashCode()
 
 }

@@ -30,8 +30,8 @@ class RowTest extends AnyFunSuite with Matchers {
   test("equalality check") {
     val rowEqual = Row(Seq("value1", 1, 3.14, null))
     val rowNotEqual = Row(Seq("value1", 2, 3.14, null))
-    row shouldEqual rowEqual
-    row should not equal rowNotEqual
+    row.shouldEqual(rowEqual)
+    row.should(not).equal(rowNotEqual)
   }
 
   test("throws class cast exception") {
