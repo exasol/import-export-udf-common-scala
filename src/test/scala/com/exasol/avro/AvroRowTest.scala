@@ -10,6 +10,8 @@ import org.scalatest.funsuite.AnyFunSuite
 
 class AvroRowTest extends AnyFunSuite {
 
+  private[this] val avroNamespace = "com.exasol.cloudetl.avro"
+
   test("apply returns Row from GenericRecord with ByteBuffer column") {
     val recordSchema = createRecord(
       "record",
@@ -152,7 +154,7 @@ class AvroRowTest extends AnyFunSuite {
     for { field <- fields } {
       javaFields.add(field)
     }
-    val schema = Schema.createRecord(name, name, "com.exasol.cloudetl.avro", false)
+    val schema = Schema.createRecord(name, name, avroNamespace, false)
     schema.setFields(javaFields)
     schema
   }
@@ -180,14 +182,14 @@ class AvroRowTest extends AnyFunSuite {
     new Schema.Field(name, unionSchema, null, null, Schema.Field.Order.ASCENDING)
 
   private[this] final def createFixedSchema(name: String, size: Int): Schema =
-    Schema.createFixed(name, "", "com.exasol.cloudetl.avro", size)
+    Schema.createFixed(name, "", avroNamespace, size)
 
   private[this] final def createEnumSchema(name: String, ordinals: Seq[String]): Schema = {
     val javaOrdinals = new java.util.ArrayList[String]()
     for { ord <- ordinals } {
       javaOrdinals.add(ord)
     }
-    Schema.createEnum(name, "", "com.exasol.cloudetl.avro", javaOrdinals)
+    Schema.createEnum(name, "", avroNamespace, javaOrdinals)
   }
 
 }

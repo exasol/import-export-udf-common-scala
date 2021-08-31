@@ -50,11 +50,14 @@ jobs:
 
       # This required because of the sonarcloud-github-action docker volume mapping.
       - name: Prepare for Sonar Cloud Scan
+        if: startsWith(matrix.scala, '2.13')
         run: |
           find . -name scoverage.xml -exec sed -i \
           's#/home/runner/work/import-export-udf-common-scala/import-export-udf-common-scala#/github/workspace#g' {} +
 
       - name: Sonar Cloud Scan
+        if: startsWith(matrix.scala, '2.13')
+        run: |
         uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
