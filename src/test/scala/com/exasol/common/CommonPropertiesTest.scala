@@ -18,7 +18,7 @@ class CommonPropertiesTest extends AnyFunSuite {
     val thrown = intercept[IllegalArgumentException] {
       CommonProperties.mapFromString("")
     }
-    assert(thrown.getMessage === s"The input string is not separated by ';'!")
+    assert(thrown.getMessage() === s"The input string is not separated by ';'!")
   }
 
   private[this] object CommonProperties extends CommonProperties

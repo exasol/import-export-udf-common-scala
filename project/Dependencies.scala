@@ -13,7 +13,7 @@ object Dependencies {
   private val SLF4JSimpleVersion = "1.7.32"
 
   // Test dependencies versions
-  private val ScalaTestVersion = "3.2.9"
+  private val ScalaTestVersion = "3.2.10"
   private val ScalaTestPlusVersion = "1.0.0-M2"
   private val MockitoCoreVersion = "3.12.4"
 

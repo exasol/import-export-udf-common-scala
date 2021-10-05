@@ -1,10 +1,18 @@
-# Import Export UDF Common Scala 0.3.0, released 2021-??-??
+# Import Export UDF Common Scala 0.3.0, released 2021-10-??
 
-Code name:
+Code name: Added custom separators
 
 ## Summary
 
+In this release, we added custom user defined property separators. We also migrated our continuous integration from Travis CI to Github Actions.
+
+## Features
+
+* #17: Added support for user provided separators
+
 ## Refactoring
+
+* #15: Migrated to Github actions
 
 ## Dependency Updates
 
@@ -19,7 +27,7 @@ Code name:
 ### Test Dependency Updates
 
 * Updated `org.mockito:mockito-core:test:3.6.0` to `3.12.4`
-* Updated `org.scalatest:scalatest:test:3.2.2` to `3.2.9`
+* Updated `org.scalatest:scalatest:test:3.2.2` to `3.2.10`
 
 ### Plugin Updates
 
@@ -28,7 +36,7 @@ Code name:
 * Updated `com.timushev.sbt:sbt-updates:0.5.1` to `0.6.0`
 * Updated `com.typesafe.sbt:sbt-git:1.0.0` to `1.0.1`
 * Updated `org.scoverage:sbt-coveralls:1.2.7` to `1.3.1`
-* Updated `org.scoverage:sbt-scoverage:1.6.1` to `1.8.2`
+* Updated `org.scoverage:sbt-scoverage:1.6.1` to `1.9.0`
 * Updated `org.wartremover:sbt-wartremover:2.4.12` to `2.4.16`
 * Updated `org.wartremover:sbt-wartremover-contib:1.3.10` to `1.3.12`
 * Updated `org.xerial.sbt:sbt-sonatype:3.9.4` to `3.9.10`

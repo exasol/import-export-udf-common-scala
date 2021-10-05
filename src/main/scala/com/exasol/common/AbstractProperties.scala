@@ -2,20 +2,17 @@ package com.exasol.common
 
 import scala.collection.SortedMap
 
-import com.exasol.{ExaConnectionInformation, ExaMetadata}
+import com.exasol.ExaConnectionInformation
+import com.exasol.ExaMetadata
+import com.exasol.common.CommonConstants._
 
 /**
- * An abstract class that holds the user provided key-value parameters
- * when using the user-defined-functions (UDFs).
+ * An abstract class that holds the user provided key-value parameters when using the user-defined-functions (UDFs).
  *
- * This only represents the raw string key-value pairs. Specific
- * implementations should extends this class to support required UDF
- * key-value parameters.
+ * This only represents the raw string key-value pairs. Specific implementations should extends this class to support
+ * required UDF key-value parameters.
  */
 abstract class AbstractProperties(private val properties: Map[String, String]) {
-
-  /** An optional property key name for the named connection object. */
-  final val CONNECTION_NAME_PROPERTY: String = "CONNECTION_NAME"
 
   /**
    * Checks whether the key-value properties map is empty.
@@ -55,37 +52,29 @@ abstract class AbstractProperties(private val properties: Map[String, String]) {
 
   /** Checks if the Exasol named connection property is provided. */
   final def hasNamedConnection(): Boolean =
-    containsKey(CONNECTION_NAME_PROPERTY)
+    containsKey(CONNECTION_NAME)
+
+  private[this] def getPropertySeparator(): String =
+    get(CONNECTION_PROPERTY_SEPARATOR).fold(DEFAULT_CONNECTION_PROPERTY_SEPARATOR_VALUE)(identity)
+
+  private[this] def getKeyValueAssignment(): String =
+    get(CONNECTION_KEYVALUE_ASSIGNMENT).fold(CONNECTION_KEYVALUE_ASSIGNMENT_VALUE)(identity)
 
   /**
    * Parses the connection object password into key-value map pairs.
    *
-   * If the connection object contains the username, it is mapped to the
-   * {@code keyForUsername} parameter. However, this value is
-   * overwritten if the provided key is available in password string of
-   * connection object.
+   * If the connection object contains the username, it is mapped to the {@code keyForUsername}
+   * parameter. However, this value is overwritten if the provided key is available in password
+   * string of connection object.
+   *
+   * Users can set also property separators using {@code CONNECTION_SEPARATOR} and {@code
+   * CONNECTION_KEYVALUE_ASSIGNMENT} parameters.
    */
-  final def parseConnectionInfo(
-    keyForUsername: String,
-    exaMetadata: Option[ExaMetadata]
-  ): Map[String, String] = {
+  final def parseConnectionInfo(keyForUsername: String, exaMetadata: Option[ExaMetadata]): Map[String, String] = {
     val connection = getConnectionInformation(exaMetadata)
     val username = connection.getUser()
     val password = connection.getPassword();
-    val map = password
-      .split(";")
-      .map { str =>
-        val idx = str.indexOf('=')
-        if (idx < 0) {
-          throw new IllegalArgumentException(
-            "Connection object password does not contain key=value pairs!"
-          )
-        }
-        str.substring(0, idx).strip().replace("\n", "") ->
-          str.substring(idx + 1).strip().replace("\n", "")
-      }
-      .toMap
-
+    val map = PropertiesParser(getPropertySeparator(), getKeyValueAssignment()).mapFromString(password)
     if (username.isEmpty()) {
       map
     } else {
@@ -94,15 +83,12 @@ abstract class AbstractProperties(private val properties: Map[String, String]) {
   }
 
   /**
-   * Returns an Exasol [[ExaConnectionInformation]] named connection
-   * information.
+   * Returns an Exasol [[ExaConnectionInformation]] named connection information.
    */
-  private[common] final def getConnectionInformation(
-    exaMetadata: Option[ExaMetadata]
-  ): ExaConnectionInformation =
+  private[common] final def getConnectionInformation(exaMetadata: Option[ExaMetadata]): ExaConnectionInformation =
     exaMetadata.fold {
       throw new IllegalArgumentException("Exasol metadata is None!")
-    }(_.getConnection(getString(CONNECTION_NAME_PROPERTY)))
+    }(_.getConnection(getString(CONNECTION_NAME)))
 
   /**
    * Returns the value of the key as a String.
@@ -124,17 +110,14 @@ abstract class AbstractProperties(private val properties: Map[String, String]) {
   /**
    * Returns a string listing of all key-value property pairs.
    *
-   * The resulting string contains key-value pairs in a sorted order by
-   * keys.
+   * The resulting string contains key-value pairs in a sorted order by keys.
    *
-   * @param keyValueSeparator The separator between each key-value pairs
-   * @param propertySeparator The separator between each key-value pair strings
-   * @return The string value of properties with provided separators
+   * @param propertySeparator a separator between each key-value pair strings
+   * @param keyValueAssignment an assignment between each key-value pairs
+   * @return a string value of properties with provided separators
    */
-  final def mkString(keyValueSeparator: String, propertySeparator: String): String =
-    (SortedMap.empty[String, String] ++ properties)
-      .map { case (k, v) => s"$k$keyValueSeparator$v" }
-      .mkString(propertySeparator)
+  final def mkString(propertySeparator: String, keyValueAssignment: String): String =
+    PropertiesParser(propertySeparator, keyValueAssignment).mapToString(properties)
 
   @SuppressWarnings(Array("org.wartremover.warts.Return"))
   // scalastyle:off

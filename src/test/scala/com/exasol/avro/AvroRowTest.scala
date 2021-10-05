@@ -126,7 +126,7 @@ class AvroRowTest extends AnyFunSuite {
     val thrown = intercept[IllegalArgumentException] {
       AvroRow(record)
     }
-    assert(thrown.getMessage === "Avro string type cannot be converted to string!")
+    assert(thrown.getMessage() === "Avro string type cannot be converted to string!")
   }
 
   test("apply throws if GenericRecord Union type is not primitive and null") {
@@ -146,7 +146,7 @@ class AvroRowTest extends AnyFunSuite {
     val thrown = intercept[IllegalArgumentException] {
       AvroRow(record)
     }
-    assert(thrown.getMessage === "Avro Union type should contain a primitive and null!")
+    assert(thrown.getMessage() === "Avro Union type should contain a primitive and null!")
   }
 
   private[this] final def createRecord(name: String, fields: Schema.Field*): Schema = {

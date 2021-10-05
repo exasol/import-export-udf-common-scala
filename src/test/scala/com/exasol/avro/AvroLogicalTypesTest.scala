@@ -143,7 +143,7 @@ class AvroLogicalTypesTest extends AnyFunSuite {
       AvroRow(record)
     }
     val expected = "Decimal precision 40 is larger than maximum allowed precision 36."
-    assert(thrown.getMessage === expected)
+    assert(thrown.getMessage() === expected)
   }
 
 }
