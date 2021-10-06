@@ -53,10 +53,10 @@ abstract class AbstractProperties(private val properties: Map[String, String]) {
     containsKey(CONNECTION_NAME)
 
   private[this] def getPropertySeparator(): String =
-    get(CONNECTION_PROPERTY_SEPARATOR).fold(DEFAULT_CONNECTION_PROPERTY_SEPARATOR_VALUE)(identity)
+    get(CONNECTION_PROPERTY_SEPARATOR).fold(CONNECTION_PROPERTY_SEPARATOR_DEFAULT_VALUE)(identity)
 
   private[this] def getKeyValueAssignment(): String =
-    get(CONNECTION_KEYVALUE_ASSIGNMENT).fold(CONNECTION_KEYVALUE_ASSIGNMENT_VALUE)(identity)
+    get(CONNECTION_KEYVALUE_ASSIGNMENT).fold(CONNECTION_KEYVALUE_ASSIGNMENT_DEFAULT_VALUE)(identity)
 
   /**
    * Parses the connection object password into key-value pairs.

@@ -17,17 +17,11 @@ final case class PropertiesParser(private val propertySeparator: String, private
    *
    * @return a map of key value pairs
    */
-  def mapFromString(string: String): Map[String, String] = {
-    if (!string.contains(propertySeparator)) {
-      throw new IllegalArgumentException(
-        s"Properties input string is not separated by '$propertySeparator'."
-      )
-    }
+  def mapFromString(string: String): Map[String, String] =
     string
       .split(propertySeparator)
       .map(splitStringToTuple)
       .toMap
-  }
 
   /**
    * Deserializes a key-value properties map into a string.
@@ -45,13 +39,13 @@ final case class PropertiesParser(private val propertySeparator: String, private
     val idx = string.indexOf(keyValueAssignment)
     if (idx < 0) {
       throw new IllegalArgumentException(
-        s"Properties input string does not contain key value assignment '$keyValueAssignment'."
+        s"Properties input string does not contain key-value assignment '$keyValueAssignment'."
       )
     }
     stripAndReplace(string.substring(0, idx)) -> stripAndReplace(string.substring(idx + keyValueAssignment.length()))
   }
 
   private[this] def stripAndReplace(string: String): String =
-    string.strip().replace("\n", "")
+    string.strip().replace("\n", "").replace("\r", "")
 
 }

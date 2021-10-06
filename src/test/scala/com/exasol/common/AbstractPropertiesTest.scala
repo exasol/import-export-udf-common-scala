@@ -219,7 +219,7 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
     val thrown = intercept[IllegalArgumentException] {
       BaseProperties(properties).parseConnectionInfo("username", Option(metadata))
     }
-    val expectedPrefix = "Properties input string is not separated by"
+    val expectedPrefix = "Properties input string does not contain key-value"
     assert(thrown.getMessage().startsWith(expectedPrefix))
     verify(metadata, times(1)).getConnection("connection_info")
   }
