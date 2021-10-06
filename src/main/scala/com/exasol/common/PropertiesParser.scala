@@ -25,7 +25,7 @@ final case class PropertiesParser(private val propertySeparator: String, private
     }
     string
       .split(propertySeparator)
-      .map(stringToTuple)
+      .map(splitStringToTuple)
       .toMap
   }
 
@@ -41,14 +41,14 @@ final case class PropertiesParser(private val propertySeparator: String, private
       .map { case (k, v) => s"$k$keyValueAssignment$v" }
       .mkString(propertySeparator)
 
-  private[this] def stringToTuple(string: String): Tuple2[String, String] = {
+  private[this] def splitStringToTuple(string: String): Tuple2[String, String] = {
     val idx = string.indexOf(keyValueAssignment)
     if (idx < 0) {
       throw new IllegalArgumentException(
         s"Properties input string does not contain key value assignment '$keyValueAssignment'."
       )
     }
-    stripAndReplace(string.substring(0, idx)) -> stripAndReplace(string.substring(idx + 1))
+    stripAndReplace(string.substring(0, idx)) -> stripAndReplace(string.substring(idx + keyValueAssignment.length()))
   }
 
   private[this] def stripAndReplace(string: String): String =
