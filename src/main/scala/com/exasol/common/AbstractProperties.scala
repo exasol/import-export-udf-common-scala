@@ -59,7 +59,7 @@ abstract class AbstractProperties(private val properties: Map[String, String]) {
     get(CONNECTION_KEYVALUE_ASSIGNMENT).fold(CONNECTION_KEYVALUE_ASSIGNMENT_VALUE)(identity)
 
   /**
-   * Parses the connection object password into key-value map pairs.
+   * Parses the connection object password into key-value pairs.
    *
    * If the connection object contains the username, it is mapped to the {@code keyForUsername}
    * parameter. However, this value is overwritten if the provided key is available in password
