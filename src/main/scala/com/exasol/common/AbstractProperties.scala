@@ -1,7 +1,5 @@
 package com.exasol.common
 
-import scala.collection.SortedMap
-
 import com.exasol.ExaConnectionInformation
 import com.exasol.ExaMetadata
 import com.exasol.common.CommonConstants._
