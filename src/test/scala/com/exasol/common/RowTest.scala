@@ -27,7 +27,7 @@ class RowTest extends AnyFunSuite with Matchers {
     assert(row.isNullAt(1) === false)
   }
 
-  test("equalality check") {
+  test("equality check") {
     val rowEqual = Row(Seq("value1", 1, 3.14, null))
     val rowNotEqual = Row(Seq("value1", 2, 3.14, null))
     row.shouldEqual(rowEqual)
@@ -39,14 +39,14 @@ class RowTest extends AnyFunSuite with Matchers {
       row.getAs[Int](0)
     }
     val expected = "class java.lang.String cannot be cast to class java.lang.Integer"
-    assert(thrown.getMessage.contains(expected))
+    assert(thrown.getMessage().contains(expected))
   }
 
   test("throws index out of bounds") {
     val thrown = intercept[IndexOutOfBoundsException] {
       row.get(5)
     }
-    assert(thrown.getMessage === "5")
+    assert(thrown.getMessage() === "5")
   }
 
 }

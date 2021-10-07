@@ -81,9 +81,7 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
     val thrown = intercept[IllegalArgumentException] {
       BaseProperties(properties).getString(key)
     }
-    assert(
-      thrown.getMessage === s"Please provide a value for the $key property!"
-    )
+    assert(thrown.getMessage() === s"Please provide a value for the $key property!")
   }
 
   test("size returns zero by default") {
@@ -104,7 +102,7 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
   test("mkString returns separated key-value property pairs") {
     properties = Map("k1" -> "v1", "k2" -> "v2", "a" -> "1")
     val expected = s"a -> 1;k1 -> v1;k2 -> v2" // sorted
-    val str = BaseProperties(properties).mkString(" -> ", ";")
+    val str = BaseProperties(properties).mkString(";", " -> ")
     assert(str.isEmpty === false)
     assert(str === expected)
   }
@@ -166,7 +164,7 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
     val thrown = intercept[IllegalArgumentException] {
       BaseProperties(properties).getConnectionInformation(None)
     }
-    assert(thrown.getMessage === "Exasol metadata is None!")
+    assert(thrown.getMessage() === "Exasol metadata is None!")
   }
 
   test("getConnectionInformation returns storage connection information") {
@@ -174,29 +172,45 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
     val metadata = mock[ExaMetadata]
     val connectionInfo = newConnectionInformation("user", "secret")
     when(metadata.getConnection("connection_info")).thenReturn(connectionInfo)
-    assert(
-      BaseProperties(properties)
-        .getConnectionInformation(Option(metadata)) === connectionInfo
-    )
+    assert(BaseProperties(properties).getConnectionInformation(Option(metadata)) === connectionInfo)
     verify(metadata, times(1)).getConnection("connection_info")
   }
 
   test("parseConnectionInfo returns key value pairs from password") {
     properties = Map("CONNECTION_NAME" -> "connection_info")
-    val metadata = mockMetadata("", "a=secret1;b=secret2")
-    val result = BaseProperties(properties)
-      .parseConnectionInfo("username", Option(metadata))
-    assert(result === Map("a" -> "secret1", "b" -> "secret2"))
-    verify(metadata, times(1)).getConnection("connection_info")
+    val expected = Map("a" -> "secret1", "b" -> "secret2")
+    assertParseConnectionInfo("", "a=secret1;b=secret2", properties, expected)
   }
 
   test("parseConnectionInfo returns key value pairs with updated username") {
     properties = Map("CONNECTION_NAME" -> "connection_info")
-    val metadata = mockMetadata("John", "a=secret1;b=secret2")
-    val result = BaseProperties(properties)
-      .parseConnectionInfo("username", Option(metadata))
-    assert(result === Map("username" -> "John", "a" -> "secret1", "b" -> "secret2"))
+    val expected = Map("userKey" -> "John", "a" -> "secret1", "b" -> "secret2")
+    assertParseConnectionInfo("John", "a=secret1;b=secret2", properties, expected)
+  }
+
+  test("parseConnectionInfo returns key value pairs with custom separators") {
+    properties = Map("CONNECTION_NAME" -> "connection_info", "CONNECTION_SEPARATOR" -> "#")
+    val expected = Map("k1" -> "v1", "k2" -> "v2", "k3" -> "v3;k4=v4")
+    assertParseConnectionInfo("", "k1=v1#k2=v2#k3=v3;k4=v4", properties, expected)
+  }
+
+  test("parseConnectionInfo returns key value pairs with custom key-value assignment") {
+    properties = Map("CONNECTION_NAME" -> "connection_info", "CONNECTION_KEYVALUE_ASSIGNMENT" -> "@@")
+    val expected = Map("k1" -> "v1", "k2" -> "v2", "k3" -> "v3", "k4" -> "v4")
+    assertParseConnectionInfo("", "k1@@v1;k2@@v2;k3@@v3;k4@@v4", properties, expected)
+  }
+
+  private[this] def assertParseConnectionInfo(
+    user: String,
+    password: String,
+    props: Map[String, String],
+    expected: Map[String, String]
+  ): Unit = {
+    val metadata = mockMetadata(user, password)
+    val result = BaseProperties(properties).parseConnectionInfo("userKey", Option(metadata))
+    assert(result === expected)
     verify(metadata, times(1)).getConnection("connection_info")
+    ()
   }
 
   test("parseConnectionInfo throws if password does not contain key value pairs") {
@@ -205,8 +219,8 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
     val thrown = intercept[IllegalArgumentException] {
       BaseProperties(properties).parseConnectionInfo("username", Option(metadata))
     }
-    val expected = "Connection object password does not contain key=value pairs!"
-    assert(thrown.getMessage === expected)
+    val expectedPrefix = "Properties input string does not contain key-value"
+    assert(thrown.getMessage().startsWith(expectedPrefix))
     verify(metadata, times(1)).getConnection("connection_info")
   }
 

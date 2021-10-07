@@ -105,7 +105,7 @@ class AvroComplexTypesTest extends AnyFunSuite {
     val thrown = intercept[IllegalArgumentException] {
       AvroRow(record)
     }
-    assert(thrown.getMessage.contains("Unsupported Avro Array type"))
+    assert(thrown.getMessage().contains("Unsupported Avro Array type"))
   }
 
   test("parse avro map type") {
@@ -195,7 +195,7 @@ class AvroComplexTypesTest extends AnyFunSuite {
     val thrown = intercept[IllegalArgumentException] {
       AvroRow(record)
     }
-    assert(thrown.getMessage.contains("Unsupported Avro Record type"))
+    assert(thrown.getMessage().contains("Unsupported Avro Record type"))
   }
 
 }
