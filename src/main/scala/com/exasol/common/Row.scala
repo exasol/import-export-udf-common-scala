@@ -31,7 +31,7 @@ final case class Row(protected[data] val values: Seq[Any]) {
       throw new IndexOutOfBoundsException(
         ExaError
           .messageBuilder("E-IEUCS-10")
-          .message("Given index {{INDEX}} is out of bounds.", index)
+          .message("Given index {{INDEX}} is out of bounds.", String.valueOf(index))
           .mitigation("Please use correct index to obtain field value.")
           .toString()
       )
@@ -42,7 +42,7 @@ final case class Row(protected[data] val values: Seq[Any]) {
   /**
    * Returns the value at position {@code index} casted to the type.
    *
-   * For catching {@link ClassCastException}}, we use reflection based casting.
+   * For catching {@link java.lang.ClassCastException}, we use reflection based casting.
    *
    * @param index an index into values array
    * @return value at the provided index casted to type
@@ -60,7 +60,7 @@ final case class Row(protected[data] val values: Seq[Any]) {
             .messageBuilder("E-IEUCS-11")
             .message("Failed to cast {{VALUE}} at index {{INDEX}} to instance of {{INSTANCE_TYPE}}.")
             .parameter("VALUE", value)
-            .parameter("INDEX", index.toString())
+            .parameter("INDEX", String.valueOf(index))
             .parameter("INSTANCE_TYPE", runtimeClass.toString())
             .mitigation("Please use valid type parameter for type casting.")
             .toString(),
