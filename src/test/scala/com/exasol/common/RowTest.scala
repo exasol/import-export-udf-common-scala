@@ -46,7 +46,7 @@ class RowTest extends AnyFunSuite with Matchers {
     val thrown = intercept[IndexOutOfBoundsException] {
       row.get(5)
     }
-    assert(thrown.getMessage().startsWith("E-IEUCS-10: Given index 5 is out of bounds."))
+    assert(thrown.getMessage().startsWith("E-IEUCS-10: Given index '5' is out of bounds."))
   }
 
 }
