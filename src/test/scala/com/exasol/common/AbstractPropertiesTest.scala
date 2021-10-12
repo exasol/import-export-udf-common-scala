@@ -81,7 +81,9 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
     val thrown = intercept[IllegalArgumentException] {
       BaseProperties(properties).getString(key)
     }
-    assert(thrown.getMessage() === s"Please provide a value for the $key property!")
+    val expectedPrefix =
+      s"E-IEUCS-2: Failed to get value for '$key' property. Please provide key-value pairs for 'key' property."
+    assert(thrown.getMessage().startsWith(expectedPrefix))
   }
 
   test("size returns zero by default") {
@@ -164,7 +166,7 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
     val thrown = intercept[IllegalArgumentException] {
       BaseProperties(properties).getConnectionInformation(None)
     }
-    assert(thrown.getMessage() === "Exasol metadata is None!")
+    assert(thrown.getMessage().startsWith("E-IEUCS-1: Provided Exasol metadata object is None."))
   }
 
   test("getConnectionInformation returns storage connection information") {
@@ -219,7 +221,7 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
     val thrown = intercept[IllegalArgumentException] {
       BaseProperties(properties).parseConnectionInfo("username", Option(metadata))
     }
-    val expectedPrefix = "Properties input string does not contain key-value"
+    val expectedPrefix = "E-IEUCS-4: Properties input string does not contain key-value assignment '='."
     assert(thrown.getMessage().startsWith(expectedPrefix))
     verify(metadata, times(1)).getConnection("connection_info")
   }

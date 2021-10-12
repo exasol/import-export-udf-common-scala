@@ -1,0 +1,5 @@
+error-tags:
+  IEUCS:
+    packages:
+      - com.exasol.common
+    highest-index: 11

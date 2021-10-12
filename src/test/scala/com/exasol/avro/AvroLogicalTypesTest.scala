@@ -142,8 +142,8 @@ class AvroLogicalTypesTest extends AnyFunSuite {
     val thrown = intercept[IllegalArgumentException] {
       AvroRow(record)
     }
-    val expected = "Decimal precision 40 is larger than maximum allowed precision 36."
-    assert(thrown.getMessage() === expected)
+    val expectedPrefix = "E-IEUCS-5: Decimal precision '40' is larger than maximal allowed '36' precision."
+    assert(thrown.getMessage().startsWith(expectedPrefix))
   }
 
 }

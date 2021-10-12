@@ -1,5 +1,6 @@
 package com.exasol.common.avro
 
+import java.lang.Integer
 import java.util.{List => JList}
 import java.util.{Map => JMap}
 
@@ -105,7 +106,9 @@ class AvroComplexTypesTest extends AnyFunSuite {
     val thrown = intercept[IllegalArgumentException] {
       AvroRow(record)
     }
-    assert(thrown.getMessage().contains("Unsupported Avro Array type"))
+    assert(
+      thrown.getMessage().startsWith("E-IEUCS-8: Unsupported Avro array type 'java.util.ImmutableCollections$MapN'.")
+    )
   }
 
   test("parse avro map type") {
@@ -142,7 +145,7 @@ class AvroComplexTypesTest extends AnyFunSuite {
     record.put("id", 1)
     record.put("address", address)
     val row = AvroRow(record)
-    assert(row.getAs[Int](0) === 1)
+    assert(row.getAs[Integer](0) === 1)
     assert(row.getAs[String](1) === """{"zipCode":40902,"street":"Street 9"}""")
   }
 
@@ -183,7 +186,7 @@ class AvroComplexTypesTest extends AnyFunSuite {
           |   "age":42
           |}""".stripMargin.replaceAll("\\s+", "")
     val row = AvroRow(record)
-    assert(row.getAs[Int](0) === 1)
+    assert(row.getAs[Integer](0) === 1)
     assert(row.getAs[String](1) === expected)
   }
 
@@ -195,7 +198,7 @@ class AvroComplexTypesTest extends AnyFunSuite {
     val thrown = intercept[IllegalArgumentException] {
       AvroRow(record)
     }
-    assert(thrown.getMessage().contains("Unsupported Avro Record type"))
+    assert(thrown.getMessage().startsWith("E-IEUCS-9: Unsupported Avro record type 'java.lang.String'."))
   }
 
 }

@@ -8,6 +8,7 @@ import java.util.{Map => JMap}
 import java.util.Collection
 
 import com.exasol.common.json.JsonMapper
+import com.exasol.errorreporting.ExaError
 
 import org.apache.avro.Conversions.DecimalConversion
 import org.apache.avro.LogicalTypes
@@ -121,8 +122,13 @@ final class AvroConverter {
     val precision = logicalType.getPrecision()
     if (precision > EXASOL_DECIMAL_PRECISION) {
       throw new IllegalArgumentException(
-        s"Decimal precision ${precision.toString()} is larger than " +
-          s"maximum allowed precision ${EXASOL_DECIMAL_PRECISION.toString()}."
+        ExaError
+          .messageBuilder("E-IEUCS-5")
+          .message("Decimal precision {{PRECISION}} is larger than maximal allowed {{ALLOWED}} precision.")
+          .parameter("PRECISION", precision.toString())
+          .parameter("ALLOWED", EXASOL_DECIMAL_PRECISION.toString())
+          .mitigation("Please ensure that Avro decimal value precision fits into Exasol decimal precision.")
+          .toString()
       )
     }
   }
@@ -136,7 +142,11 @@ final class AvroConverter {
       case fixed: GenericFixed    => new String(fixed.bytes(), "UTF8")
       case _ =>
         throw new IllegalArgumentException(
-          s"Avro ${field.getName} type cannot be converted to string!"
+          ExaError
+            .messageBuilder("E-IEUCS-6")
+            .message("Avro field {{FIELD}} type cannot be converted to string.", field.getName())
+            .mitigation("Please ensure that Exasol table column and Avro field types match.")
+            .toString()
         )
     }
 
@@ -151,14 +161,18 @@ final class AvroConverter {
         } else if (types.get(1).getType() == Schema.Type.NULL) {
           getAvroValue(value, types.get(0))
         } else {
-          throw new IllegalArgumentException(
-            "Avro Union type should contain a primitive and null!"
-          )
+          throw new IllegalArgumentException(getAvroUnionErrorMessage())
         }
-      case _ =>
-        throw new IllegalArgumentException("Avro Union type should contain a primitive and null!")
+      case _ => throw new IllegalArgumentException(getAvroUnionErrorMessage())
     }
   }
+
+  private[this] def getAvroUnionErrorMessage(): String =
+    ExaError
+      .messageBuilder("E-IEUCS-7")
+      .message("Avro union type does not contain a primitive type and null.")
+      .mitigation("Please make sure that Avro union type contains a primitive type and a null.")
+      .toString()
 
   private[this] def getArrayValue(value: Any, field: Schema): Array[Any] = value match {
     case array: Array[_] => array.map(getAvroValue(_, field.getElementType()))
@@ -172,7 +186,12 @@ final class AvroConverter {
       result
     case other =>
       throw new IllegalArgumentException(
-        s"Unsupported Avro Array type '${other.getClass.getName()}'."
+        ExaError
+          .messageBuilder("E-IEUCS-8")
+          .message("Unsupported Avro array type {{TYPE}}.", other.getClass.getName())
+          .mitigation("Please make sure Avro array type is of Array or Collection types.")
+          .ticketMitigation()
+          .toString()
       )
   }
 
@@ -201,7 +220,12 @@ final class AvroConverter {
       result
     case other =>
       throw new IllegalArgumentException(
-        s"Unsupported Avro Record type '${other.getClass.getName()}'."
+        ExaError
+          .messageBuilder("E-IEUCS-9")
+          .message("Unsupported Avro record type {{TYPE}}.", other.getClass.getName())
+          .mitigation("Please make sure that Avro record type is of IndexedRecord type.")
+          .ticketMitigation()
+          .toString()
       )
   }
 

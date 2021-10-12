@@ -74,7 +74,7 @@ class AvroPrimitiveReaderTest extends AnyFunSuite {
     val thrown = intercept[IllegalArgumentException] {
       unionTest(schema)
     }
-    assert(thrown.getMessage() === "Avro Union type should contain a primitive and null!")
+    checkAvroUnionError(thrown.getMessage())
   }
 
   test("parse avro union without a null type") {
@@ -82,7 +82,12 @@ class AvroPrimitiveReaderTest extends AnyFunSuite {
     val thrown = intercept[IllegalArgumentException] {
       unionTest(schema)
     }
-    assert(thrown.getMessage() === "Avro Union type should contain a primitive and null!")
+    checkAvroUnionError(thrown.getMessage())
+  }
+
+  private[this] def checkAvroUnionError(message: String): Unit = {
+    assert(message.startsWith("E-IEUCS-7: Avro union type does not contain a primitive type and null."))
+    ()
   }
 
   private[this] def unionTest(schema: Schema): Unit = {

@@ -24,6 +24,7 @@ object Dependencies {
   lazy val RuntimeDependencies: Seq[ModuleID] = Seq(
     "com.exasol" % "exasol-script-api" % ExasolVersion,
     "org.slf4j" % "slf4j-simple" % SLF4JSimpleVersion,
+    "com.exasol" % "error-reporting-java" % "0.4.0",
     "com.typesafe.scala-logging" %% "scala-logging" % TypesafeLoggingVersion
       exclude ("org.slf4j", "slf4j-api")
       exclude ("org.scala-lang", "scala-library")

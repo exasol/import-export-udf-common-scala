@@ -3,6 +3,7 @@ package com.exasol.common
 import com.exasol.ExaConnectionInformation
 import com.exasol.ExaMetadata
 import com.exasol.common.CommonConstants._
+import com.exasol.errorreporting.ExaError
 
 /**
  * An abstract class that holds the user provided key-value parameters when using the user-defined-functions (UDFs).
@@ -85,7 +86,13 @@ abstract class AbstractProperties(private val properties: Map[String, String]) {
    */
   private[common] final def getConnectionInformation(exaMetadata: Option[ExaMetadata]): ExaConnectionInformation =
     exaMetadata.fold {
-      throw new IllegalArgumentException("Exasol metadata is None!")
+      throw new IllegalArgumentException(
+        ExaError
+          .messageBuilder("E-IEUCS-1")
+          .message("Provided Exasol metadata object is None.")
+          .mitigation("Please make sure it is valid metadata object.")
+          .toString()
+      )
     }(_.getConnection(getString(CONNECTION_NAME)))
 
   /**
@@ -96,7 +103,13 @@ abstract class AbstractProperties(private val properties: Map[String, String]) {
   @throws[IllegalArgumentException]("If key does not exist.")
   final def getString(key: String): String =
     get(key).fold {
-      throw new IllegalArgumentException(s"Please provide a value for the $key property!")
+      throw new IllegalArgumentException(
+        ExaError
+          .messageBuilder("E-IEUCS-2")
+          .message("Failed to get value for {{KEY}} property.", key)
+          .mitigation("Please provide key-value pairs for {{KEY}} property.", key)
+          .toString()
+      )
     }(identity)
 
   /**

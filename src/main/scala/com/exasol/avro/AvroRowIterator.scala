@@ -1,6 +1,7 @@
 package com.exasol.common.avro
 
 import com.exasol.common.data.Row
+import com.exasol.errorreporting.ExaError
 
 import org.apache.avro.file.DataFileReader
 import org.apache.avro.generic.GenericRecord
@@ -32,7 +33,13 @@ object AvroRowIterator {
 
       override def next(): Row = {
         if (!hasNext) {
-          throw new NoSuchElementException("Avro reader called next on an empty iterator!")
+          throw new NoSuchElementException(
+            ExaError
+              .messageBuilder("E-IEUCS-3")
+              .message("Avro reader next call on an empty iterator.")
+              .mitigation("Please check that Avro iterator has elements before calling next.")
+              .toString()
+          )
         }
         val record = reader.next()
         AvroRow(record)
