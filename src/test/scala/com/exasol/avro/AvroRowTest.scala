@@ -13,10 +13,7 @@ class AvroRowTest extends AnyFunSuite {
   private[this] val avroNamespace = "com.exasol.cloudetl.avro"
 
   test("apply returns Row from GenericRecord with ByteBuffer column") {
-    val recordSchema = createRecord(
-      "record",
-      createField("col_str", Schema.create(Schema.Type.STRING))
-    )
+    val recordSchema = createRecord("record", createField("col_str", Schema.create(Schema.Type.STRING)))
     val record = new GenericData.Record(recordSchema)
     record.put("col_str", java.nio.ByteBuffer.wrap(Array[Byte](104, 101, 108, 108, 111)))
     assert(AvroRow(record) === Row(Seq("hello")))
@@ -117,23 +114,17 @@ class AvroRowTest extends AnyFunSuite {
   }
 
   test("apply throws if GenericRecord value cannot be cast as string") {
-    val recordSchema = createRecord(
-      "record",
-      createField("col_str", Schema.create(Schema.Type.STRING))
-    )
+    val recordSchema = createRecord("record", createField("col_str", Schema.create(Schema.Type.STRING)))
     val record = new GenericData.Record(recordSchema)
     record.put("col_str", 1L)
     val thrown = intercept[IllegalArgumentException] {
       AvroRow(record)
     }
-    assert(thrown.getMessage() === "Avro string type cannot be converted to string!")
+    assert(thrown.getMessage().startsWith("E-IEUCS-6: Avro field 'string' type cannot be converted to string."))
   }
 
   test("apply throws if GenericRecord Union type is not primitive and null") {
-    val unionSchemaTypes = Schema.createUnion(
-      Schema.create(Schema.Type.STRING),
-      Schema.create(Schema.Type.INT)
-    )
+    val unionSchemaTypes = Schema.createUnion(Schema.create(Schema.Type.STRING), Schema.create(Schema.Type.INT))
     val unionSchema = createUnion("col_union", unionSchemaTypes)
     val recordSchema = createRecord(
       "record",
@@ -146,7 +137,7 @@ class AvroRowTest extends AnyFunSuite {
     val thrown = intercept[IllegalArgumentException] {
       AvroRow(record)
     }
-    assert(thrown.getMessage() === "Avro Union type should contain a primitive and null!")
+    assert(thrown.getMessage().startsWith("E-IEUCS-7: Avro union type does not contain a primitive type and null."))
   }
 
   private[this] final def createRecord(name: String, fields: Schema.Field*): Schema = {

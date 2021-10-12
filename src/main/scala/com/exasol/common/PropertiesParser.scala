@@ -2,6 +2,8 @@ package com.exasol.common
 
 import scala.collection.SortedMap
 
+import com.exasol.errorreporting.ExaError
+
 /**
  * A class that reads, serializes and deserializes key value properties to a string.
  *
@@ -39,7 +41,11 @@ final case class PropertiesParser(private val propertySeparator: String, private
     val idx = string.indexOf(keyValueAssignment)
     if (idx < 0) {
       throw new IllegalArgumentException(
-        s"Properties input string does not contain key-value assignment '$keyValueAssignment'."
+        ExaError
+          .messageBuilder("E-IEUCS-4")
+          .message("Properties input string does not contain key-value assignment {{KVA}}.", keyValueAssignment)
+          .mitigation("Please make sure that key-value pairs encoded correctly.")
+          .toString()
       )
     }
     stripAndReplace(string.substring(0, idx)) -> stripAndReplace(string.substring(idx + keyValueAssignment.length()))

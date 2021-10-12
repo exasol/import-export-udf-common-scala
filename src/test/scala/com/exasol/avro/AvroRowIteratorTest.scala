@@ -39,7 +39,7 @@ class AvroRowIteratorTest extends AnyFunSuite with BeforeAndAfterEach {
     val thrown = intercept[NoSuchElementException] {
       iterator.next()
     }
-    assert(thrown.getMessage() === "Avro reader called next on an empty iterator!")
+    assert(thrown.getMessage().startsWith("E-IEUCS-3: Avro reader next call on an empty iterator."))
   }
 
   private[this] def write[T <: GenericRecord](file: File, record: T): Unit = {

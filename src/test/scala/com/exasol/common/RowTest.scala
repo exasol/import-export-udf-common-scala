@@ -19,7 +19,7 @@ class RowTest extends AnyFunSuite with Matchers {
 
   test("getAs[T] value at index") {
     assert(row.getAs[String](0) === "value1")
-    assert(row.getAs[Double](2) === 3.14)
+    assert(row.getAs[java.lang.Double](2) === 3.14)
   }
 
   test("isNuallAt returns true if null") {
@@ -35,18 +35,18 @@ class RowTest extends AnyFunSuite with Matchers {
   }
 
   test("throws class cast exception") {
-    val thrown = intercept[ClassCastException] {
-      row.getAs[Int](0)
+    val thrown = intercept[IllegalArgumentException] {
+      row.getAs[java.lang.Integer](0)
     }
-    val expected = "class java.lang.String cannot be cast to class java.lang.Integer"
-    assert(thrown.getMessage().contains(expected))
+    val expectedPrefix = "E-IEUCS-11: Failed to cast 'value1' at index '0' to instance of 'class java.lang.Integer'"
+    assert(thrown.getMessage().startsWith(expectedPrefix))
   }
 
   test("throws index out of bounds") {
     val thrown = intercept[IndexOutOfBoundsException] {
       row.get(5)
     }
-    assert(thrown.getMessage() === "5")
+    assert(thrown.getMessage().startsWith("E-IEUCS-10: Given index '5' is out of bounds."))
   }
 
 }

@@ -70,19 +70,19 @@ class AvroPrimitiveReaderTest extends AnyFunSuite {
   }
 
   test("parse avro union with many types") {
-    val schema = getSchema(s"""["string", "int", "null"]""")
-    val thrown = intercept[IllegalArgumentException] {
-      unionTest(schema)
-    }
-    assert(thrown.getMessage() === "Avro Union type should contain a primitive and null!")
+    assertThrowsUnionError(getSchema(s"""["string", "int", "null"]"""))
   }
 
   test("parse avro union without a null type") {
-    val schema = getSchema(s"""["string", "int"]""")
+    assertThrowsUnionError(getSchema(s"""["string", "int"]"""))
+  }
+
+  private[this] def assertThrowsUnionError(schema: Schema): Unit = {
     val thrown = intercept[IllegalArgumentException] {
       unionTest(schema)
     }
-    assert(thrown.getMessage() === "Avro Union type should contain a primitive and null!")
+    assert(thrown.getMessage().startsWith("E-IEUCS-7: Avro union type does not contain a primitive type and null."))
+    ()
   }
 
   private[this] def unionTest(schema: Schema): Unit = {

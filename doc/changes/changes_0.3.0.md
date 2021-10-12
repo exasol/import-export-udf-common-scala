@@ -13,11 +13,13 @@ In this release, we added custom user defined property separators. We also migra
 ## Refactoring
 
 * #15: Migrated to Github actions
+* #18: Added unified error codes
 
 ## Dependency Updates
 
 ### Runtime Dependency Updates
 
+* Added `com.exasol:error-reporting-java:0.4.0`
 * Updated `com.fasterxml.jackson.core:jackson-databind:2.11.3` to `2.12.5`
 * Updated `com.fasterxml.jackson.module:jackson-module-scala:2.11.3` to `2.12.5`
 * Updated `com.typesafe.scala-logging:scala-logging:3.9.2` to `3.9.4`
