@@ -15,7 +15,7 @@ object Dependencies {
   // Test dependencies versions
   private val ScalaTestVersion = "3.2.10"
   private val ScalaTestPlusVersion = "1.0.0-M2"
-  private val MockitoCoreVersion = "3.12.4"
+  private val MockitoCoreVersion = "4.0.0"
 
   val ExasolResolvers: Seq[Resolver] = Seq(
     "Exasol Releases" at "https://maven.exasol.com/artifactory/exasol-releases"
