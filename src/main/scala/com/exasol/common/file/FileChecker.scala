@@ -28,11 +28,11 @@ abstract class FileChecker {
    */
   final def isRegularFile(filePath: String): Boolean = {
     val path = Paths.get(filePath)
-    assertBucketFsPath(path)
+    checkStartsWithPath(path)
     Files.isRegularFile(path)
   }
 
-  private[this] def assertBucketFsPath(path: Path): Unit = {
+  private[this] def checkStartsWithPath(path: Path): Unit = {
     val file = path.toFile()
     try {
       val absolutePath = file.getCanonicalPath()
@@ -40,8 +40,8 @@ abstract class FileChecker {
         throw new IllegalArgumentException(
           ExaError
             .messageBuilder("E-IEUCS-12")
-            .message("Provided path {{PATH}} is not a BucketFS file location.", absolutePath)
-            .mitigation("Please make sure that file path start with '/buckets'.")
+            .message("Provided path {{PATH}} does not start with expected location prefix.", absolutePath)
+            .mitigation("Please make sure that file path start with {{PREFIX}}.", getLocationPrefix())
             .toString()
         )
       }
@@ -50,8 +50,8 @@ abstract class FileChecker {
         throw new UncheckedIOException(
           ExaError
             .messageBuilder("E-IEUCS-13")
-            .message("Failed to open BucketFS path {{PATH}}.", path)
-            .mitigation("Please make sure that file exists in BucketFS location.")
+            .message("Failed to open path {{PATH}}.", path)
+            .mitigation("Please make sure that file exists and starts with location {{PREFIX}}", getLocationPrefix())
             .toString(),
           exception
         )

@@ -26,7 +26,9 @@ class FileCheckerTest extends AnyFunSuite with Matchers {
       new BucketFSFileChecker().isRegularFile("/var/log/bucket1/file.txt")
     }
     val message = thrown.getMessage()
-    assert(message.startsWith("E-IEUCS-12: Provided path '/var/log/bucket1/file.txt' is not a BucketFS file location."))
+    assert(message.startsWith("E-IEUCS-12"))
+    assert(message.contains("Provided path '/var/log/bucket1/file.txt' does not start with expected"))
+    assert(message.contains("Please make sure that file path start with '/buckets'."))
   }
 
   class TemporaryFileChecker extends FileChecker {
