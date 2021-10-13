@@ -16,7 +16,7 @@ addSbtPlugin("com.thoughtworks.sbt-api-mappings" % "sbt-api-mappings" % "3.0.0")
 
 // Adds Scala Code Coverage (Scoverage) used during unit tests
 // http://github.com/scoverage/sbt-scoverage
-addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.9.0")
+addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.9.1")
 
 // Adds SBT Coveralls plugin for uploading Scala code coverage to
 // https://coveralls.io
@@ -46,4 +46,4 @@ addSbtPlugin("com.jsuereth" % "sbt-pgp" % "2.1.1")
 
 // Adds a `git` plugin
 // https://github.com/sbt/sbt-git
-addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "1.0.1")
+addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "1.0.2")
