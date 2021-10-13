@@ -1,10 +1,10 @@
-# Import Export UDF Common Scala 0.3.0, released 2021-10-??
+# Import Export UDF Common Scala 0.3.0, released 2021-10-13
 
 Code name: Added custom separators
 
 ## Summary
 
-In this release, we added custom user defined property separators. We also migrated our continuous integration from Travis CI to Github Actions.
+In this release, we added custom user defined property separators and BucketFS file location checker. We also migrated our continuous integration from Travis CI to Github Actions and added unified error codes.
 
 ## Features
 
