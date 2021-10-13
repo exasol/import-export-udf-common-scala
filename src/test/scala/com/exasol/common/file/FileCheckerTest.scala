@@ -35,7 +35,7 @@ class FileCheckerTest extends AnyFunSuite with Matchers with MockitoSugar {
     assert(message.contains("Please make sure that file path start with '/buckets'."))
   }
 
-  test("file checker throw ioexception") {
+  test("bucketfs file checker throws ioexception") {
     val file = mock[File]
     when(file.getAbsolutePath()).thenReturn("test/path")
     when(file.getCanonicalPath()).thenThrow(new IOException())
