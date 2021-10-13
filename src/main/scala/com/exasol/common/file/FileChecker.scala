@@ -1,5 +1,6 @@
 package com.exasol.common.file
 
+import java.io.File
 import java.io.IOException
 import java.io.UncheckedIOException
 import java.nio.file.Files
@@ -28,12 +29,11 @@ abstract class FileChecker {
    */
   final def isRegularFile(filePath: String): Boolean = {
     val path = Paths.get(filePath)
-    checkStartsWithPath(path)
+    checkStartsWithPath(path.toFile())
     Files.isRegularFile(path)
   }
 
-  private[this] def checkStartsWithPath(path: Path): Unit = {
-    val file = path.toFile()
+  protected[file] final def checkStartsWithPath(file: File): Unit =
     try {
       val absolutePath = file.getCanonicalPath()
       if (!absolutePath.startsWith(getLocationPrefix())) {
@@ -50,12 +50,11 @@ abstract class FileChecker {
         throw new UncheckedIOException(
           ExaError
             .messageBuilder("E-IEUCS-13")
-            .message("Failed to open path {{PATH}}.", path)
+            .message("Failed to open path {{PATH}}.", file.getAbsolutePath())
             .mitigation("Please make sure that file exists and starts with location {{PREFIX}}", getLocationPrefix())
             .toString(),
           exception
         )
     }
-  }
 
 }
