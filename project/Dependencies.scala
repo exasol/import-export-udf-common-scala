@@ -31,6 +31,7 @@ object Dependencies {
       exclude ("org.scala-lang", "scala-reflect"),
     "org.apache.avro" % "avro" % AvroVersion
       exclude ("org.slf4j", "slf4j-api")
+      exclude ("org.apache.commons", "commons-compress")
       excludeAll (
         ExclusionRule(organization = "com.fasterxml.jackson.core"),
         ExclusionRule(organization = "com.fasterxml.jackson.module")
