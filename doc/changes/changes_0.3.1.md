@@ -9,12 +9,3 @@ This release fixes parsing bugs in JSON mapper functionality.
 ## Bug Fixes
 
 * #24: Fixed JSON mapper issues
-
-## Dependency Updates
-
-### Runtime Dependency Updates
-
-### Test Dependency Updates
-
-### Plugin Updates
-
