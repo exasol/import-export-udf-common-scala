@@ -12,7 +12,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
-        <scala.version>2.13.7</scala.version>
         <!-- runtime dependency versions -->
         <exasol.api.version>6.1.7</exasol.api.version>
         <exasol.error-reporting.version>0.4.0</exasol.error-reporting.version>
@@ -72,11 +71,6 @@
             </snapshots>
         </repository>
     </repositories>
-    <!--
-    <prerequisites>
-        <maven>3.6.3</maven>
-    </prerequisites>
-    -->
     <dependencies>
         <dependency>
             <groupId>org.scala-lang</groupId>
@@ -123,7 +117,7 @@
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-scala_2.13</artifactId>
+            <artifactId>jackson-module-scala_${scala.compat.version}</artifactId>
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
@@ -133,7 +127,7 @@
         </dependency>
         <dependency>
             <groupId>com.typesafe.scala-logging</groupId>
-            <artifactId>scala-logging_2.13</artifactId>
+            <artifactId>scala-logging_${scala.compat.version}</artifactId>
             <version>${typesafe.logging.version}</version>
             <exclusions>
                 <exclusion>
@@ -153,13 +147,13 @@
         <!-- Test Dependencies -->
         <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.13</artifactId>
+            <artifactId>scalatest_${scala.compat.version}</artifactId>
             <version>${scalatest.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.scalatestplus</groupId>
-            <artifactId>scalatestplus-mockito_2.13</artifactId>
+            <artifactId>scalatestplus-mockito_${scala.compat.version}</artifactId>
             <version>${scalatestplus.version}</version>
             <scope>test</scope>
         </dependency>
@@ -171,6 +165,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>${project.artifactId}_${scala.compat.version}-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
@@ -204,6 +199,7 @@
                 </executions>
                 <configuration>
                     <scalaVersion>${scala.version}</scalaVersion>
+                    <scalaCompatVersion>${scala.compat.version}</scalaCompatVersion>
                     <checkMultipleScalaVersions>true</checkMultipleScalaVersions>
                     <failOnMultipleScalaVersions>true</failOnMultipleScalaVersions>
                     <recompileMode>incremental</recompileMode>
@@ -232,10 +228,6 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <!--
-                    <skipMain>true</skipMain>
-                    <skip>true</skip>
-                    -->
                 </configuration>
                 <executions>
                     <execution>
@@ -251,6 +243,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M4</version>
                 <configuration>
+                    <skipTests>true</skipTests>
                     <!--
                     Set the highest log level for coverage testing, so that we
                     have a chance to reach branches in the logging lambdas too.
@@ -270,7 +263,7 @@
                 <artifactId>scalatest-maven-plugin</artifactId>
                 <version>2.0.2</version>
                 <configuration>
-                    <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties ${argLine}</argLine>
+                    <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties</argLine>
                     <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                 </configuration>
                 <executions>
@@ -304,53 +297,6 @@
                         <goals>
                             <goal>single</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>prepare-agent-integration</id>
-                        <goals>
-                            <goal>prepare-agent-integration</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>merge-results</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>merge</goal>
-                        </goals>
-                        <configuration>
-                            <fileSets>
-                                <fileSet>
-                                    <directory>${project.build.directory}/</directory>
-                                    <includes>
-                                        <include>jacoco*.exec</include>
-                                    </includes>
-                                </fileSet>
-                            </fileSets>
-                            <destFile>${project.build.directory}/aggregate.exec</destFile>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <configuration>
-                            <dataFile>${project.build.directory}/aggregate.exec</dataFile>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -530,7 +476,7 @@
             <plugin>
                 <groupId>io.github.zlika</groupId>
                 <artifactId>reproducible-build-maven-plugin</artifactId>
-                <version>0.13</version>
+                <version>0.14</version>
                 <executions>
                     <execution>
                         <id>strip-jar</id>
@@ -552,14 +498,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <!--
-                <configuration>
-                    <sourcePaths>
-                        <sourcePath>target/delombok/main</sourcePath>
-                        <sourcePath>target/delombok/test</sourcePath>
-                    </sourcePaths>
-                </configuration>
-                -->
             </plugin>
             <plugin>
                 <groupId>com.exasol</groupId>
@@ -575,13 +513,9 @@
                 <configuration>
                     <modules>
                         <module>maven_central</module>
-                        <module>integration_tests</module>
                     </modules>
                     <excludedPlugins>
-                        <!-- does not work with scalar code yet -->
-                        <!--
-                        <excludedPlugin>com.exasol:error-code-crawler-maven-plugin</excludedPlugin>
-                        -->
+                        <excludedPlugin>org.jacoco:jacoco-maven-plugin</excludedPlugin>
                     </excludedPlugins>
                     <excludedFiles>
                         <excludedFile>.github/workflows/release_droid_release_on_maven_central.yml</excludedFile>
@@ -629,4 +563,23 @@
             </plugins>
         </pluginManagement>
     </build>
+    <profiles>
+        <profile>
+            <id>scala2.13</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <scala.version>2.13.7</scala.version>
+                <scala.compat.version>2.13</scala.compat.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>scala2.12</id>
+            <properties>
+                <scala.version>2.12.15</scala.version>
+                <scala.compat.version>2.12</scala.compat.version>
+            </properties>
+        </profile>
+    </profiles>
 </project>
