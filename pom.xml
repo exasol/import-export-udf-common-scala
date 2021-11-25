@@ -602,6 +602,11 @@
                         <artifactId>organize-imports_${scala.compat.version}</artifactId>
                         <version>0.6.0</version>
                     </dependency>
+                    <dependency>
+                        <groupId>com.github.vovapolu</groupId>
+                        <artifactId>scaluzzi_${scala.compat.version}</artifactId>
+                        <version>0.1.20</version>
+                    </dependency>
                 </dependencies>
                 <configuration>
                     <mode>CHECK</mode>

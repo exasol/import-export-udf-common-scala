@@ -72,7 +72,7 @@ abstract class AbstractProperties(private val properties: Map[String, String]) {
   final def parseConnectionInfo(keyForUsername: String, exaMetadata: Option[ExaMetadata]): Map[String, String] = {
     val connection = getConnectionInformation(exaMetadata)
     val username = connection.getUser()
-    val password = connection.getPassword();
+    val password = connection.getPassword()
     val map = PropertiesParser(getPropertySeparator(), getKeyValueAssignment()).mapFromString(password)
     if (username.isEmpty()) {
       map
