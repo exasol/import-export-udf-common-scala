@@ -184,7 +184,6 @@
                         <id>scala-test-compile</id>
                         <phase>process-test-resources</phase>
                         <goals>
-                            <goal>compile</goal>
                             <goal>testCompile</goal>
                         </goals>
                     </execution>
@@ -264,7 +263,7 @@
                 <version>2.0.2</version>
                 <configuration>
                     <junitxml>.</junitxml>
-                    <filereports>WDF TestSuite.txt</filereports>
+                    <filereports>TestSuite.txt</filereports>
                     <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties</argLine>
                     <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                 </configuration>
@@ -533,6 +532,16 @@
                             http://nexus.sonatype.org/oss-repository-hosting.html/scalatest-maven-plugin|https://www.scalatest.org/user_guide/using_the_scalatest_maven_plugin
                         </linkReplacement>
                     </linkReplacements>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.scoverage</groupId>
+                <artifactId>scoverage-maven-plugin</artifactId>
+                <version>1.4.1</version>
+                <configuration>
+                    <scalaVersion>${scala.version}</scalaVersion>
+                    <aggregate>true</aggregate>
+                    <highlighting>true</highlighting>
                 </configuration>
             </plugin>
             <plugin>
