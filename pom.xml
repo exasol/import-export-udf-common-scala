@@ -14,7 +14,7 @@
         <java.version>11</java.version>
         <!-- runtime dependency versions -->
         <exasol.api.version>6.1.7</exasol.api.version>
-        <exasol.error-reporting.version>0.4.0</exasol.error-reporting.version>
+        <exasol.error-reporting.version>0.4.1</exasol.error-reporting.version>
         <avro.version>1.11.0</avro.version>
         <jackson.version>2.12.5</jackson.version>
         <typesafe.logging.version>3.9.4</typesafe.logging.version>
@@ -22,7 +22,7 @@
         <!-- test dependency versions -->
         <scalatest.version>3.2.10</scalatest.version>
         <scalatestplus.version>1.0.0-M2</scalatestplus.version>
-        <mockito.version>4.0.0</mockito.version>
+        <mockito.version>4.1.0</mockito.version>
         <gpg.skip>true</gpg.skip>
     </properties>
     <licenses>
@@ -263,6 +263,8 @@
                 <artifactId>scalatest-maven-plugin</artifactId>
                 <version>2.0.2</version>
                 <configuration>
+                    <junitxml>.</junitxml>
+                    <filereports>WDF TestSuite.txt</filereports>
                     <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties</argLine>
                     <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                 </configuration>
@@ -533,16 +535,37 @@
                     </linkReplacements>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.scalastyle</groupId>
+                <artifactId>scalastyle-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <verbose>false</verbose>
+                    <failOnViolation>true</failOnViolation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <failOnWarning>false</failOnWarning>
+                    <sourceDirectory>${project.basedir}/src/main/scala</sourceDirectory>
+                    <testSourceDirectory>${project.basedir}/src/test/scala</testSourceDirectory>
+                    <configLocation>${project.basedir}/project/scalastyle-config.xml</configLocation>
+                    <outputFile>${project.build.directory}/scalastyle-output.xml</outputFile>
+                    <outputEncoding>UTF-8</outputEncoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>scalastyle</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.1.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>

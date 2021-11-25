@@ -10,7 +10,7 @@ Code name:
 
 ### Compile Dependency Updates
 
-* Added `com.exasol:error-reporting-java:0.4.0`
+* Added `com.exasol:error-reporting-java:0.4.1`
 * Added `com.exasol:exasol-script-api:6.1.7`
 * Added `com.fasterxml.jackson.core:jackson-databind:2.12.5`
 * Added `com.fasterxml.jackson.module:jackson-module-scala_2.13:2.12.5`
@@ -21,7 +21,7 @@ Code name:
 
 ### Test Dependency Updates
 
-* Added `org.mockito:mockito-core:4.0.0`
+* Added `org.mockito:mockito-core:4.1.0`
 * Added `org.scalatestplus:scalatestplus-mockito_2.13:1.0.0-M2`
 * Added `org.scalatest:scalatest_2.13:3.2.10`
 
@@ -47,6 +47,7 @@ Code name:
 * Added `org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M4`
 * Added `org.codehaus.mojo:versions-maven-plugin:2.8.1`
 * Added `org.itsallcode:openfasttrace-maven-plugin:1.2.0`
+* Added `org.scalastyle:scalastyle-maven-plugin:1.0.0`
 * Added `org.scalatest:scalatest-maven-plugin:2.0.2`
 * Added `org.sonatype.ossindex.maven:ossindex-maven-plugin:3.1.0`
 * Added `org.sonatype.plugins:nexus-staging-maven-plugin:1.6.8`
