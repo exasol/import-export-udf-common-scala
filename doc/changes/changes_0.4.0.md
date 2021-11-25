@@ -27,6 +27,7 @@ Code name:
 
 ### Plugin Dependency Updates
 
+* Added `com.diffplug.spotless:spotless-maven-plugin:2.17.4`
 * Added `com.exasol:error-code-crawler-maven-plugin:0.7.1`
 * Added `com.exasol:project-keeper-maven-plugin:1.3.2`
 * Added `io.github.zlika:reproducible-build-maven-plugin:0.14`
