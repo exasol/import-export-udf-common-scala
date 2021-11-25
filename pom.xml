@@ -208,7 +208,7 @@
                         <arg>-feature</arg>
                         <arg>-explaintypes</arg>
                         <arg>-Xfatal-warnings</arg>
-                        <arg>-Ywarn-unused:imports</arg>
+                        <arg>-Ywarn-unused</arg>
                     </args>
                     <javacArgs>
                         <javacArg>-source</javacArg>
@@ -217,7 +217,13 @@
                         <javacArg>${java.version}</javacArg>
                         <javacArg>-Xlint:all,-serial,-path,-try</javacArg>
                     </javacArgs>
-                    <compilerPlugins></compilerPlugins>
+                    <compilerPlugins>
+                        <compilerPlugin>
+                            <groupId>org.scalameta</groupId>
+                            <artifactId>semanticdb-scalac_${scala.version}</artifactId>
+                            <version>4.4.30</version>
+                        </compilerPlugin>
+                    </compilerPlugins>
                 </configuration>
             </plugin>
             <plugin>
@@ -586,6 +592,21 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>io.github.evis</groupId>
+                <artifactId>scalafix-maven-plugin_${scala.compat.version}</artifactId>
+                <version>0.1.4_0.9.31</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.github.liancheng</groupId>
+                        <artifactId>organize-imports_${scala.compat.version}</artifactId>
+                        <version>0.6.0</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <mode>CHECK</mode>
+                </configuration>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
@@ -619,7 +640,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <scala.version>2.13.7</scala.version>
+                <scala.version>2.13.6</scala.version>
                 <scala.compat.version>2.13</scala.compat.version>
             </properties>
         </profile>

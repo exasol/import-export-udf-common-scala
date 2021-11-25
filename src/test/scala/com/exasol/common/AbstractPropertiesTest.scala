@@ -1,8 +1,11 @@
 package com.exasol.common
 
-import com.exasol.{ExaConnectionInformation, ExaMetadata}
+import com.exasol.ExaConnectionInformation
+import com.exasol.ExaMetadata
 
-import org.mockito.Mockito.{times, verify, when}
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.when
 import org.scalatest.BeforeAndAfterEach
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.mockito.MockitoSugar
@@ -181,33 +184,28 @@ class AbstractPropertiesTest extends AnyFunSuite with BeforeAndAfterEach with Mo
   test("parseConnectionInfo returns key value pairs from password") {
     properties = Map("CONNECTION_NAME" -> "connection_info")
     val expected = Map("a" -> "secret1", "b" -> "secret2")
-    assertParseConnectionInfo("", "a=secret1;b=secret2", properties, expected)
+    assertParseConnectionInfo("", "a=secret1;b=secret2", expected)
   }
 
   test("parseConnectionInfo returns key value pairs with updated username") {
     properties = Map("CONNECTION_NAME" -> "connection_info")
     val expected = Map("userKey" -> "John", "a" -> "secret1", "b" -> "secret2")
-    assertParseConnectionInfo("John", "a=secret1;b=secret2", properties, expected)
+    assertParseConnectionInfo("John", "a=secret1;b=secret2", expected)
   }
 
   test("parseConnectionInfo returns key value pairs with custom separators") {
     properties = Map("CONNECTION_NAME" -> "connection_info", "CONNECTION_SEPARATOR" -> "#")
     val expected = Map("k1" -> "v1", "k2" -> "v2", "k3" -> "v3;k4=v4")
-    assertParseConnectionInfo("", "k1=v1#k2=v2#k3=v3;k4=v4", properties, expected)
+    assertParseConnectionInfo("", "k1=v1#k2=v2#k3=v3;k4=v4", expected)
   }
 
   test("parseConnectionInfo returns key value pairs with custom key-value assignment") {
     properties = Map("CONNECTION_NAME" -> "connection_info", "CONNECTION_KEYVALUE_ASSIGNMENT" -> "@@")
     val expected = Map("k1" -> "v1", "k2" -> "v2", "k3" -> "v3", "k4" -> "v4")
-    assertParseConnectionInfo("", "k1@@v1;k2@@v2;k3@@v3;k4@@v4", properties, expected)
+    assertParseConnectionInfo("", "k1@@v1;k2@@v2;k3@@v3;k4@@v4", expected)
   }
 
-  private[this] def assertParseConnectionInfo(
-    user: String,
-    password: String,
-    props: Map[String, String],
-    expected: Map[String, String]
-  ): Unit = {
+  private[this] def assertParseConnectionInfo(user: String, password: String, expected: Map[String, String]): Unit = {
     val metadata = mockMetadata(user, password)
     val result = BaseProperties(properties).parseConnectionInfo("userKey", Option(metadata))
     assert(result === expected)

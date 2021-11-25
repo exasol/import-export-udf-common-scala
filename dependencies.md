@@ -47,11 +47,12 @@
 | [SCoverage Maven Plugin][58]                            | [The Apache Software License, Version 2.0][9] |
 | [Scalastyle Maven Plugin][60]                           | [Apache 2.0][15]                              |
 | [spotless-maven-plugin][62]                             | [The Apache Software License, Version 2.0][7] |
-| [Apache Maven Clean Plugin][64]                         | [Apache License, Version 2.0][7]              |
-| [Apache Maven Resources Plugin][66]                     | [Apache License, Version 2.0][7]              |
-| [Apache Maven JAR Plugin][68]                           | [Apache License, Version 2.0][7]              |
-| [Apache Maven Install Plugin][70]                       | [Apache License, Version 2.0][9]              |
-| [Apache Maven Site Plugin][72]                          | [Apache License, Version 2.0][7]              |
+| [scalafix-maven-plugin][64]                             | [BSD-3-Clause][65]                            |
+| [Apache Maven Clean Plugin][66]                         | [Apache License, Version 2.0][7]              |
+| [Apache Maven Resources Plugin][68]                     | [Apache License, Version 2.0][7]              |
+| [Apache Maven JAR Plugin][70]                           | [Apache License, Version 2.0][7]              |
+| [Apache Maven Install Plugin][72]                       | [Apache License, Version 2.0][9]              |
+| [Apache Maven Site Plugin][74]                          | [Apache License, Version 2.0][7]              |
 
 [56]: https://github.com/exasol/project-keeper-maven-plugin
 [58]: https://scoverage.github.io/scoverage-maven-plugin/1.4.1/
@@ -66,9 +67,9 @@
 [20]: https://github.com/mockito/mockito
 [32]: http://www.mojohaus.org/versions-maven-plugin/
 [24]: https://maven.apache.org/plugins/maven-compiler-plugin/
-[66]: https://maven.apache.org/plugins/maven-resources-plugin/
+[68]: https://maven.apache.org/plugins/maven-resources-plugin/
 [38]: https://github.com/itsallcode/openfasttrace-maven-plugin
-[64]: https://maven.apache.org/plugins/maven-clean-plugin/
+[66]: https://maven.apache.org/plugins/maven-clean-plugin/
 [8]: http://github.com/FasterXML/jackson
 [44]: https://maven.apache.org/plugins/maven-deploy-plugin/
 [23]: http://unlicense.org/
@@ -77,12 +78,14 @@
 [21]: https://github.com/mockito/mockito/blob/main/LICENSE
 [52]: http://zlika.github.io/reproducible-build-maven-plugin
 [13]: http://www.opensource.org/licenses/mit-license.php
+[65]: https://opensource.org/licenses/BSD-3-Clause
 [6]: https://avro.apache.org
 [14]: https://github.com/lightbend/scala-logging
 [48]: https://maven.apache.org/plugins/maven-source-plugin/
 [3]: LICENSE-exasol-script-api.txt
 [12]: http://www.slf4j.org
-[68]: https://maven.apache.org/plugins/maven-jar-plugin/
+[64]: https://github.com/evis/scalafix-maven-plugin
+[70]: https://maven.apache.org/plugins/maven-jar-plugin/
 [17]: http://www.apache.org/licenses/LICENSE-2.0
 [46]: http://www.sonatype.com/public-parent/nexus-maven-plugins/nexus-staging/nexus-staging-maven-plugin/
 [15]: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -90,12 +93,12 @@
 [40]: https://maven.apache.org/surefire/maven-failsafe-plugin/
 [0]: https://www.scala-lang.org/
 [47]: http://www.eclipse.org/legal/epl-v10.html
-[72]: https://maven.apache.org/plugins/maven-site-plugin/
+[74]: https://maven.apache.org/plugins/maven-site-plugin/
 [39]: https://www.gnu.org/licenses/gpl-3.0.html
 [7]: https://www.apache.org/licenses/LICENSE-2.0.txt
 [36]: https://maven.apache.org/enforcer/maven-enforcer-plugin/
 [2]: http://www.exasol.com
-[70]: http://maven.apache.org/plugins/maven-install-plugin/
+[72]: http://maven.apache.org/plugins/maven-install-plugin/
 [34]: https://sonatype.github.io/ossindex-maven/maven-plugin/
 [42]: https://maven.apache.org/plugins/maven-gpg-plugin/
 [22]: http://github.com/davidB/scala-maven-plugin

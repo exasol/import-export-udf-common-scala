@@ -334,7 +334,8 @@
   </check>
 
   <!-- Checks that imports are grouped and ordered according to the style configuration -->
-  <check level="error" class="org.scalastyle.scalariform.ImportOrderChecker" enabled="true">
+  <!-- Disabled since imports are organized by Scalafix linting. -->
+  <check level="error" class="org.scalastyle.scalariform.ImportOrderChecker" enabled="false">
     <parameters>
       <parameter name="groups">java,scala,exasol,others</parameter>
       <parameter name="group.java">javax?\..*</parameter>

@@ -16,7 +16,7 @@ Code name:
 * Added `com.fasterxml.jackson.module:jackson-module-scala_2.13:2.12.5`
 * Added `com.typesafe.scala-logging:scala-logging_2.13:3.9.4`
 * Added `org.apache.avro:avro:1.11.0`
-* Added `org.scala-lang:scala-library:2.13.7`
+* Added `org.scala-lang:scala-library:2.13.6`
 * Added `org.slf4j:slf4j-simple:1.7.32`
 
 ### Test Dependency Updates
@@ -30,6 +30,7 @@ Code name:
 * Added `com.diffplug.spotless:spotless-maven-plugin:2.17.4`
 * Added `com.exasol:error-code-crawler-maven-plugin:0.7.1`
 * Added `com.exasol:project-keeper-maven-plugin:1.3.2`
+* Added `io.github.evis:scalafix-maven-plugin_2.13:0.1.4_0.9.31`
 * Added `io.github.zlika:reproducible-build-maven-plugin:0.14`
 * Added `net.alchim31.maven:scala-maven-plugin:4.5.4`
 * Added `org.apache.maven.plugins:maven-assembly-plugin:3.3.0`
