@@ -28,9 +28,24 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Publish to Central Repository
+      - name: Publish to Central Repository for Scala 2.13
+        run: |
+          mvn clean deploy \
+              -Pscala2.13 \
+              -Dgpg.skip=false \
+              -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
+              -DskipTests
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-        run: mvn clean -Dgpg.skip=false -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} -DskipTests deploy -P123
-
+      - name: Publish to Central Repository for Scala 2.12
+        run: |
+          mvn clean deploy \
+              -Pscala2.12 \
+              -Dgpg.skip=false \
+              -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
+              -DskipTests \
+              -Dproject-keeper.skip=true
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
