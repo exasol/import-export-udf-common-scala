@@ -2,15 +2,20 @@ name: CI Build
 
 on:
   - push
+  - pull_request
 
 jobs:
   build:
-    name: Building with Scala ${{ matrix.scala }}
+    name: Building with Scala ${{ matrix.scala-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        scala: [ scala2.12, scala2.13 ]
+        include:
+          - scala-version: scala2.13
+            pk-skip: false
+          - scala-version: scala2.12
+            pk-skip: true
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -28,21 +33,35 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
       - name: Run scalafix linting
         run: |
-          mvn --batch-mode --update-snapshots clean compile test-compile \
-              scalafix:scalafix \
-              -P${{ matrix.scala }}
+          mvn --batch-mode clean compile test scalafix:scalafix \
+              -P${{ matrix.scala-version }} \
+              -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
+              -DtrimStackTrace=false
       - name: Run tests and build with Maven
         run: |
-          mvn --batch-mode --update-snapshots clean verify \
-              -P${{ matrix.scala }} \
-              -DtrimStackTrace=false
-      - name: Run coverage and sonar
-        if: startsWith(matrix.scala, 'scala2.13')
+          mvn --batch-mode clean verify \
+              -P${{ matrix.scala-version }} \
+              -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
+              -DtrimStackTrace=false \
+              -Dproject-keeper.skip=${{ matrix.pk-skip }}
+      - name: Publish Test Report
+        uses: scacap/action-surefire-report@v1
+        if: ${{ always() && github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]' && startsWith(matrix.scala-version, 'scala2.13') }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Sonar analysis
+        if: ${{ env.SONAR_TOKEN != null && startsWith(matrix.scala-version, 'scala2.13') }}
         run: |
-          mvn --batch-mode --update-snapshots scoverage:report sonar:sonar \
-              -P${{ matrix.scala }} \
+          mvn --batch-mode scoverage:report sonar:sonar \
+              -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
               -DtrimStackTrace=false \
               -Dsonar.organization=exasol \
               -Dsonar.host.url=https://sonarcloud.io \

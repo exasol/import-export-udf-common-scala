@@ -29,7 +29,7 @@ Code name:
 
 * Added `com.diffplug.spotless:spotless-maven-plugin:2.17.4`
 * Added `com.exasol:error-code-crawler-maven-plugin:0.7.1`
-* Added `com.exasol:project-keeper-maven-plugin:1.3.2`
+* Added `com.exasol:project-keeper-maven-plugin:1.3.3`
 * Added `io.github.evis:scalafix-maven-plugin_2.13:0.1.4_0.9.31`
 * Added `io.github.zlika:reproducible-build-maven-plugin:0.14`
 * Added `net.alchim31.maven:scala-maven-plugin:4.5.4`

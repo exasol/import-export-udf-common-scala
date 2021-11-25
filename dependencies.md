@@ -58,13 +58,14 @@
 [58]: https://scoverage.github.io/scoverage-maven-plugin/1.4.1/
 [18]: https://github.com/scalatest/scalatestplus-mockito
 [4]: https://github.com/exasol/error-reporting-java
-[10]: http://wiki.fasterxml.com/JacksonModuleScala
 [9]: http://www.apache.org/licenses/LICENSE-2.0.txt
 [60]: http://www.scalastyle.org
 [26]: https://maven.apache.org/surefire/maven-surefire-plugin/
 [62]: https://github.com/diffplug/spotless
+[3]: https://mit-license.org/
 [5]: https://opensource.org/licenses/MIT
 [20]: https://github.com/mockito/mockito
+[10]: https://github.com/FasterXML/jackson-module-scala
 [32]: http://www.mojohaus.org/versions-maven-plugin/
 [24]: https://maven.apache.org/plugins/maven-compiler-plugin/
 [68]: https://maven.apache.org/plugins/maven-resources-plugin/
@@ -82,7 +83,6 @@
 [6]: https://avro.apache.org
 [14]: https://github.com/lightbend/scala-logging
 [48]: https://maven.apache.org/plugins/maven-source-plugin/
-[3]: LICENSE-exasol-script-api.txt
 [12]: http://www.slf4j.org
 [64]: https://github.com/evis/scalafix-maven-plugin
 [70]: https://maven.apache.org/plugins/maven-jar-plugin/
