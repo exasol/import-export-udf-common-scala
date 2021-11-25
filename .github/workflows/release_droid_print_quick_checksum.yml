@@ -6,6 +6,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { scala-version: 'scala2.12', pk-skip: true }
+          - { scala-version: 'scala2.13', pk-skip: false }
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -23,10 +29,12 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Build with Maven skipping tests for Scala 2.13
-        run: mvn --batch-mode clean verify -DskipTests -Pscala2.13
-      - name: Build with Maven skipping tests for Scala 2.12
-        run: mvn --batch-mode clean verify -DskipTests -Pscala2.12 -Dproject-keeper.skip=true
+      - name: Build with Maven skipping tests for ${{ matrix.scala-version }}
+        run: |
+          mvn --batch-mode clean verify \
+              -P${{ matrix.scala-version }} \
+              -DskipTests \
+              -Dproject-keeper.skip=${{ matrix.pk-skip }}
       - name: Print checksum
         run: echo 'checksum_start==';find target -maxdepth 1 -name *.jar -exec sha256sum "{}" + | xargs;echo '==checksum_end'
 

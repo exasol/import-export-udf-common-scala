@@ -6,6 +6,12 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { scala-version: 'scala2.12', pk-skip: true }
+          - { scala-version: 'scala2.13', pk-skip: false }
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -14,7 +20,7 @@ jobs:
       - name: Set up Maven Central Repository
         uses: actions/setup-java@v2
         with:
-          distribution: "temurin"
+          distribution: 'temurin'
           java-version: 11
           server-id: ossrh
           server-username: MAVEN_USERNAME
@@ -28,24 +34,14 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Publish to Central Repository for Scala 2.13
+      - name: Publish to Central Repository for ${{ matrix.scala-version }}
         run: |
           mvn clean deploy \
-              -Pscala2.13 \
-              -Dgpg.skip=false \
-              -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
-              -DskipTests
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-      - name: Publish to Central Repository for Scala 2.12
-        run: |
-          mvn clean deploy \
-              -Pscala2.12 \
+              -P${{ matrix.scala-version }} \
               -Dgpg.skip=false \
               -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
               -DskipTests \
-              -Dproject-keeper.skip=true
+              -Dproject-keeper.skip=${{ matrix.pk-skip }}
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}

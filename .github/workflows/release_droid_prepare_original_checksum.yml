@@ -6,6 +6,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { scala-version: 'scala2.12', pk-skip: true }
+          - { scala-version: 'scala2.13', pk-skip: false }
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -23,10 +29,11 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Run tests and build with Maven for Scala 2.13
-        run: mvn --batch-mode clean verify --file pom.xml -Pscala2.13
-      - name: Run tests and build with Maven for Scala 2.12
-        run: mvn --batch-mode clean verify --file pom.xml -Pscala2.12 -Dproject-keeper.skip=true
+      - name: Run tests and build with Maven for ${{ matrix.scala-version }}
+        run: |
+          mvn --batch-mode clean verify --file pom.xml \
+              -P${{ matrix.scala-version }} \
+              -Dproject-keeper.skip=${{ matrix.pk-skip }}
       - name: Prepare checksum
         run: find target -maxdepth 1 -name *.jar -exec sha256sum "{}" + > original_checksum
       - name: Upload checksum to the artifactory

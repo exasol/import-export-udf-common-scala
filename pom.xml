@@ -524,7 +524,7 @@
                         <excludedPlugin>org.jacoco:jacoco-maven-plugin</excludedPlugin>
                     </excludedPlugins>
                     <excludedFiles>
-                        <excludedFile>.github/workflows/release_droid_release_on_maven_central.yml</excludedFile>
+                        <excludedFile>.github/workflows/release_droid*.yml</excludedFile>
                     </excludedFiles>
                     <linkReplacements>
                         <linkReplacement>
