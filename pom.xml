@@ -206,16 +206,28 @@
                         <arg>-deprecation</arg>
                         <arg>-feature</arg>
                         <arg>-explaintypes</arg>
+                        <arg>-Xcheckinit</arg>
                         <arg>-Xfatal-warnings</arg>
-                        <arg>-Ywarn-unused</arg>
+                        <arg>-Xlint:_</arg>
+                        <arg>-Ywarn-dead-code</arg>
+                        <arg>-Ywarn-numeric-widen</arg>
+                        <arg>-Ywarn-value-discard</arg>
+                        <arg>-Ywarn-extra-implicit</arg>
+                        <arg>-Ywarn-unused:_</arg>
                     </args>
                     <javacArgs>
                         <javacArg>-source</javacArg>
                         <javacArg>${java.version}</javacArg>
                         <javacArg>-target</javacArg>
                         <javacArg>${java.version}</javacArg>
-                        <javacArg>-Xlint:all,-serial,-path,-try</javacArg>
+                        <javacArg>-deprecation</javacArg>
+                        <javacArg>-parameters</javacArg>
+                        <javacArg>-Xlint:all</javacArg>
                     </javacArgs>
+                    <jvmArgs>
+                        <jvmArg>-Xmx2048m</jvmArg>
+                        <jvmArg>-Xss64m</jvmArg>
+                    </jvmArgs>
                     <compilerPlugins>
                         <compilerPlugin>
                             <groupId>org.scalameta</groupId>
@@ -253,13 +265,6 @@
                     have a chance to reach branches in the logging lambdas too.
                     -->
                     <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties ${argLine}</argLine>
-                    <includes>
-                        <include>**Test.java</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**IT.java</exclude>
-                    </excludes>
-                    <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -373,30 +378,6 @@
                     <reportVerbosity>ALL</reportVerbosity>
                     <reportShowOrigin>true</reportShowOrigin>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M3</version>
-                <configuration>
-                    <!--
-                    Set the highest log level for coverage testing, so that we have a
-                    chance to reach branches the logging lambdas too.
-                    -->
-                    <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties ${argLine}</argLine>
-                    <includes>
-                        <include>**IT.java</include>
-                    </includes>
-                    <systemPropertyVariables />
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -567,7 +548,7 @@
                     <failOnWarning>false</failOnWarning>
                     <sourceDirectory>${project.basedir}/src/main/scala</sourceDirectory>
                     <testSourceDirectory>${project.basedir}/src/test/scala</testSourceDirectory>
-                    <configLocation>${project.basedir}/project/scalastyle-config.xml</configLocation>
+                    <configLocation>${project.basedir}/scalastyle-config.xml</configLocation>
                     <outputFile>${project.build.directory}/scalastyle-output.xml</outputFile>
                     <outputEncoding>UTF-8</outputEncoding>
                 </configuration>

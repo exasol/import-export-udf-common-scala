@@ -38,7 +38,6 @@ Code name:
 * Added `org.apache.maven.plugins:maven-compiler-plugin:3.8.1`
 * Added `org.apache.maven.plugins:maven-deploy-plugin:3.0.0-M1`
 * Added `org.apache.maven.plugins:maven-enforcer-plugin:3.0.0`
-* Added `org.apache.maven.plugins:maven-failsafe-plugin:3.0.0-M3`
 * Added `org.apache.maven.plugins:maven-gpg-plugin:3.0.1`
 * Added `org.apache.maven.plugins:maven-install-plugin:2.5.2`
 * Added `org.apache.maven.plugins:maven-jar-plugin:3.2.0`
