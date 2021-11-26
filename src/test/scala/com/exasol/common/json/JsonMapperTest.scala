@@ -3,7 +3,6 @@ package com.exasol.common.json
 import java.util.LinkedHashMap
 
 import com.fasterxml.jackson.databind.JsonNode
-
 import org.scalatest.funsuite.AnyFunSuite
 
 class JsonMapperTest extends AnyFunSuite {

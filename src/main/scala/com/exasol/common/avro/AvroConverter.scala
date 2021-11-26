@@ -4,8 +4,8 @@ import java.nio.ByteBuffer
 import java.sql.Date
 import java.sql.Timestamp
 import java.time._
-import java.util.{Map => JMap}
 import java.util.Collection
+import java.util.{Map => JMap}
 
 import com.exasol.common.json.JsonMapper
 import com.exasol.errorreporting.ExaError
@@ -156,15 +156,20 @@ final class AvroConverter {
     typesSize match {
       case 1 => getAvroValue(value, types.get(0))
       case 2 =>
-        if (types.get(0).getType() == Schema.Type.NULL) {
+        if (isNullSchemaType(types.get(0).getType())) {
           getAvroValue(value, types.get(1))
-        } else if (types.get(1).getType() == Schema.Type.NULL) {
+        } else if (isNullSchemaType(types.get(1).getType())) {
           getAvroValue(value, types.get(0))
         } else {
           throw new IllegalArgumentException(getAvroUnionErrorMessage())
         }
       case _ => throw new IllegalArgumentException(getAvroUnionErrorMessage())
     }
+  }
+
+  private[this] def isNullSchemaType(avroType: Schema.Type): Boolean = avroType match {
+    case Schema.Type.NULL => true
+    case _                => false
   }
 
   private[this] def getAvroUnionErrorMessage(): String =

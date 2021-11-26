@@ -13,7 +13,7 @@
 
 -->
 <scalastyle>
-  <name>Exasol Cloud ETL Scalastyle Configurations (adapted from Spark Scala Style Guide)</name>
+  <name>Exasol Scala Scalastyle Configurations (adapted from Spark Scala Style Guide)</name>
 
   <!-- Check there are no tabs in a file -->
   <check level="error"
@@ -170,7 +170,7 @@
 
   <!-- Custom Check: 'println' should not be used -->
   <check customId="println"
-    level="warn" class="org.scalastyle.scalariform.TokenChecker" enabled="true">
+    level="error" class="org.scalastyle.scalariform.TokenChecker" enabled="true">
     <parameters>
       <parameter name="regex">^println$</parameter>
     </parameters>
@@ -334,7 +334,8 @@
   </check>
 
   <!-- Checks that imports are grouped and ordered according to the style configuration -->
-  <check level="error" class="org.scalastyle.scalariform.ImportOrderChecker" enabled="true">
+  <!-- Disabled since imports are organized by Scalafix linting. -->
+  <check level="error" class="org.scalastyle.scalariform.ImportOrderChecker" enabled="false">
     <parameters>
       <parameter name="groups">java,scala,exasol,others</parameter>
       <parameter name="group.java">javax?\..*</parameter>
@@ -418,7 +419,7 @@
   </check>
 
   <!-- Checks for use of magic numbers, avoids assignments like: var baz = 4 -->
-  <check level="warn" class="org.scalastyle.scalariform.MagicNumberChecker" enabled="false">
+  <check level="warn" class="org.scalastyle.scalariform.MagicNumberChecker" enabled="true">
     <parameters>
       <parameter name="ignore"><![CDATA[-1,0,1,2,3,4,5,6,7]]></parameter>
     </parameters>
@@ -428,7 +429,7 @@
   <check level="error" class="org.scalastyle.scalariform.ReturnChecker" enabled="true"></check>
 
   <!-- Check that null is not used, prefer Option if possible -->
-  <check level="warn" class="org.scalastyle.scalariform.NullChecker" enabled="false"></check>
+  <check level="error" class="org.scalastyle.scalariform.NullChecker" enabled="false"></check>
 
   <!-- Check that classes and objects do not define the clone() method -->
   <check level="error" class="org.scalastyle.scalariform.NoCloneChecker" enabled="true"></check>
