@@ -37,4 +37,3 @@ jobs:
               -Dproject-keeper.skip=${{ matrix.pk-skip }}
       - name: Print checksum
         run: echo 'checksum_start==';find target -maxdepth 1 -name *.jar -exec sha256sum "{}" + | xargs;echo '==checksum_end'
-
