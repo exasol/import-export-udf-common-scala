@@ -10,8 +10,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { scala-version: 'scala2.12', pk-skip: true }
-          - { scala-version: 'scala2.13', pk-skip: false }
+          - { scala-version: 'scala2.12', project-keeper-skip: true }
+          - { scala-version: 'scala2.13', project-keeper-skip: false }
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -33,7 +33,7 @@ jobs:
         run: |
           mvn --batch-mode clean verify --file pom.xml \
               -P${{ matrix.scala-version }} \
-              -Dproject-keeper.skip=${{ matrix.pk-skip }}
+              -Dproject-keeper.skip=${{ matrix.project-keeper-skip }}
       - name: Prepare checksum
         run: find target -maxdepth 1 -name *.jar -exec sha256sum "{}" + > original_checksum
       - name: Upload checksum to the artifactory

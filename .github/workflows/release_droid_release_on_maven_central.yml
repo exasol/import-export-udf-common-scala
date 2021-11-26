@@ -10,8 +10,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { scala-version: 'scala2.12', pk-skip: true }
-          - { scala-version: 'scala2.13', pk-skip: false }
+          - { scala-version: 'scala2.12', project-keeper-skip: true }
+          - { scala-version: 'scala2.13', project-keeper-skip: false }
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -41,7 +41,7 @@ jobs:
               -Dgpg.skip=false \
               -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
               -DskipTests \
-              -Dproject-keeper.skip=${{ matrix.pk-skip }}
+              -Dproject-keeper.skip=${{ matrix.project-keeper-skip }}
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
