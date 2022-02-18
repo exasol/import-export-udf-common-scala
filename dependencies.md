@@ -54,7 +54,6 @@
 | [Apache Maven Site Plugin][72]                          | [Apache License, Version 2.0][7]              |
 
 [54]: https://github.com/exasol/project-keeper-maven-plugin
-[56]: https://scoverage.github.io/scoverage-maven-plugin/1.4.1/
 [18]: https://github.com/scalatest/scalatestplus-mockito
 [4]: https://github.com/exasol/error-reporting-java
 [9]: http://www.apache.org/licenses/LICENSE-2.0.txt
@@ -98,6 +97,7 @@
 [2]: http://www.exasol.com
 [70]: http://maven.apache.org/plugins/maven-install-plugin/
 [34]: https://sonatype.github.io/ossindex-maven/maven-plugin/
+[56]: https://scoverage.github.io/scoverage-maven-plugin/1.4.11/
 [40]: https://maven.apache.org/plugins/maven-gpg-plugin/
 [22]: http://github.com/davidB/scala-maven-plugin
 [48]: https://maven.apache.org/plugins/maven-javadoc-plugin/

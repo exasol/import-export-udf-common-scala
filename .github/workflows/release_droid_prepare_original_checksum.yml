@@ -5,6 +5,7 @@ on:
 
 jobs:
   build:
+    name: Build for Scala version ${{ matrix.scala-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

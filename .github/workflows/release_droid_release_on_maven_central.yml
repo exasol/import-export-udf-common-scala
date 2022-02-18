@@ -5,6 +5,7 @@ on:
 
 jobs:
   publish:
+    name: Publish for Scala version ${{ matrix.scala-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
