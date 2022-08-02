@@ -20,8 +20,8 @@ This release fixes vulnerabilities in the following dependencies:
 
 * Added `com.exasol:error-reporting-java:0.4.1`
 * Added `com.exasol:exasol-script-api:6.1.7`
-* Added `com.fasterxml.jackson.core:jackson-databind:2.12.5`
-* Added `com.fasterxml.jackson.module:jackson-module-scala_2.13:2.12.5`
+* Added `com.fasterxml.jackson.core:jackson-databind:2.12.7`
+* Added `com.fasterxml.jackson.module:jackson-module-scala_2.13:2.12.7`
 * Added `com.typesafe.scala-logging:scala-logging_2.13:3.9.5`
 * Added `org.apache.avro:avro:1.11.1`
 * Added `org.scala-lang:scala-library:2.13.8`

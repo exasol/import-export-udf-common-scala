@@ -12,7 +12,8 @@
         <exasol.api.version>6.1.7</exasol.api.version>
         <exasol.error-reporting.version>0.4.1</exasol.error-reporting.version>
         <avro.version>1.11.1</avro.version>
-        <jackson.version>2.12.5</jackson.version>
+        <!-- Upgrading jackson to 2.13.x causes test failures. -->
+        <jackson.version>2.12.7</jackson.version>
         <typesafe.logging.version>3.9.5</typesafe.logging.version>
         <slf4j.simple.version>1.7.36</slf4j.simple.version>
         <!-- test dependency versions -->
