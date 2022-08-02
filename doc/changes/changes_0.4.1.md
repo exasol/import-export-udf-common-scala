@@ -1,4 +1,4 @@
-# Import Export UDF Common Scala 0.4.1, released 2022-??-??
+# Import Export UDF Common Scala 0.4.1, released 2022-08-02
 
 Code name: Upgrade dependencies to fix vulnerabilities
 
