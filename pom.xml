@@ -362,6 +362,11 @@
                         <artifactId>scaluzzi_${scala.compat.version}</artifactId>
                         <version>0.1.23</version>
                     </dependency>
+                    <dependency>
+                        <groupId>com.geirsson</groupId>
+                        <artifactId>metaconfig-pprint_${scala.compat.version}</artifactId>
+                        <version>0.10.0</version>
+                    </dependency>
                 </dependencies>
                 <configuration>
                     <mode>CHECK</mode>
