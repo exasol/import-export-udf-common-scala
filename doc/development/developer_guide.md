@@ -179,7 +179,7 @@ Any pull requests to keep this document updated are very much appreciated!
 
 [gh-issues]: https://github.com/exasol/import-export-udf-common-scala/issues
 [gh-pulls]: https://github.com/exasol/import-export-udf-common-scala/pulls
-[fork-and-pull]: https://help.github.com/articles/using-pull-requests/
+[fork-and-pull]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
 [gh-releases]: https://github.com/exasol/import-export-udf-common-scala/releases
 [submit-pr]: https://github.com/exasol/import-export-udf-common-scala/compare
 [open-issues]: https://github.com/exasol/import-export-udf-common-scala/issues
