@@ -29,9 +29,13 @@ jobs:
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
+      - name: Install xmlstarlet
+        run: sudo apt install -y --no-install-recommends xmlstarlet
+      - name: Update release pom file
+        run: ./.github/workflows/createReleasePom.sh
       - name: Publish to Central Repository for ${{ matrix.scala-version }}
         run: |
-          mvn clean deploy \
+          mvn --file release-pom.xml clean deploy \
               -P${{ matrix.scala-version }} \
               -Dgpg.skip=false \
               -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
@@ -39,3 +43,5 @@ jobs:
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+      - name: Remove release pom file
+        run: rm -rf release-pom.xml
