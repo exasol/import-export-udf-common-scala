@@ -8,7 +8,7 @@ This release fixes vulnerabilities in the following dependencies:
 
 * com.fasterxml.jackson.core:jackson-databind:jar:2.12.5 in compile
     * CVE-2020-36518, severity CWE-787: Out-of-bounds Write (7.5)
-    * sonatype-2021-4682
+    * [sonatype-2021-4682](https://ossindex.sonatype.org/vulnerability/sonatype-2021-4682), severity CWE-400: Uncontrolled Resource Consumption ('Resource Exhaustion')
 
 ## Bugfixes
 
