@@ -383,6 +383,7 @@
             <properties>
                 <scala.version>2.13.8</scala.version>
                 <scala.compat.version>2.13</scala.compat.version>
+                <project-keeper.skip>false</project-keeper.skip>
             </properties>
         </profile>
         <profile>
@@ -390,6 +391,7 @@
             <properties>
                 <scala.version>2.12.15</scala.version>
                 <scala.compat.version>2.12</scala.compat.version>
+                <project-keeper.skip>true</project-keeper.skip>
             </properties>
         </profile>
     </profiles>

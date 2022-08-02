@@ -14,8 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { scala-version: 'scala2.12', project-keeper-skip: true }
-          - { scala-version: 'scala2.13', project-keeper-skip: false }
+          - { scala-version: 'scala2.12' }
+          - { scala-version: 'scala2.13' }
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
@@ -47,8 +47,7 @@ jobs:
           mvn --batch-mode verify \
               -P${{ matrix.scala-version }} \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
-              -DtrimStackTrace=false \
-              -Dproject-keeper.skip=${{ matrix.project-keeper-skip }}
+              -DtrimStackTrace=false
       - name: Publish Test Report
         uses: scacap/action-surefire-report@v1
         if: ${{ always() && github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]' && startsWith(matrix.scala-version, 'scala2.13') }}
