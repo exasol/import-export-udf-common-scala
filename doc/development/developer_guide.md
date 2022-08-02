@@ -22,8 +22,7 @@ Please feel free to report a bug, suggest an idea for a feature, or ask a
 question about the code.
 
 You can create an issue using [Github issues][gh-issues] or follow a standard
-[fork and pull][fork-and-pull] process to contribute a code via [Github pull
-requests][gh-pulls].
+fork and pull process to contribute a code via [Github pull requests][gh-pulls].
 
 If you do not know where to start, please have a look at [open
 issues][open-issues]. You can choose the ones that interest you the most. If you
@@ -179,7 +178,6 @@ Any pull requests to keep this document updated are very much appreciated!
 
 [gh-issues]: https://github.com/exasol/import-export-udf-common-scala/issues
 [gh-pulls]: https://github.com/exasol/import-export-udf-common-scala/pulls
-[fork-and-pull]: https://help.github.com/articles/using-pull-requests/
 [gh-releases]: https://github.com/exasol/import-export-udf-common-scala/releases
 [submit-pr]: https://github.com/exasol/import-export-udf-common-scala/compare
 [open-issues]: https://github.com/exasol/import-export-udf-common-scala/issues
