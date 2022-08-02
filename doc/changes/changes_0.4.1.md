@@ -22,36 +22,36 @@ This release fixes vulnerabilities in the following dependencies:
 * Added `com.exasol:exasol-script-api:6.1.7`
 * Added `com.fasterxml.jackson.core:jackson-databind:2.12.5`
 * Added `com.fasterxml.jackson.module:jackson-module-scala_2.13:2.12.5`
-* Added `com.typesafe.scala-logging:scala-logging_2.13:3.9.4`
-* Added `org.apache.avro:avro:1.11.0`
+* Added `com.typesafe.scala-logging:scala-logging_2.13:3.9.5`
+* Added `org.apache.avro:avro:1.11.1`
 * Added `org.scala-lang:scala-library:2.13.8`
 * Added `org.slf4j:slf4j-simple:1.7.36`
 
 ### Test Dependency Updates
 
-* Added `org.mockito:mockito-core:4.3.1`
+* Added `org.mockito:mockito-core:4.6.1`
 * Added `org.scalatestplus:scalatestplus-mockito_2.13:1.0.0-M2`
-* Added `org.scalatest:scalatest_2.13:3.2.10`
+* Added `org.scalatest:scalatest_2.13:3.2.13`
 
 ### Plugin Dependency Updates
 
-* Added `com.diffplug.spotless:spotless-maven-plugin:2.20.2`
-* Added `com.exasol:error-code-crawler-maven-plugin:1.0.0`
+* Added `com.diffplug.spotless:spotless-maven-plugin:2.22.8`
+* Added `com.exasol:error-code-crawler-maven-plugin:1.1.2`
 * Added `com.exasol:project-keeper-maven-plugin:2.5.0`
-* Added `io.github.evis:scalafix-maven-plugin_2.13:0.1.4_0.9.33`
+* Added `io.github.evis:scalafix-maven-plugin_2.13:0.1.6_0.10.0`
 * Added `io.github.zlika:reproducible-build-maven-plugin:0.15`
-* Added `net.alchim31.maven:scala-maven-plugin:4.5.6`
+* Added `net.alchim31.maven:scala-maven-plugin:4.6.3`
 * Added `org.apache.maven.plugins:maven-assembly-plugin:3.3.0`
-* Added `org.apache.maven.plugins:maven-clean-plugin:3.1.0`
+* Added `org.apache.maven.plugins:maven-clean-plugin:2.5`
 * Added `org.apache.maven.plugins:maven-compiler-plugin:3.10.0`
 * Added `org.apache.maven.plugins:maven-deploy-plugin:3.0.0-M1`
 * Added `org.apache.maven.plugins:maven-enforcer-plugin:3.0.0`
 * Added `org.apache.maven.plugins:maven-gpg-plugin:3.0.1`
-* Added `org.apache.maven.plugins:maven-install-plugin:2.5.2`
-* Added `org.apache.maven.plugins:maven-jar-plugin:3.2.2`
+* Added `org.apache.maven.plugins:maven-install-plugin:2.4`
+* Added `org.apache.maven.plugins:maven-jar-plugin:2.4`
 * Added `org.apache.maven.plugins:maven-javadoc-plugin:3.3.2`
-* Added `org.apache.maven.plugins:maven-resources-plugin:3.2.0`
-* Added `org.apache.maven.plugins:maven-site-plugin:3.11.0`
+* Added `org.apache.maven.plugins:maven-resources-plugin:2.6`
+* Added `org.apache.maven.plugins:maven-site-plugin:3.3`
 * Added `org.apache.maven.plugins:maven-source-plugin:3.2.1`
 * Added `org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M4`
 * Added `org.codehaus.mojo:flatten-maven-plugin:1.2.7`

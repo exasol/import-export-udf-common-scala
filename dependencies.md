@@ -44,17 +44,17 @@
 | [Apache Maven Javadoc Plugin][38]                       | [Apache License, Version 2.0][7]              |
 | [Nexus Staging Maven Plugin][39]                        | [Eclipse Public License][40]                  |
 | [JaCoCo :: Maven Plugin][41]                            | [Eclipse Public License 2.0][42]              |
-| [error-code-crawler-maven-plugin][43]                   | [MIT][5]                                      |
-| [Project keeper maven plugin][44]                       | [The MIT License][45]                         |
-| [SCoverage Maven Plugin][46]                            | [The Apache Software License, Version 2.0][9] |
-| [Scalastyle Maven Plugin][47]                           | [Apache 2.0][14]                              |
-| [spotless-maven-plugin][48]                             | [The Apache Software License, Version 2.0][7] |
-| [scalafix-maven-plugin][49]                             | [BSD-3-Clause][50]                            |
-| [Apache Maven Clean Plugin][51]                         | [Apache License, Version 2.0][7]              |
-| [Apache Maven Resources Plugin][52]                     | [Apache License, Version 2.0][7]              |
-| [Apache Maven JAR Plugin][53]                           | [Apache License, Version 2.0][7]              |
-| [Apache Maven Install Plugin][54]                       | [Apache License, Version 2.0][9]              |
-| [Apache Maven Site Plugin][55]                          | [Apache License, Version 2.0][7]              |
+| [error-code-crawler-maven-plugin][43]                   | [MIT License][44]                             |
+| [Project keeper maven plugin][45]                       | [The MIT License][46]                         |
+| [SCoverage Maven Plugin][47]                            | [The Apache Software License, Version 2.0][9] |
+| [Scalastyle Maven Plugin][48]                           | [Apache 2.0][14]                              |
+| [spotless-maven-plugin][49]                             | [The Apache Software License, Version 2.0][7] |
+| [scalafix-maven-plugin][50]                             | [BSD-3-Clause][51]                            |
+| [Maven Clean Plugin][52]                                | [The Apache Software License, Version 2.0][9] |
+| [Maven Resources Plugin][53]                            | [The Apache Software License, Version 2.0][9] |
+| [Maven JAR Plugin][54]                                  | [The Apache Software License, Version 2.0][9] |
+| [Maven Install Plugin][55]                              | [The Apache Software License, Version 2.0][9] |
+| [Maven Site Plugin 3][56]                               | [The Apache Software License, Version 2.0][9] |
 
 [0]: https://www.scala-lang.org/
 [1]: https://www.apache.org/licenses/LICENSE-2.0
@@ -99,16 +99,17 @@
 [40]: http://www.eclipse.org/legal/epl-v10.html
 [41]: https://www.jacoco.org/jacoco/trunk/doc/maven.html
 [42]: https://www.eclipse.org/legal/epl-2.0/
-[43]: https://github.com/exasol/error-code-crawler-maven-plugin
-[44]: https://github.com/exasol/project-keeper/
-[45]: https://github.com/exasol/project-keeper/blob/main/LICENSE
-[46]: https://scoverage.github.io/scoverage-maven-plugin/1.4.11/
-[47]: http://www.scalastyle.org
-[48]: https://github.com/diffplug/spotless
-[49]: https://github.com/evis/scalafix-maven-plugin
-[50]: https://opensource.org/licenses/BSD-3-Clause
-[51]: https://maven.apache.org/plugins/maven-clean-plugin/
-[52]: https://maven.apache.org/plugins/maven-resources-plugin/
-[53]: https://maven.apache.org/plugins/maven-jar-plugin/
-[54]: http://maven.apache.org/plugins/maven-install-plugin/
-[55]: https://maven.apache.org/plugins/maven-site-plugin/
+[43]: https://github.com/exasol/error-code-crawler-maven-plugin/
+[44]: https://github.com/exasol/error-code-crawler-maven-plugin/blob/main/LICENSE
+[45]: https://github.com/exasol/project-keeper/
+[46]: https://github.com/exasol/project-keeper/blob/main/LICENSE
+[47]: https://scoverage.github.io/scoverage-maven-plugin/1.4.11/
+[48]: http://www.scalastyle.org
+[49]: https://github.com/diffplug/spotless
+[50]: https://github.com/evis/scalafix-maven-plugin
+[51]: https://opensource.org/licenses/BSD-3-Clause
+[52]: http://maven.apache.org/plugins/maven-clean-plugin/
+[53]: http://maven.apache.org/plugins/maven-resources-plugin/
+[54]: http://maven.apache.org/plugins/maven-jar-plugin/
+[55]: http://maven.apache.org/plugins/maven-install-plugin/
+[56]: http://maven.apache.org/plugins/maven-site-plugin/
