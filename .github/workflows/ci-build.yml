@@ -60,6 +60,7 @@ jobs:
           mvn --batch-mode scoverage:report org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
               -DtrimStackTrace=false \
+              -P${{ matrix.scala-version }} \
               -Dsonar.organization=exasol \
               -Dsonar.host.url=https://sonarcloud.io \
               -Dsonar.login=$SONAR_TOKEN
