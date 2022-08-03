@@ -3,10 +3,16 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>import-export-udf-common-scala</artifactId>
-    <version>0.4.2</version>
+    <version>0.4.3</version>
     <name>Import Export UDF Common Scala</name>
     <description>Common import export libraries used in Exasol user defined functions</description>
     <url>https://github.com/exasol/import-export-udf-common-scala/</url>
+    <parent>
+        <artifactId>import-export-udf-common-scala-generated-parent</artifactId>
+        <groupId>com.exasol</groupId>
+        <version>0.4.3</version>
+        <relativePath>pk_generated_parent.pom</relativePath>
+    </parent>
     <properties>
         <!-- runtime dependency versions -->
         <exasol.api.version>6.1.7</exasol.api.version>
@@ -20,6 +26,8 @@
         <scalatest.version>3.2.13</scalatest.version>
         <scalatestplus.version>1.0.0-M2</scalatestplus.version>
         <mockito.version>4.6.1</mockito.version>
+        <sonar.sources>.</sonar.sources>
+        <sonar.inclusions>src/main/**</sonar.inclusions>
     </properties>
     <distributionManagement>
         <snapshotRepository>
@@ -139,6 +147,12 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>nl.jqno.equalsverifier</groupId>
+            <artifactId>equalsverifier</artifactId>
+            <version>3.10.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <finalName>${project.artifactId}_${scala.compat.version}-${project.version}</finalName>
@@ -217,9 +231,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-test</id>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.scalatest</groupId>
@@ -227,9 +244,7 @@
                 <version>2.0.2</version>
                 <configuration>
                     <junitxml>.</junitxml>
-                    <filereports>TestSuite.txt</filereports>
-                    <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties</argLine>
-                    <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                    <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties ${argLine}</argLine>
                 </configuration>
                 <executions>
                     <execution>
@@ -237,6 +252,10 @@
                         <goals>
                             <goal>test</goal>
                         </goals>
+                        <configuration>
+                            <filereports>TestSuite.txt</filereports>
+                            <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -294,16 +313,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.scoverage</groupId>
-                <artifactId>scoverage-maven-plugin</artifactId>
-                <version>1.4.11</version>
-                <configuration>
-                    <scalaVersion>${scala.version}</scalaVersion>
-                    <aggregate>true</aggregate>
-                    <highlighting>true</highlighting>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.scalastyle</groupId>
@@ -395,10 +404,4 @@
             </properties>
         </profile>
     </profiles>
-    <parent>
-        <artifactId>import-export-udf-common-scala-generated-parent</artifactId>
-        <groupId>com.exasol</groupId>
-        <version>0.4.2</version>
-        <relativePath>pk_generated_parent.pom</relativePath>
-    </parent>
 </project>
