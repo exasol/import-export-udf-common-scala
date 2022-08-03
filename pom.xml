@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>import-export-udf-common-scala</artifactId>
-    <version>0.4.1</version>
+    <version>0.4.2</version>
     <name>Import Export UDF Common Scala</name>
     <description>Common import export libraries used in Exasol user defined functions</description>
     <url>https://github.com/exasol/import-export-udf-common-scala/</url>
@@ -398,7 +398,7 @@
     <parent>
         <artifactId>import-export-udf-common-scala-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>0.4.1</version>
+        <version>0.4.2</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
