@@ -56,7 +56,7 @@ jobs:
       - name: Sonar analysis
         if: ${{ env.SONAR_TOKEN != null && startsWith(matrix.scala-version, 'scala2.13') }}
         run: |
-          mvn --batch-mode scoverage:report org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          mvn --batch-mode org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
               -DtrimStackTrace=false \
               -P${{ matrix.scala-version }} \
