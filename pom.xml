@@ -178,8 +178,7 @@
                         <arg>-Ywarn-numeric-widen</arg>
                         <arg>-Ywarn-value-discard</arg>
                         <arg>-Ywarn-extra-implicit</arg>
-                        <!-- Disabled to fix build. This will be re-enabled in https://github.com/exasol/import-export-udf-common-scala/issues/41 -->
-                        <!--  <arg>-Ywarn-unused:_</arg> -->
+                        <arg>-Ywarn-unused:_</arg>
                     </args>
                     <javacArgs>
                         <javacArg>-source</javacArg>
