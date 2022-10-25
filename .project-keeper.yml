@@ -12,4 +12,3 @@ linkReplacements:
 excludes:
   - "E-PK-CORE-18: Outdated content: '.github/workflows/ci-build.yml'"
   - "E-PK-CORE-18: Outdated content: '.github/workflows/release_droid_release_on_maven_central.yml'"
-  - regex: "(?s)E-PK-CORE-62: The project's README.md does not contain a valid badges block. Please add or replace the following badges:.*"
