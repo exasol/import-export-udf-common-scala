@@ -34,7 +34,6 @@ jobs:
       - name: Run scalafix linting
         run: |
           mvn --batch-mode clean compile test scalafix:scalafix \
-              -P${{ matrix.scala-version }} \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
               -DtrimStackTrace=false
       - name: Run tests and build with Maven
