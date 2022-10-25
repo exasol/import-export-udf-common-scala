@@ -357,14 +357,6 @@
                 <project-keeper.skip>false</project-keeper.skip>
             </properties>
         </profile>
-        <profile>
-            <id>scala2.12</id>
-            <properties>
-                <scala.version>2.12.17</scala.version>
-                <scala.compat.version>2.12</scala.compat.version>
-                <project-keeper.skip>true</project-keeper.skip>
-            </properties>
-        </profile>
     </profiles>
     <parent>
         <artifactId>import-export-udf-common-scala-generated-parent</artifactId>

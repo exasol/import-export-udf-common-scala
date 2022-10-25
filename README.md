@@ -3,7 +3,6 @@
 [![Build Status](https://github.com/exasol/import-export-udf-common-scala/actions/workflows/ci-build.yml/badge.svg)](https://github.com/exasol/import-export-udf-common-scala/actions/workflows/ci-build.yml)
 
 Scala 2.13: [![Maven Central](https://img.shields.io/maven-central/v/com.exasol/import-export-udf-common-scala_2.13)](https://search.maven.org/artifact/com.exasol/import-export-udf-common-scala_2.13)
-Scala 2.12: [![Maven Central](https://img.shields.io/maven-central/v/com.exasol/import-export-udf-common-scala_2.12)](https://search.maven.org/artifact/com.exasol/import-export-udf-common-scala_2.12)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Aimport-export-udf-common-scala&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.exasol%3Aimport-export-udf-common-scala)
 
