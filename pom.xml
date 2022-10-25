@@ -227,6 +227,10 @@
                         <goals>
                             <goal>test</goal>
                         </goals>
+                        <configuration>
+                            <filereports>TestSuite.txt</filereports>
+                            <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -284,16 +288,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.scoverage</groupId>
-                <artifactId>scoverage-maven-plugin</artifactId>
-                <version>1.4.11</version>
-                <configuration>
-                    <scalaVersion>${scala.version}</scalaVersion>
-                    <aggregate>true</aggregate>
-                    <highlighting>true</highlighting>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.scalastyle</groupId>
