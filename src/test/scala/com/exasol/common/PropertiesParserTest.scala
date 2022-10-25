@@ -1,5 +1,6 @@
 package com.exasol.common
 
+import nl.jqno.equalsverifier.EqualsVerifier
 import org.scalatest.funsuite.AnyFunSuite
 
 class PropertiesParserTest extends AnyFunSuite {
@@ -26,6 +27,10 @@ class PropertiesParserTest extends AnyFunSuite {
 
   test("mapToString returns empty string from empty map") {
     assert(parser.mapToString(Map.empty[String, String]) === "")
+  }
+
+  test("verify contract") {
+    EqualsVerifier.forClass(classOf[PropertiesParser]).verify()
   }
 
 }

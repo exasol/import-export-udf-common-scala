@@ -26,6 +26,7 @@ This is release is a breaking change as it removes support for Scala 2.12, it on
 
 ### Test Dependency Updates
 
+* Added `nl.jqno.equalsverifier:equalsverifier:3.10.1`
 * Updated `org.mockito:mockito-core:4.6.1` to `4.8.1`
 
 ### Plugin Dependency Updates
@@ -34,3 +35,4 @@ This is release is a breaking change as it removes support for Scala 2.12, it on
 * Updated `com.exasol:project-keeper-maven-plugin:2.5.0` to `2.8.0`
 * Updated `org.apache.maven.plugins:maven-enforcer-plugin:3.0.0` to `3.1.0`
 * Updated `org.itsallcode:openfasttrace-maven-plugin:1.4.0` to `1.5.0`
+* Removed `org.scoverage:scoverage-maven-plugin:1.4.11`
