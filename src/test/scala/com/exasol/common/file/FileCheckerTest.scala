@@ -26,12 +26,14 @@ class FileCheckerTest extends AnyFunSuite with Matchers with MockitoSugar {
   }
 
   test("bucketfs file checker throws when path does not start with expected prefix") {
+    val path = "/var/log/bucket1/file.txt"
     val thrown = intercept[IllegalArgumentException] {
-      new BucketFSFileChecker().isRegularFile("/var/log/bucket1/file.txt")
+      new BucketFSFileChecker().isRegularFile(path)
     }
+    val expectedPath = new File(path).getCanonicalPath()
     val message = thrown.getMessage()
     assert(message.startsWith("E-IEUCS-12"))
-    assert(message.contains("Provided path '/var/log/bucket1/file.txt' does not start with expected"))
+    assert(message.contains("Provided path '" + expectedPath + "' does not start with expected"))
     assert(message.contains("Please make sure that file path start with '/buckets'."))
   }
 
