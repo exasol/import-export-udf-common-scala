@@ -1,12 +1,19 @@
-# Import Export UDF Common Scala 0.4.3, released 2022-??-??
+# Import Export UDF Common Scala 1.0.0, released 2022-10-25
 
-Code name:
+Code name: Fix vulnerabilities in dependencies
 
 ## Summary
 
+This is release is a breaking change as it removes support for Scala 2.12, it only supports Scala 2.13. It also updates the following dependencies to fix vulnerabilities:
+* com.fasterxml.jackson.core:jackson-databind:jar:2.12.7:compile:
+  * CVE-2022-42003 CWE-502: Deserialization of Untrusted Data (7.5)
+  * CVE-2022-42004 CWE-502: Deserialization of Untrusted Data (7.5)
+* org.scala-lang:scala-library:jar:2.13.8:compile:
+  * CVE-2022-36944 CWE-502: Deserialization of Untrusted Data (9.8)
+
 ## Features
 
-* ISSUE_NUMBER: description
+* #40: Fixed vulnerabilities in dependencies
 
 ## Dependency Updates
 
