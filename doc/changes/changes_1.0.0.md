@@ -1,4 +1,4 @@
-# Import Export UDF Common Scala 1.0.0, released 2022-10-25
+# Import Export UDF Common Scala 1.0.0, released 2022-10-26
 
 Code name: Fix vulnerabilities in dependencies
 
