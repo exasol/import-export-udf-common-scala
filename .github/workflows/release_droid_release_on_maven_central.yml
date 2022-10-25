@@ -5,13 +5,7 @@ on:
 
 jobs:
   publish:
-    name: Publish for Scala version ${{ matrix.scala-version }}
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - { scala-version: 'scala2.13' }
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
@@ -32,15 +26,11 @@ jobs:
         run: sudo apt install -y --no-install-recommends xmlstarlet
       - name: Update release pom file
         run: ./.github/workflows/createReleasePom.sh
-      - name: Publish to Central Repository for ${{ matrix.scala-version }}
-        run: |
-          mvn --file release-pom.xml clean deploy \
-              -P${{ matrix.scala-version }} \
-              -Dgpg.skip=false \
-              -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
-              -DskipTests
+      - name: Publish to Central Repository
+        run: mvn --file release-pom.xml --batch-mode -Dgpg.skip=false -DskipTests clean deploy
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
       - name: Remove release pom file
         run: rm -rf release-pom.xml
