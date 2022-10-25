@@ -8,6 +8,9 @@
     <description>Common import export libraries used in Exasol user defined functions</description>
     <url>https://github.com/exasol/import-export-udf-common-scala/</url>
     <properties>
+        <!-- Scala 2.13 properties -->
+        <scala.version>2.13.9</scala.version>
+        <scala.compat.version>2.13</scala.compat.version>
         <!-- runtime dependency versions -->
         <avro.version>1.11.1</avro.version>
         <jackson.version>2.13.4</jackson.version>
@@ -353,19 +356,6 @@
             </plugin>
         </plugins>
     </build>
-    <profiles>
-        <profile>
-            <id>scala2.13</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <scala.version>2.13.8</scala.version>
-                <scala.compat.version>2.13</scala.compat.version>
-                <project-keeper.skip>false</project-keeper.skip>
-            </properties>
-        </profile>
-    </profiles>
     <parent>
         <artifactId>import-export-udf-common-scala-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
