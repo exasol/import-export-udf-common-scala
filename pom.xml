@@ -9,7 +9,6 @@
     <url>https://github.com/exasol/import-export-udf-common-scala/</url>
     <properties>
         <!-- runtime dependency versions -->
-        <exasol.api.version>6.1.7</exasol.api.version>
         <avro.version>1.11.1</avro.version>
         <jackson.version>2.13.4</jackson.version>
         <typesafe.logging.version>3.9.5</typesafe.logging.version>
@@ -18,6 +17,15 @@
         <scalatest.version>3.2.13</scalatest.version>
         <scalatestplus.version>1.0.0-M2</scalatestplus.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>maven.exasol.com</id>
+            <url>https://maven.exasol.com/artifactory/exasol-releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.scala-lang</groupId>
@@ -27,7 +35,7 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>exasol-script-api</artifactId>
-            <version>${exasol.api.version}</version>
+            <version>6.1.7</version>
         </dependency>
         <dependency>
             <groupId>com.exasol</groupId>
