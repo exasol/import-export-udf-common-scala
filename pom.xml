@@ -9,7 +9,7 @@
     <url>https://github.com/exasol/import-export-udf-common-scala/</url>
     <properties>
         <!-- Scala 2.13 properties -->
-        <scala.version>2.13.9</scala.version>
+        <scala.version>2.13.10</scala.version>
         <scala.compat.version>2.13</scala.compat.version>
         <!-- runtime dependency versions -->
         <avro.version>1.11.1</avro.version>
@@ -71,7 +71,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <version>2.13.4.2</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
@@ -172,7 +172,8 @@
                         <arg>-Ywarn-numeric-widen</arg>
                         <arg>-Ywarn-value-discard</arg>
                         <arg>-Ywarn-extra-implicit</arg>
-                        <arg>-Ywarn-unused:_</arg>
+                        <!-- Disabled to fix build. This will be re-enabled in https://github.com/exasol/import-export-udf-common-scala/issues/41 -->
+                        <!--  <arg>-Ywarn-unused:_</arg> -->
                     </args>
                     <javacArgs>
                         <javacArg>-source</javacArg>

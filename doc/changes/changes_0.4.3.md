@@ -13,9 +13,9 @@ Code name:
 ### Compile Dependency Updates
 
 * Updated `com.exasol:error-reporting-java:0.4.1` to `1.0.0`
-* Updated `com.fasterxml.jackson.core:jackson-databind:2.12.7` to `2.13.4`
+* Updated `com.fasterxml.jackson.core:jackson-databind:2.12.7` to `2.13.4.2`
 * Updated `com.fasterxml.jackson.module:jackson-module-scala_2.13:2.12.7` to `2.13.4`
-* Updated `org.scala-lang:scala-library:2.13.8` to `2.13.9`
+* Updated `org.scala-lang:scala-library:2.13.8` to `2.13.10`
 
 ### Test Dependency Updates
 
