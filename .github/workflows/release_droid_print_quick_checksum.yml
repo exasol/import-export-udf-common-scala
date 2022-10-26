@@ -5,14 +5,7 @@ on:
 
 jobs:
   build:
-    name: Build for Scala version ${{ matrix.scala-version }}
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - { scala-version: 'scala2.12' }
-          - { scala-version: 'scala2.13' }
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
@@ -24,10 +17,8 @@ jobs:
           distribution: 'temurin'
           java-version: 11
           cache: 'maven'
-      - name: Build with Maven skipping tests for ${{ matrix.scala-version }}
-        run: |
-          mvn --batch-mode clean verify \
-              -P${{ matrix.scala-version }} \
-              -DskipTests
+      - name: Build with Maven skipping tests
+        run: mvn --batch-mode clean verify -DskipTests
       - name: Print checksum
         run: echo 'checksum_start==';find target -maxdepth 1 -name *.jar -exec sha256sum "{}" + | xargs;echo '==checksum_end'
+

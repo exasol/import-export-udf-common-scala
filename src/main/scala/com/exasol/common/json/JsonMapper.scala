@@ -1,6 +1,10 @@
 package com.exasol.common.json
 
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
+
 import com.fasterxml.jackson.core.JsonParser
+import com.fasterxml.jackson.core.`type`.TypeReference
 import com.fasterxml.jackson.databind.MapperFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.json.{JsonMapper => BaseJsonMapper}
@@ -52,7 +56,7 @@ object JsonMapper {
    * @return parsed value
    */
   def fromJson[T: Manifest](jsonString: String): T =
-    mapper.readValue[T](jsonString)
+    mapper.readValue(jsonString, getTypeReference[T])
 
   /**
    * Parses JSON string into a type.
@@ -64,4 +68,18 @@ object JsonMapper {
   def parseJson[T: Manifest](jsonString: String): T =
     fromJson(jsonString)
 
+  private[this] def getTypeReference[T: Manifest] = new TypeReference[T] {
+    override def getType = getTypeFromManifest(manifest[T])
+  }
+
+  private[this] def getTypeFromManifest(manifest: Manifest[_]): Type =
+    if (manifest.typeArguments.isEmpty) {
+      manifest.runtimeClass
+    } else {
+      new ParameterizedType {
+        def getRawType = manifest.runtimeClass
+        def getActualTypeArguments = manifest.typeArguments.map(getTypeFromManifest(_)).toArray
+        def getOwnerType = null
+      }
+    }
 }

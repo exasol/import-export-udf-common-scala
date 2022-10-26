@@ -3,55 +3,29 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>import-export-udf-common-scala</artifactId>
-    <version>0.4.3</version>
+    <version>1.0.0</version>
     <name>Import Export UDF Common Scala</name>
     <description>Common import export libraries used in Exasol user defined functions</description>
     <url>https://github.com/exasol/import-export-udf-common-scala/</url>
-    <parent>
-        <artifactId>import-export-udf-common-scala-generated-parent</artifactId>
-        <groupId>com.exasol</groupId>
-        <version>0.4.3</version>
-        <relativePath>pk_generated_parent.pom</relativePath>
-    </parent>
     <properties>
+        <!-- Scala 2.13 properties -->
+        <scala.version>2.13.10</scala.version>
+        <scala.compat.version>2.13</scala.compat.version>
         <!-- runtime dependency versions -->
-        <exasol.api.version>6.1.7</exasol.api.version>
-        <exasol.error-reporting.version>0.4.1</exasol.error-reporting.version>
         <avro.version>1.11.1</avro.version>
-        <!-- Upgrading jackson to 2.13.x causes test failures. -->
-        <jackson.version>2.12.7</jackson.version>
+        <jackson.version>2.13.4</jackson.version>
         <typesafe.logging.version>3.9.5</typesafe.logging.version>
         <slf4j.simple.version>1.7.36</slf4j.simple.version>
         <!-- test dependency versions -->
         <scalatest.version>3.2.13</scalatest.version>
         <scalatestplus.version>1.0.0-M2</scalatestplus.version>
-        <mockito.version>4.6.1</mockito.version>
-        <sonar.sources>.</sonar.sources>
-        <sonar.inclusions>src/main/**</sonar.inclusions>
     </properties>
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
     <repositories>
         <repository>
             <id>maven.exasol.com</id>
             <url>https://maven.exasol.com/artifactory/exasol-releases</url>
             <snapshots>
                 <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>maven.exasol.com-snapshots</id>
-            <url>https://maven.exasol.com/artifactory/exasol-snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>
@@ -64,12 +38,12 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>exasol-script-api</artifactId>
-            <version>${exasol.api.version}</version>
+            <version>6.1.7</version>
         </dependency>
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>error-reporting-java</artifactId>
-            <version>${exasol.error-reporting.version}</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.avro</groupId>
@@ -97,7 +71,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <version>2.13.4.2</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
@@ -144,7 +118,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
+            <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -223,7 +197,7 @@
                         <compilerPlugin>
                             <groupId>org.scalameta</groupId>
                             <artifactId>semanticdb-scalac_${scala.version}</artifactId>
-                            <version>4.4.35</version>
+                            <version>4.6.0</version>
                         </compilerPlugin>
                     </compilerPlugins>
                 </configuration>
@@ -287,7 +261,7 @@
             <plugin>
                 <groupId>org.itsallcode</groupId>
                 <artifactId>openfasttrace-maven-plugin</artifactId>
-                <version>1.4.0</version>
+                <version>1.5.0</version>
                 <executions>
                     <execution>
                         <id>trace-requirements</id>
@@ -305,7 +279,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>2.5.0</version>
+                <version>2.8.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -374,7 +348,7 @@
                     <dependency>
                         <groupId>com.geirsson</groupId>
                         <artifactId>metaconfig-pprint_${scala.compat.version}</artifactId>
-                        <version>0.10.0</version>
+                        <version>0.11.1</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -383,25 +357,10 @@
             </plugin>
         </plugins>
     </build>
-    <profiles>
-        <profile>
-            <id>scala2.13</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <scala.version>2.13.8</scala.version>
-                <scala.compat.version>2.13</scala.compat.version>
-                <project-keeper.skip>false</project-keeper.skip>
-            </properties>
-        </profile>
-        <profile>
-            <id>scala2.12</id>
-            <properties>
-                <scala.version>2.12.15</scala.version>
-                <scala.compat.version>2.12</scala.compat.version>
-                <project-keeper.skip>true</project-keeper.skip>
-            </properties>
-        </profile>
-    </profiles>
+    <parent>
+        <artifactId>import-export-udf-common-scala-generated-parent</artifactId>
+        <groupId>com.exasol</groupId>
+        <version>1.0.0</version>
+        <relativePath>pk_generated_parent.pom</relativePath>
+    </parent>
 </project>

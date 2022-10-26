@@ -5,14 +5,7 @@ on:
 
 jobs:
   build:
-    name: Build for Scala version ${{ matrix.scala-version }}
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - { scala-version: 'scala2.12' }
-          - { scala-version: 'scala2.13' }
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
@@ -24,10 +17,10 @@ jobs:
           distribution: 'temurin'
           java-version: 11
           cache: 'maven'
-      - name: Run tests and build with Maven for ${{ matrix.scala-version }}
-        run: |
-          mvn --batch-mode clean verify --file pom.xml \
-              -P${{ matrix.scala-version }}
+      - name: Enable testcontainer reuse
+        run: echo 'testcontainers.reuse.enable=true' > "$HOME/.testcontainers.properties"
+      - name: Run tests and build with Maven
+        run: mvn --batch-mode clean verify --file pom.xml
       - name: Prepare checksum
         run: find target -maxdepth 1 -name *.jar -exec sha256sum "{}" + > original_checksum
       - name: Upload checksum to the artifactory
