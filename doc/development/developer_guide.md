@@ -3,7 +3,7 @@
 This guide provides development workflows that are used to develop and maintain
 the import-export-udf-common-scala and the projects based on it. It is intended
 for those who wish to address the issues, merge a pull request, perform release
-  or deep dive into the codebase of the project.
+or deep dive into the codebase of the project.
 
 ## Contributing
 
@@ -38,7 +38,7 @@ follow the steps below to submit your patches.
 - Code
 - Write tests for changes
 - Update documentation if needed
-- **Make sure everything is working**, run `./scripts/ci.sh`
+- **Make sure everything is working**, run `mvn clean verify`
 - If everything is okay, commit and push to your fork
 - [Submit a pull request][submit-pr]
 - Let us work together to get your changes reviewed
@@ -71,61 +71,10 @@ First clone a local copy of the repository:
 git clone https://github.com/exasol/import-export-udf-common-scala.git
 ```
 
-Then run `sbt`, and run any of these commands:
+Then run the end-to-end build process:
 
-- `clean`       : cleans previously compiled outputs; to start clean again.
-- `compile`     : compiles the source files.
-- `test:compile`: compiles the unit test files.
-- `it:compile`  : compiles the integration test files.
-- `test`        : run all the unit tests.
-- `it:test`     : run all the integration tests.
-- `doc`         : generate the API documentation.
-
-You can also run several commands combined together:
-
-```
-;clean;test;it:test
-```
-
-Additionally, you can run `testOnly filename` or `it:testOnly filename` commands
-to only run single file tests.
-
-### Running E2E Build Script
-
-Inside the `scripts/` folder, you will find the `ci.sh` bash file, that runs
-end-to-end build process. This file is intended to be run in continuous
-integration (CI) environment. For the continuous integration we use the Github
-Actions.
-
-Please run this file to make sure that everything is working before committing
-code or submitting a pull request.
-
-```bash
-./scripts/ci.sh
-```
-
-Additionally, ensure that the `ci.sh` scripts work with different versions of
-the Scala programming language. You can check that with the following command:
-
-```bash
-SCALA_VERSION=2.13.6 ./scripts/ci.sh
-```
-
-## Checking the Test Coverage
-
-The `ci.sh` script also creates the code coverage reports. They are located in
-the target path, `target/scala-<SCALA.VERSION>/scoverage-report/`.
-
-You can open the `index.html` file, it should show the code coverage reports per
-file.
-
-![alt text](../images/code_coverage_example.png "Code Coverage Example")
-
-You can also generate the coverage reports using the `sbt` command line, by
-running:
-
-```bash
-;clean;coverage;test;it:test;coverageReport
+```sh
+mvn clean verify
 ```
 
 ## Checking the Dependency Updates
@@ -138,13 +87,13 @@ running the following commands.
 Check if any plugins have new versions:
 
 ```bash
-pluginUpdates
+mvn versions:display-plugin-updates -U
 ```
 
 Check if any dependencies have new versions:
 
 ```bash
-dependencyUpdates
+mvn versions:display-dependency-updates -U
 ```
 
 ### Dependency Tree and Artifact Eviction
@@ -152,24 +101,8 @@ dependencyUpdates
 You can check the dependency tree by running the command below:
 
 ```bash
-dependencyTree
+mvn dependency:tree
 ```
-
-Additionally, it is also good practice to check the evicted artifacts, and maybe
-to exclude them explicitly when declaring the library dependencies. In order to
-check the evicted artifacts, run:
-
-```bash
-evicted
-```
-
-## Editor Setups
-
-We try to keep the codebase code editor agnostic. But we tested that it works
-with IntelliJ.
-
-Any setups required for editors are out of scope. However, this can change when
-we get contributors who use those code editors :)
 
 ## Conclusion
 
