@@ -15,6 +15,8 @@ Code name:
 * Updated `com.exasol:error-reporting-java:1.0.0` to `1.0.1`
 * Removed `com.exasol:exasol-script-api:6.1.7`
 * Added `com.exasol:udf-api-java:1.0.2`
+* Updated `com.fasterxml.jackson.core:jackson-databind:2.13.4.2` to `2.14.2`
+* Updated `com.fasterxml.jackson.module:jackson-module-scala_2.13:2.13.4` to `2.14.2`
 * Updated `org.slf4j:slf4j-simple:1.7.36` to `2.0.6`
 
 ### Test Dependency Updates

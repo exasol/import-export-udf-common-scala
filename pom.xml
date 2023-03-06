@@ -19,7 +19,7 @@
         <scala.compat.version>2.13</scala.compat.version>
         <!-- runtime dependency versions -->
         <avro.version>1.11.1</avro.version>
-        <jackson.version>2.13.4</jackson.version>
+        <jackson.version>2.14.2</jackson.version>
         <typesafe.logging.version>3.9.5</typesafe.logging.version>
         <slf4j.simple.version>2.0.6</slf4j.simple.version>
         <!-- test dependency versions -->
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.13.4.2</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
