@@ -1,12 +1,18 @@
-# Import Export UDF Common Scala 1.1.0, released 2023-??-??
+# Import Export UDF Common Scala 1.1.0, released 2023-03-07
 
-Code name:
+Code name: Migrated to `udf-api-java`
 
 ## Summary
 
+In this release, we migrated to `udf-api-java` from `exasol-script-api` dependency and discontinued references to `maven.exasol.com` repository. Additionally, updated developer guide, removed obsolete `sbt` build tool instructions.
+
 ## Bug Fixes
 
-- #43: Migrated to `udf-api-java` from old `exasol-script-api`
+* #43: Migrated to `udf-api-java` from old `exasol-script-api`
+
+## Documentation
+
+* #39: Updated developer guide, removed obsolete `sbt` based information
 
 ## Dependency Updates
 
