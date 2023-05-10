@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.exasol</groupId>
     <artifactId>import-export-udf-common-scala</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <name>Import Export UDF Common Scala</name>
     <description>Common import export libraries used in Exasol user defined functions</description>
     <url>https://github.com/exasol/import-export-udf-common-scala/</url>
     <parent>
         <artifactId>import-export-udf-common-scala-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.0</version>
+        <version>1.1.1</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
     <properties>
@@ -276,7 +275,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>2.9.3</version>
+                <version>2.9.7</version>
                 <executions>
                     <execution>
                         <goals>
