@@ -8,7 +8,7 @@ Library `org.apache.avro` was updated to fix its CVE-2023-39410.
 
 ## Features
 
-* #51: Fix vulnerability in avro
+* #51: Fixed vulnerability in avro
 
 ## Dependency Updates
 
