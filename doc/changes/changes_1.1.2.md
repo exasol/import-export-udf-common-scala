@@ -1,4 +1,4 @@
-# Import Export UDF Common Scala 1.1.2, released 2023-??-??
+# Import Export UDF Common Scala 1.1.2, released 2023-11-22
 
 Code name: Update avro to fix CVE
 
