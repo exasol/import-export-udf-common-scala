@@ -3,7 +3,8 @@
 Code name: Update avro to CVE-2023-39410
 
 ## Summary
-Library org.apache.avro was updated to fix its CVE-2023-39410.
+
+Library `org.apache.avro` was updated to fix its CVE-2023-39410.
 
 ## Features
 
