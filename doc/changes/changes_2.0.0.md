@@ -15,4 +15,5 @@ Previous releases of this project contained all dependencies in the published JA
 ### Plugin Dependency Updates
 
 * Updated `com.exasol:project-keeper-maven-plugin:2.9.16` to `2.9.17`
+* Removed `org.apache.maven.plugins:maven-assembly-plugin:3.5.0`
 * Updated `org.codehaus.mojo:versions-maven-plugin:2.16.1` to `2.16.2`
