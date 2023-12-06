@@ -17,7 +17,6 @@ Previous releases of this project contained all dependencies in the published JA
 * Updated `com.exasol:udf-api-java:1.0.2` to `1.0.4`
 * Updated `com.fasterxml.jackson.core:jackson-databind:2.15.0` to `2.16.0`
 * Updated `com.fasterxml.jackson.module:jackson-module-scala_2.13:2.15.0` to `2.16.0`
-* Updated `org.scala-lang:scala-library:2.13.10` to `2.13.12`
 * Removed `org.slf4j:slf4j-simple:2.0.7`
 
 ### Test Dependency Updates

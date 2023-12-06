@@ -14,7 +14,7 @@
     </parent>
     <properties>
         <!-- Scala 2.13 properties -->
-        <scala.version>2.13.12</scala.version>
+        <scala.version>2.13.10</scala.version>
         <scala.compat.version>2.13</scala.compat.version>
         <!-- runtime dependency versions -->
         <avro.version>1.11.3</avro.version>
