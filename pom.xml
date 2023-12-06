@@ -18,12 +18,12 @@
         <scala.compat.version>2.13</scala.compat.version>
         <!-- runtime dependency versions -->
         <avro.version>1.11.3</avro.version>
-        <jackson.version>2.16.0</jackson.version>
+        <jackson.version>2.15.0</jackson.version>
         <typesafe.logging.version>3.9.5</typesafe.logging.version>
-        <slf4j.simple.version>2.0.9</slf4j.simple.version>
+        <slf4j.simple.version>2.0.7</slf4j.simple.version>
         <!-- test dependency versions -->
-        <scalatest.version>3.3.0-SNAP4</scalatest.version>
-        <scalatestplus.version>1.0.0-SNAP5</scalatestplus.version>
+        <scalatest.version>3.2.13</scalatest.version>
+        <scalatestplus.version>1.0.0-M2</scalatestplus.version>
     </properties>
     <dependencies>
         <dependency>
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>udf-api-java</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.exasol</groupId>
@@ -75,6 +75,11 @@
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.simple.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.typesafe.scala-logging</groupId>
             <artifactId>scala-logging_${scala.compat.version}</artifactId>
             <version>${typesafe.logging.version}</version>
@@ -109,19 +114,13 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>5.8.0</version>
+            <version>5.3.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>nl.jqno.equalsverifier</groupId>
             <artifactId>equalsverifier</artifactId>
-            <version>3.15.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.simple.version}</version>
+            <version>3.14.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -227,6 +226,31 @@
                             <filereports>TestSuite.txt</filereports>
                             <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assembly/all-dependencies.xml</descriptor>
+                    </descriptors>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
