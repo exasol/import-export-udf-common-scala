@@ -16,5 +16,9 @@
     },
     "files.watcherExclude": {
         "**/target": true
+    },
+    "sonarlint.connectedMode.project": {
+        "connectionId": "exasol",
+        "projectKey": "com.exasol:import-export-udf-common-scala"
     }
 }
