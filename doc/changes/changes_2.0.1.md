@@ -1,12 +1,18 @@
 # Import Export UDF Common Scala 2.0.1, released 2024-11-20
 
-Code name:
+Code name: Fix CVE-2024-47561 in org.apache.avro:avro:jar:1.11.3:compile
 
 ## Summary
 
-## Features
+This release fixes CVE-2024-47561 in `org.apache.avro:avro:jar:1.11.3:compile`.
 
-* ISSUE_NUMBER: description
+## Security
+
+* #56: Fixed CVE-2024-47561 in `org.apache.avro:avro:jar:1.11.3:compile`
+
+## Refactoring
+
+* #53: Fixed sonar warning about Java version during CI build
 
 ## Dependency Updates
 
