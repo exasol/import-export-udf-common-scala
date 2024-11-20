@@ -324,7 +324,7 @@
                         <version>0.1.23</version>
                     </dependency>
                     <dependency>
-                        <groupId>com.geirsson</groupId>
+                        <groupId>org.scalameta</groupId>
                         <artifactId>metaconfig-pprint_${scala.compat.version}</artifactId>
                         <version>0.13.0</version>
                     </dependency>

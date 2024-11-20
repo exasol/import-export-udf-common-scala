@@ -27,5 +27,6 @@ jobs:
             17
           cache: "maven"
       - name: Run scalafix linting
-        run: |
-          mvn --batch-mode clean compile test scalafix:scalafix
+        # Running tests is required here to avoid linter error
+        # "error: SemanticDB not found: src/main/scala/com/exasol/common/file/BucketFSFileChecker.scala"
+        run: mvn --batch-mode clean compile test scalafix:scalafix
