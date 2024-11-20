@@ -8,5 +8,15 @@ linkReplacements:
   - "http://wiki.fasterxml.com/JacksonModuleScala|https://github.com/FasterXML/jackson-module-scala"
   - "http://nexus.sonatype.org/oss-repository-hosting.html|https://www.scalatest.org/user_guide/using_the_scalatest_maven_plugin"
   - "http://nexus.sonatype.org/oss-repository-hosting.html/scalatest-maven-plugin|https://www.scalatest.org/user_guide/using_the_scalatest_maven_plugin"
-excludes:
-  - "E-PK-CORE-18: Outdated content: '.github/workflows/release_droid_release_on_maven_central.yml'"
+build:
+  workflows:
+    - name: release.yml
+      stepCustomizations:
+        - action: INSERT_AFTER
+          stepId: build
+          content:
+            name: Prepare Maven Central Release
+            id: prepare-maven-central-release
+            run: |
+              sudo apt install -y --no-install-recommends xmlstarlet
+              ./.github/workflows/createReleasePom.sh

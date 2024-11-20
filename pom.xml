@@ -2,28 +2,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>import-export-udf-common-scala</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <name>Import Export UDF Common Scala</name>
     <description>Common import export libraries used in Exasol user defined functions</description>
     <url>https://github.com/exasol/import-export-udf-common-scala/</url>
     <parent>
         <artifactId>import-export-udf-common-scala-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
     <properties>
         <!-- Scala 2.13 properties -->
-        <scala.version>2.13.10</scala.version>
+        <scala.version>2.13.15</scala.version>
         <scala.compat.version>2.13</scala.compat.version>
         <!-- runtime dependency versions -->
-        <avro.version>1.11.3</avro.version>
-        <jackson.version>2.15.0</jackson.version>
+        <avro.version>1.12.0</avro.version>
+        <jackson.version>2.18.1</jackson.version>
         <typesafe.logging.version>3.9.5</typesafe.logging.version>
-        <slf4j.simple.version>2.0.7</slf4j.simple.version>
+        <slf4j.simple.version>2.0.16</slf4j.simple.version>
         <!-- test dependency versions -->
-        <scalatest.version>3.2.13</scalatest.version>
-        <scalatestplus.version>1.0.0-M2</scalatestplus.version>
+        <scalatest.version>3.3.0-SNAP4</scalatest.version>
+        <scalatestplus.version>1.0.0-SNAP5</scalatestplus.version>
     </properties>
     <dependencies>
         <dependency>
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>udf-api-java</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.5</version>
         </dependency>
         <dependency>
             <groupId>com.exasol</groupId>
@@ -114,13 +114,13 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>5.3.1</version>
+            <version>5.14.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>nl.jqno.equalsverifier</groupId>
             <artifactId>equalsverifier</artifactId>
-            <version>3.14.1</version>
+            <version>3.17.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -130,7 +130,7 @@
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
-                <version>4.8.1</version>
+                <version>4.9.2</version>
                 <executions>
                     <execution>
                         <id>scala-compile-first</id>
@@ -193,7 +193,7 @@
                         <compilerPlugin>
                             <groupId>org.scalameta</groupId>
                             <artifactId>semanticdb-scalac_${scala.version}</artifactId>
-                            <version>4.6.0</version>
+                            <version>4.11.2</version>
                         </compilerPlugin>
                     </compilerPlugins>
                 </configuration>
@@ -232,7 +232,7 @@
             <plugin>
                 <groupId>org.itsallcode</groupId>
                 <artifactId>openfasttrace-maven-plugin</artifactId>
-                <version>1.6.2</version>
+                <version>2.3.0</version>
                 <executions>
                     <execution>
                         <id>trace-requirements</id>
@@ -250,7 +250,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>2.9.17</version>
+                <version>4.4.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -285,7 +285,7 @@
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
-                <version>2.36.0</version>
+                <version>2.43.0</version>
                 <configuration>
                     <scala>
                         <scalafmt>
@@ -311,7 +311,7 @@
             <plugin>
                 <groupId>io.github.evis</groupId>
                 <artifactId>scalafix-maven-plugin_${scala.compat.version}</artifactId>
-                <version>0.1.6_0.10.0</version>
+                <version>0.1.10_0.11.0</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.github.liancheng</groupId>
@@ -326,7 +326,7 @@
                     <dependency>
                         <groupId>com.geirsson</groupId>
                         <artifactId>metaconfig-pprint_${scala.compat.version}</artifactId>
-                        <version>0.11.1</version>
+                        <version>0.13.0</version>
                     </dependency>
                 </dependencies>
                 <configuration>
