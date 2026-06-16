@@ -1,12 +1,9 @@
-# Import Export UDF Common Scala 2.0.2, released 2026-??-??
+# Import Export UDF Common Scala 2.0.2, released 2026-06-16
 
-Code name:
+Code name: Dependencies update to fix Avro CVE
 
 ## Summary
-
-## Features
-
-* ISSUE_NUMBER: description
+In this version avro dependency updated to fix CVE-2025-33042
 
 ## Dependency Updates
 
