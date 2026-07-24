@@ -57,6 +57,11 @@ jobs:
             11
             21
           cache: maven
+      - {
+        name: Run scalafix linting,
+        id: run-scalafix-linting,
+        run: 'mvn --batch-mode clean compile test scalafix:scalafix'
+      }
       - name: Cache SonarCloud packages
         id: cache-sonar
         uses: actions/cache@v6
