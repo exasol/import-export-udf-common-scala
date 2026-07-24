@@ -305,23 +305,6 @@
                 <groupId>io.github.evis</groupId>
                 <artifactId>scalafix-maven-plugin_${scala.compat.version}</artifactId>
                 <version>0.1.12_0.14.6</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.github.liancheng</groupId>
-                        <artifactId>organize-imports_${scala.compat.version}</artifactId>
-                        <version>0.6.0</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.github.vovapolu</groupId>
-                        <artifactId>scaluzzi_${scala.compat.version}</artifactId>
-                        <version>0.1.23</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.scalameta</groupId>
-                        <artifactId>metaconfig-pprint_${scala.compat.version}</artifactId>
-                        <version>0.18.7</version>
-                    </dependency>
-                </dependencies>
                 <configuration>
                     <mode>CHECK</mode>
                 </configuration>
