@@ -10,6 +10,17 @@ linkReplacements:
   - "http://nexus.sonatype.org/oss-repository-hosting.html/scalatest-maven-plugin|https://www.scalatest.org/user_guide/using_the_scalatest_maven_plugin"
 build:
   workflows:
+    - name: ci-build.yml
+      stepCustomizations:
+        - action: INSERT_AFTER
+          job: build-and-test
+          stepId: setup-java
+          content:
+            name: Run scalafix linting
+            id: run-scalafix-linting
+            # Running tests is required here to avoid linter error
+            # "error: SemanticDB not found: src/main/scala/com/exasol/common/file/BucketFSFileChecker.scala"
+            run: mvn --batch-mode clean compile test scalafix:scalafix
     - name: release.yml
       stepCustomizations:
         - action: INSERT_AFTER

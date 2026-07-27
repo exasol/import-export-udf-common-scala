@@ -76,3 +76,4 @@ Thumbs.db
 
 *.flattened-pom.xml
 release-pom.xml
+/.serena/
