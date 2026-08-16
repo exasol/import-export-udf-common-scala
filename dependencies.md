@@ -3,16 +3,16 @@
 
 ## Compile Dependencies
 
-| Dependency                   | License                                       |
-| ---------------------------- | --------------------------------------------- |
-| [Scala Library][0]           | [Apache-2.0][1]                               |
-| [Exasol UDF API for Java][2] | [MIT License][3]                              |
-| [error-reporting-java][4]    | [MIT License][5]                              |
-| [Apache Avro][6]             | [Apache-2.0][7]                               |
-| [jackson-databind][8]        | [The Apache Software License, Version 2.0][7] |
-| [jackson-module-scala][9]    | [The Apache Software License, Version 2.0][7] |
-| [SLF4J Simple Provider][10]  | [MIT][11]                                     |
-| [scala-logging][12]          | [Apache 2.0 License][13]                      |
+| Dependency                      | License                                       |
+| ------------------------------- | --------------------------------------------- |
+| [scala-library-bootstrapped][0] | [Apache-2.0][1]                               |
+| [Exasol UDF API for Java][2]    | [MIT License][3]                              |
+| [error-reporting-java][4]       | [MIT License][5]                              |
+| [Apache Avro][6]                | [Apache-2.0][7]                               |
+| [jackson-databind][8]           | [The Apache Software License, Version 2.0][7] |
+| [jackson-module-scala][9]       | [The Apache Software License, Version 2.0][7] |
+| [SLF4J Simple Provider][10]     | [MIT][11]                                     |
+| [scala-logging][12]             | [Apache 2.0 License][13]                      |
 
 ## Test Dependencies
 
@@ -59,7 +59,7 @@
 | [Apache Maven Install Plugin][59]                       | [Apache-2.0][7]                                |
 | [Apache Maven Site Plugin][60]                          | [Apache-2.0][7]                                |
 
-[0]: https://www.scala-lang.org/
+[0]: https://scala-lang.org/
 [1]: https://www.apache.org/licenses/LICENSE-2.0
 [2]: https://github.com/exasol/udf-api-java/
 [3]: https://github.com/exasol/udf-api-java/blob/main/LICENSE
