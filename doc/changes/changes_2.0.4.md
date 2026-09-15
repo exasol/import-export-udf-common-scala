@@ -33,7 +33,6 @@ jackson-databind - Allocation of Resources Without Limits or Throttling
 * Updated `com.fasterxml.jackson.core:jackson-databind:2.22.1` to `2.22.2`
 * Updated `com.fasterxml.jackson.module:jackson-module-scala_2.13:2.22.1` to `2.22.2`
 * Updated `org.apache.avro:avro:1.12.1` to `1.12.2`
-* Updated `org.scala-lang:scala-library:2.13.18` to `3.8.4`
 * Updated `org.slf4j:slf4j-simple:2.0.18` to `2.0.19`
 
 ### Plugin Dependency Updates
