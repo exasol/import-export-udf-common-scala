@@ -10,6 +10,17 @@ Code name:
 
 ## Dependency Updates
 
+### Compile Dependency Updates
+
+* Updated `com.exasol:udf-api-java:1.0.11` to `1.0.12`
+* Updated `com.fasterxml.jackson.core:jackson-databind:2.22.2` to `2.22.4`
+* Updated `com.fasterxml.jackson.module:jackson-module-scala_2.13:2.22.2` to `2.22.4`
+* Updated `org.slf4j:slf4j-simple:2.0.19` to `2.0.20`
+
+### Test Dependency Updates
+
+* Updated `org.mockito:mockito-core:5.23.0` to `5.24.0`
+
 ### Plugin Dependency Updates
 
 * Updated `com.exasol:error-code-crawler-maven-plugin:2.1.1` to `2.1.2`
