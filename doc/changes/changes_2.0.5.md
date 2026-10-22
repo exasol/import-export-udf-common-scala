@@ -1,12 +1,18 @@
-# Import Export UDF Common Scala 2.0.5, released 2026-??-??
+# Import Export UDF Common Scala 2.0.5, released 2026-10-22
 
-Code name:
+Code name: Jackson Security Fixes
 
 ## Summary
 
-## Features
+This release fixes five vulnerabilities in Jackson Databind and Jackson Core.
 
-* ISSUE_NUMBER: description
+## Security
+
+* Fixed CVE-2026-110879 (untrusted data deserialization) in dependency `com.fasterxml.jackson.core:jackson-databind:jar:2.22.2:compile`
+* #73: Fixed CVE-2026-91776 (unbounded type id cache growth) in dependency `com.fasterxml.jackson.core:jackson-databind:jar:2.22.2:compile`
+* #74: Fixed CVE-2026-91777 (denial of service) in dependency `com.fasterxml.jackson.core:jackson-databind:jar:2.22.2:compile`
+* #76: Fixed CVE-2026-89407 (regex denial of service) in dependency `com.fasterxml.jackson.core:jackson-core:jar:2.22.2:compile`
+* #77: Fixed CVE-2026-89425 (unbounded error token growth) in dependency `com.fasterxml.jackson.core:jackson-core:jar:2.22.2:compile`
 
 ## Dependency Updates
 
