@@ -1,0 +1,42 @@
+# Import Export UDF Common Scala 2.0.5, released 2026-10-22
+
+Code name: Jackson Security Fixes
+
+## Summary
+
+This release fixes five vulnerabilities in Jackson Databind and Jackson Core.
+
+## Security
+
+* Fixed CVE-2026-110879 (untrusted data deserialization) in dependency `com.fasterxml.jackson.core:jackson-databind:jar:2.22.2:compile`
+* #73: Fixed CVE-2026-91776 (unbounded type id cache growth) in dependency `com.fasterxml.jackson.core:jackson-databind:jar:2.22.2:compile`
+* #74: Fixed CVE-2026-91777 (denial of service) in dependency `com.fasterxml.jackson.core:jackson-databind:jar:2.22.2:compile`
+* #76: Fixed CVE-2026-89407 (regex denial of service) in dependency `com.fasterxml.jackson.core:jackson-core:jar:2.22.2:compile`
+* #77: Fixed CVE-2026-89425 (unbounded error token growth) in dependency `com.fasterxml.jackson.core:jackson-core:jar:2.22.2:compile`
+
+## Dependency Updates
+
+### Compile Dependency Updates
+
+* Updated `com.exasol:udf-api-java:1.0.11` to `1.0.12`
+* Updated `com.fasterxml.jackson.core:jackson-databind:2.22.2` to `2.22.4`
+* Updated `com.fasterxml.jackson.module:jackson-module-scala_2.13:2.22.2` to `2.22.4`
+* Updated `org.slf4j:slf4j-simple:2.0.19` to `2.0.20`
+
+### Test Dependency Updates
+
+* Updated `org.mockito:mockito-core:5.23.0` to `5.24.0`
+
+### Plugin Dependency Updates
+
+* Updated `com.exasol:error-code-crawler-maven-plugin:2.1.1` to `2.1.2`
+* Updated `com.exasol:project-keeper-maven-plugin:5.7.5` to `5.8.0`
+* Updated `org.apache.maven.plugins:maven-artifact-plugin:3.6.1` to `3.7.0`
+* Updated `org.apache.maven.plugins:maven-compiler-plugin:3.15.0` to `3.16.0`
+* Updated `org.apache.maven.plugins:maven-deploy-plugin:3.1.4` to `3.2.0`
+* Updated `org.apache.maven.plugins:maven-install-plugin:3.1.4` to `3.2.0`
+* Updated `org.apache.maven.plugins:maven-surefire-plugin:3.5.6` to `3.6.0`
+* Updated `org.codehaus.mojo:build-helper-maven-plugin:3.6.1` to `3.6.2`
+* Updated `org.codehaus.mojo:versions-maven-plugin:2.21.0` to `2.23.0`
+* Updated `org.sonarsource.scanner.maven:sonar-maven-plugin:5.7.0.6970` to `5.8.0.7211`
+* Updated `org.sonatype.central:central-publishing-maven-plugin:0.11.0` to `0.12.0`
